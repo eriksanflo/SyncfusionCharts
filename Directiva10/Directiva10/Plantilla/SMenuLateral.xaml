@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:CarpetaACompartir="clr-namespace:Directiva10.A_Compartir"
+       xmlns:CarpetaPantalladeInicio="clr-namespace:Directiva10.PantalladeInicio"
+       xmlns:CarpetaMonitor="clr-namespace:Directiva10.Monitor"
+       xmlns:CarpetaKPIs="clr-namespace:Directiva10.KPIs"
+       xmlns:CarpetaCajas="clr-namespace:Directiva10.Cajas"
+       xmlns:CarpetaUsuarios="clr-namespace:Directiva10.Usuarios"  
+       xmlns:CarpetaAlertas="clr-namespace:Directiva10.Alertas"  
+       xmlns:CarpetaReportes="clr-namespace:Directiva10.Reportes"  
+       FlyoutBehavior="Flyout"
+       FlyoutHeaderBehavior="Scroll"
+       FlyoutBackgroundImageAspect="Fill"
+       Shell.NavBarHasShadow="False"
+       FlyoutBackground ="{StaticResource LinearGradientBrushMenuLateral}"
+       FlyoutBackgroundImage="{AppThemeBinding Default={StaticResource FileImageSourceFondoMenuLateralClaro}, Dark={StaticResource FileImageSourceFondoMenuLateralOscuro}}"
+       x:Class="Directiva10.Plantilla.SMenuLateral">
+    <!-- FlyoutBehavior="Flyout" -->
+    <FlyoutItem x:Name="XamlFlyoutItemAccesoDirecto"
+                FlyoutDisplayOptions="AsMultipleItems"
+                FlyoutItemIsVisible="True"
+                IsEnabled="True">
+        <ShellContent Title="Inicio"
+                      Route="RutaInicio"
+                      FlyoutIcon="menuLateralInicio.png"
+                      Icon="menuInferiorInicio.png"
+                      ContentTemplate="{DataTemplate CarpetaPantalladeInicio:CPPantalladeInicio}"/>
+        <ShellContent Title="Indicadores"
+                      Route="Graficas"
+                      FlyoutIcon="menuLateralKPI.png"
+                      Icon="menuInferiorKPI.png"
+                      ContentTemplate="{DataTemplate CarpetaKPIs:CPKPIs}"/>
+        <ShellContent Title="Cajas"
+                      Route="RutaCajas"
+                      FlyoutIcon="menuLateralCajas.png"
+                      Icon="menuInferiorCajas.png"
+                      ContentTemplate="{DataTemplate CarpetaCajas:CPCajas}"/>
+    </FlyoutItem>
+    <Shell.FlyoutFooterTemplate>
+        <DataTemplate>
+            <StackLayout Spacing="0">
+                <StackLayout.Padding>
+                    <OnPlatform  x:TypeArguments="Thickness" 
+                                 Default="5"   
+                                 iOS="15"/>
+                </StackLayout.Padding>
+                <Label HorizontalTextAlignment="Center"
+                       TextColor="#A6A6A6"
+                       FontSize="Micro">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Versión "/>
+                            <Span Text="{Binding VersiondeApp, Mode=OneWay}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label Text="Desarrollado por" 
+                       TextColor="#A6A6A6"
+                       FontSize="Micro"
+                       HorizontalTextAlignment="Center"/>
+                <Label Text="GRUPMYL CDIGITAL" 
+                       TextColor="#4d4d4d"
+                       FontSize="Small"
+                       HorizontalTextAlignment="Center"/>
+            </StackLayout>
+        </DataTemplate>
+    </Shell.FlyoutFooterTemplate>
+</Shell>

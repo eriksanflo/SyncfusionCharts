@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<PluginRgPluginsPopup:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+                                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                                xmlns:PluginRgPluginsPopup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+                                xmlns:PluginRgPluginsAnimations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+                                xmlns:CarpetaACompartir="clr-namespace:Directiva10.A_Compartir"
+                                CloseWhenBackgroundIsClicked="False"
+                                Background="#142b48"
+                                BackgroundInputTransparent="False"
+                                x:Class="Directiva10.Plantilla.PPModalMensaje">
+    <PluginRgPluginsPopup:PopupPage.Animation>
+        <PluginRgPluginsAnimations:ScaleAnimation PositionIn="Center"
+                                                  PositionOut="Center"
+                                                  ScaleIn="1.2"
+                                                  ScaleOut="0.8"
+                                                  DurationIn="400"
+                                                  DurationOut="300"
+                                                  EasingIn="SinOut"
+                                                  EasingOut="SinIn"
+                                                  HasBackgroundAnimation="True"/>
+    </PluginRgPluginsPopup:PopupPage.Animation>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <OnPlatform x:TypeArguments="Thickness" x:Key="OnPlatformPaddingBoton"      Android="15,10,15,10"   iOS="15,10,15,10"  Default="15,10,15,10"/>
+            <OnPlatform x:TypeArguments="x:Double"  x:Key="OnPlatformWidthRequestIcono" Android="25"   iOS="20"  Default="25"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ScrollView VerticalOptions="FillAndExpand"
+                 HorizontalOptions="FillAndExpand"
+                 BackgroundColor="#142b48" 
+                 Padding="30">
+        <StackLayout VerticalOptions="CenterAndExpand"
+                     HorizontalOptions="CenterAndExpand">
+            <Frame Style="{StaticResource StyleFrameTarjeta}">
+                <StackLayout Spacing="{StaticResource OnPlatformSpacingEtiquetaEditar}">
+                    <StackLayout Padding="15">
+                        <Label Text="{Binding Mensaje}"
+                               HorizontalTextAlignment="Center"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal"
+                                 HorizontalOptions="Center"
+                                 Spacing="20">
+                        <StackLayout IsVisible="{Binding EsperaRespuestadeUsuario}">
+                            <Frame BackgroundColor="{AppThemeBinding Default={StaticResource ColorBotonPrimarioClaro}, Dark={StaticResource ColorBotonPrimarioOscuro}}" 
+                                   CornerRadius="20"
+                                   HasShadow="False"
+                                   Padding="{StaticResource OnPlatformPaddingBoton}">
+                                <StackLayout Orientation="Horizontal"
+                                             VerticalOptions="Center"
+                                             Spacing="15">
+                                    <Image Source="mensajeOk.png"
+                                           WidthRequest="{StaticResource OnPlatformWidthRequestIcono}"
+                                           HeightRequest="{StaticResource OnPlatformWidthRequestIcono}"
+                                           VerticalOptions="Center"/>
+                                    <Label Text="{Binding TextoBotonAceptar}"
+                                           TextColor="White"
+                                           VerticalOptions="Center"/>
+                                </StackLayout>
+                            </Frame>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="XamlTapGestureRecognizerAceptarTapped"/>
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                        <StackLayout IsVisible="{Binding EsperaRespuestadeUsuario}">
+                            <Frame BackgroundColor="{AppThemeBinding Default={StaticResource ColorBotonSecundarioClaro}, Dark={StaticResource ColorBotonSecundarioOscuro}}" 
+                                   CornerRadius="20"
+                                   HasShadow="False"
+                                   Padding="{StaticResource OnPlatformPaddingBoton}">
+                                <StackLayout Orientation="Horizontal"
+                                             VerticalOptions="Center"
+                                             Spacing="15">
+                                    <Image Source="mensajeCancelar.png"
+                                           WidthRequest="{StaticResource OnPlatformWidthRequestIcono}"
+                                           HeightRequest="{StaticResource OnPlatformWidthRequestIcono}"
+                                           VerticalOptions="Center"/>
+                                    <Label Text="{Binding TextoBotonCancelar}"
+                                           TextColor="White"
+                                           VerticalOptions="Center"/>
+                                </StackLayout>
+                            </Frame>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="XamlTapGestureRecognizerCancelarTapped"/>
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                        <StackLayout IsVisible="{Binding EsperaRespuestadeUsuario, Converter={CarpetaACompartir:TInvertirValorBool}}">
+                            <Frame BackgroundColor="{AppThemeBinding Default={StaticResource ColorBotonSecundarioClaro}, Dark={StaticResource ColorBotonSecundarioOscuro}}" 
+                                   CornerRadius="20"
+                                   HasShadow="False"
+                                   Padding="{StaticResource OnPlatformPaddingBoton}">
+                                <StackLayout Orientation="Horizontal"
+                                             VerticalOptions="Center"
+                                             Spacing="15">
+                                    <Image Source="mensajeOk.png"
+                                           WidthRequest="{StaticResource OnPlatformWidthRequestIcono}"
+                                           HeightRequest="{StaticResource OnPlatformWidthRequestIcono}"
+                                           VerticalOptions="Center"/>
+                                    <Label Text="{Binding TextoBotonAceptar}"
+                                           TextColor="White"
+                                           VerticalOptions="Center"/>
+                                </StackLayout>
+                            </Frame>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="XamlTapGestureRecognizerCerrarTapped"/>
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+    </ScrollView>
+</PluginRgPluginsPopup:PopupPage>

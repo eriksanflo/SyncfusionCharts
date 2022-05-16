@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Shell.NavBarIsVisible="False"
+             Shell.TabBarIsVisible="True"
+             x:Class="Directiva10.PantalladeInicio.CPPantalladeInicio">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="Center">
+            <Label Text="{Binding Texto}"
+                   TextColor="White"                   
+                   FontSize="Large"
+                   HorizontalTextAlignment="Center"/>
+            <Button x:Name="XamlButtonPrueba" 
+                    Text="Actualizar texto"
+                    Clicked="XamlButtonPruebaClicked"/>
+            <Entry x:Name="XamlEntryUsuario"
+                   PlaceholderColor="Aqua"
+                   Placeholder="Usuario"/>
+            <Entry x:Name="XamlEntryContrasena"
+                   PlaceholderColor="Aqua"/>
+            <Entry x:Name="XamlEntryDistribucion"
+                   PlaceholderColor="Aqua"/>
+            <Button x:Name="XamlButtonIniciarSesion" 
+                    Text="Acción que no afecta la vista"
+                    Clicked="XamlButtonIniciarSesionClicked"/>
+            <CollectionView x:Name="XamlCollectionViewPersonas"                           
+                            SelectionMode="Single"
+                            IsGrouped="False"
+                            ItemSizingStrategy="MeasureAllItems"
+                            ItemsLayout="VerticalList"
+                            ItemsSource="{Binding ObservableCollectionPersonas}"
+                            SelectionChanged="XamlCollectionViewPersonasSelectionChanged" >
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Padding="20"
+                                     Spacing="0">
+                            <Label Text="{Binding Nombre}"
+                                   TextColor="White"
+                                   FontSize="19"/>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

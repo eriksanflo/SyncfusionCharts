@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:CarpetaACompartir="clr-namespace:Directiva10.A_Compartir"
+             xmlns:CarpetaInterfaces="clr-namespace:Directiva10.Interfaces"
+             Padding="0"
+             Title=""
+             x:Class="Directiva10.Pin.CPRestablecerPin">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <OnPlatform x:TypeArguments="Thickness"  x:Key="OnPlatformMovilPaggingPiedePagina"  Android="0,30,0,30" iOS="0,30,0,30" Default="0,30,0,30"/>
+            <OnPlatform x:TypeArguments="Thickness"  x:Key="OnPlatformTabletPaggingPiedePagina" Android="0,40,0,40" iOS="0,40,0,40" Default="0,40,0,40"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <ScrollView HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+            <StackLayout BackgroundColor="White"
+                         Spacing="0">
+                <StackLayout HorizontalOptions="FillAndExpand">
+                    <Grid ColumnSpacing="0"
+                          RowSpacing="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackLayout Grid.Column="0"
+                                     Grid.Row="0">
+                            <BoxView Margin="0" 
+                                     CornerRadius="0,0,20,20" 
+                                     Background="{StaticResource LinearGradientBrushFondo}"
+                                     VerticalOptions="FillAndExpand"/>
+                        </StackLayout>
+                        <StackLayout Padding="{Binding ThicknessPaddingTexto}"
+                                     Spacing="40"
+                                     Grid.Column="0"
+                                     Grid.Row="0">
+                            <Label Text="RESTABLECER PIN"
+                                   TextColor="White"
+                                   FontAttributes="Bold"
+                                   FontSize="Medium"
+                                   HorizontalTextAlignment="Center"/>
+                            <StackLayout Spacing="20">
+                                <Image Source="iconoPregunta.png"
+                                       Aspect="AspectFit"
+                                       WidthRequest="{Binding AnchoIconoAlerta}"
+                                       VerticalOptions="Center"/>
+                                <Label Text="¿Está seguro?"
+                                       TextColor="#f77a1b"
+                                       FontAttributes="Bold"
+                                       FontSize="Large"
+                                       HorizontalTextAlignment="Center"/>
+                            </StackLayout>
+                            <Label HorizontalTextAlignment="Center">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="Solo conviene restablecer el "
+                                              TextColor="White"/>
+                                        <Span Text="PIN"
+                                              TextColor="{AppThemeBinding Default={StaticResource ColorBotonPrimarioClaro}, Dark={StaticResource ColorBotonPrimarioOscuro}}"/>
+                                        <Span Text=" si el usuario lo olvida o este deja de funcionar."
+                                              TextColor="White"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </StackLayout>
+                    </Grid>
+                </StackLayout>
+                <StackLayout HorizontalOptions="FillAndExpand"
+                             VerticalOptions="FillAndExpand">
+                    <StackLayout VerticalOptions="CenterAndExpand"
+                                 Padding="{Binding ThicknessPaddingLogin}"
+                                 Spacing="30">
+                        <Label Text="Ingresa la contraseña de inicio de sesión:"
+                               TextColor="#142b48"
+                               FontSize="Medium"
+                               FontAttributes="Bold"
+                               HorizontalTextAlignment="Center"/>
+                            <CarpetaInterfaces:TEntry x:Name="XamlEntryContrasena"
+                                                      BorderColor="{StaticResource OnPlatformBorderColorTEntry}"
+                                                      BorderRadius="{StaticResource OnPlatformBorderRadiusTEntry}"
+                                                      BorderWidth="{StaticResource OnPlatformBorderWidthTEntry}"
+                                                      Padding="{StaticResource OnPlatformPaddingTEntry}"                                                  
+                                                      BackgroundColor="#eff2f5"
+                                                      Placeholder="Contraseña"
+                                                      Keyboard="Text"
+                                                      IsPassword="True"
+                                                      MaxLength="100">
+                                <Entry.Behaviors>
+                                    <CarpetaACompartir:TValidarRequerido/>
+                                </Entry.Behaviors>
+                            </CarpetaInterfaces:TEntry>
+                        <StackLayout HorizontalOptions="Center"
+                                     Padding="20,0,20,0">
+                            <Button x:Name="XamlButtonRestablecerPin" 
+                                    Style="{StaticResource StyleBoton}"
+                                    Text="Guardar" 
+                                    FontSize="Medium"
+                                    Clicked="XamlButtonRestablecerPinClicked"/>
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout BackgroundColor="White" 
+                             Padding="{x:OnIdiom Default={StaticResource OnPlatformMovilPaggingPiedePagina}, Tablet={StaticResource OnPlatformTabletPaggingPiedePagina}}">
+                    <Label Text="¿Necesita ayuda?"
+                           TextColor="{AppThemeBinding Default={StaticResource ColorPlaceHolderClaro}, Dark={StaticResource ColorPlaceHolderOscuro}}"
+                           HorizontalOptions="Center"/>
+                    <StackLayout Orientation="Horizontal"
+                                 HorizontalOptions="CenterAndExpand">
+                        <StackLayout>
+                            <Label TextColor="{AppThemeBinding Default={StaticResource ColorBotonPrimarioClaro}, Dark={StaticResource ColorBotonPrimarioOscuro}}">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="Tel: "/>
+                                        <Span Text="222 403-877"
+                                              FontAttributes="Bold"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="XamlTapGestureRecognizerTelefonoTapped"
+                                                      CommandParameter="222 403 877"/>
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                        <StackLayout>
+                            <Label Text=" / " 
+                                   TextColor="{AppThemeBinding Default={StaticResource ColorBotonPrimarioClaro}, Dark={StaticResource ColorBotonPrimarioOscuro}}"/>
+                        </StackLayout>
+                        <StackLayout>
+                            <Label TextColor="{AppThemeBinding Default={StaticResource ColorBotonPrimarioClaro}, Dark={StaticResource ColorBotonPrimarioOscuro}}">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="Whatsapp: "/>
+                                        <Span Text="222 812-0284"
+                                              FontAttributes="Bold"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="XamlGestureRecognizerWhatsAppTapped" 
+                                                      CommandParameter="+52 222 812 0284"/>
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

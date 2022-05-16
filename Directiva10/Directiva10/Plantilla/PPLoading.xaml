@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<PluginRgPluginsPopup:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+                                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                                xmlns:PluginRgPluginsPopup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+                                xmlns:PluginRgPluginsAnimations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+                                xmlns:CarpetaACompartir="clr-namespace:Directiva10.A_Compartir"
+                                CloseWhenBackgroundIsClicked="False"
+                                Background="#142b48"
+                                BackgroundInputTransparent="False"
+                                x:Class="Directiva10.Plantilla.PPLoading">
+    <PluginRgPluginsPopup:PopupPage.Animation>
+        <PluginRgPluginsAnimations:ScaleAnimation PositionIn="Center"
+                                                  PositionOut="Center"
+                                                  ScaleIn="1.2"
+                                                  ScaleOut="0.8"
+                                                  DurationIn="400"
+                                                  DurationOut="300"
+                                                  EasingIn="SinOut"
+                                                  EasingOut="SinIn"
+                                                  HasBackgroundAnimation="True"/>
+    </PluginRgPluginsPopup:PopupPage.Animation>
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Welcome to Xamarin.Forms!"
+                    VerticalOptions="CenterAndExpand" 
+                    HorizontalOptions="CenterAndExpand" />
+        </StackLayout>
+    </ContentPage.Content>
+    <ScrollView Padding="0,0,0,0"
+                BackgroundColor="Transparent">
+        <StackLayout VerticalOptions="FillAndExpand"
+                     HorizontalOptions="FillAndExpand"
+                     BackgroundColor="#142b48" 
+                     Padding="30">
+            <StackLayout VerticalOptions="CenterAndExpand"
+                         HorizontalOptions="CenterAndExpand">
+                <Ellipse x:Name="XamlEllipseCirculoBlanco" 
+                         HorizontalOptions="Center" 
+                         VerticalOptions="Center"
+                         WidthRequest="80"
+                         HeightRequest="80"
+                         Fill="White"
+                         Stroke="#183251"
+                         StrokeThickness="2"/>
+                <Ellipse x:Name="XamlEllipseCirculoNaranja" 
+                         HorizontalOptions="Center" 
+                         VerticalOptions="Center"
+                         WidthRequest="80"
+                         HeightRequest="80"
+                         Fill="#f77a1b"
+                         Stroke="#f35a0f"
+                         StrokeThickness="2"/>
+                <StackLayout HorizontalOptions="Center"
+                             Padding="0,30,0,0"
+                             Spacing="30">
+                    <StackLayout Spacing="15">
+                        <Label Text="Construyendo..."
+                               TextColor="#f77a1b"
+                               FontSize="Large"
+                               HorizontalTextAlignment="Center"/>
+                        <Label x:Name="XamlLabelTexto" 
+                               Text="Espera un momento"
+                               TextColor="White"
+                               HorizontalTextAlignment="Center"/>
+                    </StackLayout>
+                    <Button x:Name="XamlButtonCerrar"
+                            Style="{StaticResource StyleBoton}"
+                            Text="Cancelar"
+                            HorizontalOptions="Center"
+                            Clicked="XamlButtonCerrarClicked"/>
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</PluginRgPluginsPopup:PopupPage>

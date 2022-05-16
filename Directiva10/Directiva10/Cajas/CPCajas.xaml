@@ -1,0 +1,305 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:CarpetaACompartir="clr-namespace:Directiva10.A_Compartir"
+             xmlns:CarpetaPlantilla="clr-namespace:Directiva10.Plantilla"
+             Shell.NavBarIsVisible="False"
+             Shell.TabBarIsVisible="True"
+             Padding="0"
+             x:Class="Directiva10.Cajas.CPCajas">
+    <ContentPage.Content>
+        <StackLayout Spacing="0" 
+                     HorizontalOptions="FillAndExpand"
+                     VerticalOptions="FillAndExpand">
+            <CarpetaPlantilla:CVBarradeNavegacion x:Name="XamlCVBarradeNavegacion"
+                                                  Titulo="CAJAS"
+                                                  MostrarIconodeNavegacion="True"
+                                                  MostrarIconodeAlerta="True"
+                                                  NumerodeNotificaciones="12"/>
+            <RefreshView HorizontalOptions="FillAndExpand" 
+                         Background="{StaticResource LinearGradientBrushFondo}"
+                         CommandParameter=""
+                         IsRefreshing="{Binding EstaActualizando, Mode=TwoWay}"
+                         Padding="0"
+                         Refreshing="XamlRefresViewSucursalesRefreshing">
+                <CollectionView x:Name="XamlCollectionViewSucursales" 
+                                HorizontalOptions="FillAndExpand"
+                                BackgroundColor="{AppThemeBinding Default={StaticResource ColordeFondoCollectionViewClaro}, Dark={StaticResource ColordeFondoCollectionViewOscuro}}" 
+                                SelectionMode="Single"
+                                IsGrouped="False"
+                                ItemSizingStrategy="MeasureAllItems"
+                                ItemsLayout="VerticalList"
+                                ItemsSource="{Binding ObservableCollectionSucursales}"
+                                SelectionChanged="XamlCollectionViewSucursalesSelectionChanged" >
+                    <CollectionView.Header>
+                        <StackLayout HorizontalOptions="FillAndExpand"
+                                     Padding="-1"
+                                     Spacing="0">
+                            <StackLayout BackgroundColor="{AppThemeBinding Default={StaticResource ColorBarradeNavegacionClaro}, Dark={StaticResource ColorBarradeNavegacionOscuro}}">
+                                <!-- En iOS al CollectionView oculta parte de la vista, por eso se coloca este espacio -->
+                            </StackLayout>
+                            <Grid Padding="-1"
+                                  ColumnSpacing="0"
+                                  RowSpacing="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="30"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="30"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="6"/>
+                                    <RowDefinition Height="6"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <StackLayout BackgroundColor="{AppThemeBinding Default={StaticResource ColordeFondoCollectionViewClaro}, Dark={StaticResource ColordeFondoCollectionViewOscuro}}" 
+                                             Grid.Column="0"
+                                             Grid.ColumnSpan="3"
+                                             Grid.Row="0"
+                                             Grid.RowSpan="7">
+                                </StackLayout>
+                                <StackLayout Grid.Column="0"
+                                             Grid.ColumnSpan="3"
+                                             Grid.Row="0"
+                                             Grid.RowSpan="2">
+                                    <BoxView Margin="0" 
+                                             CornerRadius="0,0,20,20" 
+                                             Background="{StaticResource LinearGradientBrushFondo}"
+                                             VerticalOptions="FillAndExpand"/>
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal"
+                                             Padding="0,20,0,30"
+                                             Grid.Column="1"
+                                             Grid.Row="0">
+                                    <Button Style="{Binding StyleBotonIngresos}"
+                                            Text="Ingresos"
+                                            FontSize="16"
+                                            HorizontalOptions="StartAndExpand"
+                                            Clicked="XamlButtonIngresosClicked"/>
+                                    <Button x:Name="XamlButtonEgresos" 
+                                            Style="{Binding StyleBotonEgresos}"
+                                            Text="Egresos" 
+                                            FontSize="16"
+                                            HorizontalOptions="EndAndExpand"
+                                            Clicked="XamlButtonEgresosClicked"/>
+                                </StackLayout>
+                                <StackLayout Grid.Column="1"
+                                             Grid.Row="1"
+                                             Grid.RowSpan="3">
+                                    <BoxView Margin="0" 
+                                             CornerRadius="20,20,0,0" 
+                                             Background="{StaticResource LinearGradientBrushTarjetaDegradado}"
+                                             VerticalOptions="FillAndExpand"/>
+                                </StackLayout>
+                                <StackLayout Grid.Column="1"
+                                             Grid.Row="4"
+                                             Grid.RowSpan="2">
+                                    <BoxView Margin="0" 
+                                             CornerRadius="0,0,20,20" 
+                                             Background="{AppThemeBinding Default={StaticResource ColorSeparadorClaro}, Dark={StaticResource ColorSeparadorOscuro}}"
+                                             VerticalOptions="FillAndExpand"/>
+                                </StackLayout>
+                                <StackLayout Grid.Column="1"
+                                             Grid.Row="4"
+                                             Grid.RowSpan="2">
+                                    <BoxView Margin="1,0,1,1" 
+                                             CornerRadius="0,0,20,20" 
+                                             Background="{AppThemeBinding Default={StaticResource ColorTarjetaFondoClaro}, Dark={StaticResource ColorTarjetaFondoOscuro}}"
+                                             VerticalOptions="FillAndExpand"/>
+                                </StackLayout>
+                                <StackLayout Padding="25"
+                                             Grid.Column="1"
+                                             Grid.Row="1"
+                                             Grid.RowSpan="3">
+                                    <StackLayout Orientation="Horizontal">
+                                        <StackLayout>
+                                            <Label Text="Total de hoy"
+                                                   TextColor="White"
+                                                   FontSize="14"/>
+                                        </StackLayout>
+                                        <StackLayout Orientation="Horizontal" 
+                                                     HorizontalOptions="EndAndExpand"
+                                                     Spacing="4">
+                                            <Ellipse HorizontalOptions="Center" 
+                                                     VerticalOptions="Center"
+                                                     WidthRequest="5"
+                                                     HeightRequest="5"
+                                                     Fill="White"
+                                                     Stroke="White"
+                                                     StrokeThickness="2"/>
+                                            <Ellipse HorizontalOptions="Center" 
+                                                     VerticalOptions="Center"
+                                                     WidthRequest="5"
+                                                     HeightRequest="5"
+                                                     Fill="White"
+                                                     Stroke="White"
+                                                     StrokeThickness="2"/>
+                                            <Ellipse HorizontalOptions="Center" 
+                                                     VerticalOptions="Center"
+                                                     WidthRequest="5"
+                                                     HeightRequest="5"
+                                                     Fill="White"
+                                                     Stroke="White"
+                                                     StrokeThickness="2"/>
+                                        </StackLayout>
+                                    </StackLayout>
+                                    <StackLayout Padding="0,25,0,0"
+                                                 Spacing="25">
+                                        <Label Text="{Binding TotaldeHoy, Converter={CarpetaACompartir:TDoubleToFormatoMoneda}}"
+                                               TextColor="White"
+                                               FontSize="42"
+                                               FontAttributes="Bold"
+                                               HorizontalTextAlignment="Center"/>
+                                        <Label TextColor="White" 
+                                               FontSize="Micro"
+                                               HorizontalOptions="EndAndExpand" 
+                                               HorizontalTextAlignment="End">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="{Binding FechadeUltimaSincronizacion, Converter={CarpetaACompartir:TDateTimeToFormatoFecha}}"/>
+                                                    <Span Text=" "/>
+                                                    <Span Text="{Binding HoradeUltimaSincronizacion, Converter={CarpetaACompartir:TTimeSpanToFormatoHora}}"/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                    </StackLayout>
+                                </StackLayout>
+                                <StackLayout Padding="0,25,0,25" 
+                                             Grid.Column="1"
+                                             Grid.Row="4"
+                                             Grid.RowSpan="2">
+                                    <StackLayout Orientation="Horizontal"
+                                                 Spacing="0">
+                                        <StackLayout HorizontalOptions="FillAndExpand"
+                                                     Spacing="0">
+                                            <Label Text="Total semana"
+                                                   Style="{StaticResource StyleEtiqueta}"
+                                                   FontSize="15"
+                                                   HorizontalTextAlignment="Center"/>
+                                            <Label Text="{Binding TotalSemana, Converter={CarpetaACompartir:TDoubleToFormatoMoneda}}"
+                                                   FontSize="22"
+                                                   FontAttributes="Bold"
+                                                   HorizontalTextAlignment="Center"/>
+                                        </StackLayout>
+                                        <BoxView Color="{AppThemeBinding Default={StaticResource ColorSeparadorClaro}, Dark={StaticResource ColorSeparadorOscuro}}"
+                                                 WidthRequest="1"/>
+                                        <StackLayout HorizontalOptions="FillAndExpand"
+                                                     Spacing="0">
+                                            <Label Text="Total mes"
+                                                   Style="{StaticResource StyleEtiqueta}"
+                                                   FontSize="15"
+                                                   HorizontalTextAlignment="Center"/>
+                                            <Label Text="{Binding TotalMes, Converter={CarpetaACompartir:TDoubleToFormatoMoneda}}"
+                                                   FontSize="22"
+                                                   FontAttributes="Bold"
+                                                   HorizontalTextAlignment="Center"/>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </StackLayout>
+                                <StackLayout Grid.Column="1"
+                                             Grid.Row="3"
+                                             Grid.RowSpan="2">
+                                    <BoxView BackgroundColor="#f14407"
+                                             CornerRadius="3"
+                                             Margin="40,0,40,0" 
+                                             HeightRequest="12"/>
+                                </StackLayout>
+                                <StackLayout Padding="20" 
+                                             Grid.Column="1"
+                                             Grid.Row="6">
+                                    <Label Text="Balance Actual de Sucursales"
+                                           FontSize="17"
+                                           FontAttributes="Bold"/>
+                                </StackLayout>
+                            </Grid>
+                        </StackLayout>
+                    </CollectionView.Header>
+                    <CollectionView.EmptyView>
+                        <StackLayout BackgroundColor="{AppThemeBinding Default={StaticResource ColordeFondoCollectionViewClaro}, Dark={StaticResource ColordeFondoCollectionViewOscuro}}" 
+                                     Padding="20">
+                            <Label Text="{StaticResource StringMensajeSinRegistros}"
+                                   Style="{StaticResource StyleEtiqueta}"
+                                   FontSize="Medium"
+                                   HorizontalTextAlignment="Center"
+                                   HorizontalOptions="CenterAndExpand"/>
+                        </StackLayout>
+                    </CollectionView.EmptyView>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout BackgroundColor="{AppThemeBinding Default={StaticResource ColordeFondoCollectionViewClaro}, Dark={StaticResource ColordeFondoCollectionViewOscuro}}" 
+                                         Padding="{StaticResource OnPlatformMarginListViewElemento}"
+                                         Spacing="0">
+                                <BoxView HorizontalOptions="FillAndExpand" 
+                                         HeightRequest="1"
+                                         BackgroundColor="{AppThemeBinding Default={StaticResource ColorSeparadorClaro}, Dark={StaticResource ColorSeparadorOscuro}}"/>
+                                <StackLayout BackgroundColor="{AppThemeBinding Default={StaticResource ColordeFondoCollectionViewClaro}, Dark={StaticResource ColordeFondoCollectionViewOscuro}}" 
+                                             Padding="30,10,30,10">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="5"/>
+                                        </Grid.RowDefinitions>
+                                        <StackLayout Grid.Column="0"
+                                                     Grid.Row="1">
+                                            <Label Text="{Binding Nombre}"
+                                                   FontSize="19"/>
+                                        </StackLayout>
+                                        <StackLayout Grid.Column="1"
+                                                     Grid.Row="0">
+                                            <StackLayout Orientation="Horizontal" 
+                                                         HorizontalOptions="EndAndExpand"
+                                                         Spacing="4">
+                                                <Ellipse HorizontalOptions="Center" 
+                                                         VerticalOptions="Center"
+                                                         WidthRequest="5"
+                                                         HeightRequest="5"
+                                                         Fill="#142b48"
+                                                         Stroke="#142b48"
+                                                         StrokeThickness="2"/>
+                                                <Ellipse HorizontalOptions="Center" 
+                                                         VerticalOptions="Center"
+                                                         WidthRequest="5"
+                                                         HeightRequest="5"
+                                                         Fill="#142b48"
+                                                         Stroke="#142b48"
+                                                         StrokeThickness="2"/>
+                                                <Ellipse HorizontalOptions="Center" 
+                                                         VerticalOptions="Center"
+                                                         WidthRequest="5"
+                                                         HeightRequest="5"
+                                                         Fill="#142b48"
+                                                         Stroke="#142b48"
+                                                         StrokeThickness="2"/>
+                                            </StackLayout>
+                                        </StackLayout>
+                                        <StackLayout Grid.Column="1"
+                                                     Grid.Row="1">
+                                            <Label Text="{Binding Monto, Converter={CarpetaACompartir:TDoubleToFormatoMoneda}}"
+                                                   FontSize="19"
+                                                   FontAttributes="Bold"
+                                                   HorizontalTextAlignment="End"/>
+                                        </StackLayout>
+                                    </Grid>
+                                </StackLayout>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                    <CollectionView.Footer>
+                        <StackLayout BackgroundColor="{AppThemeBinding Default={StaticResource ColordeFondoCollectionViewClaro}, Dark={StaticResource ColordeFondoCollectionViewOscuro}}" 
+                                     Padding="{StaticResource OnPlatformPaddingCollectionViewFooteriOS}">
+                            <!-- En iOS al CollectionView oculta parte de la vista, por eso se coloca este espacio -->
+                        </StackLayout>
+                    </CollectionView.Footer>
+                </CollectionView>
+            </RefreshView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

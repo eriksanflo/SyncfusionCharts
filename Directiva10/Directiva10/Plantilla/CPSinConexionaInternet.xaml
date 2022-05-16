@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Padding="0"
+             x:Class="Directiva10.Plantilla.CPSinConexionaInternet">
+    <ContentPage.Content>
+        <ScrollView HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+            <StackLayout BackgroundColor="White"
+                         Spacing="0">
+                <StackLayout HorizontalOptions="FillAndExpand">
+                    <Grid ColumnSpacing="0"
+                          RowSpacing="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackLayout Grid.Column="0"
+                                     Grid.Row="0">
+                            <BoxView Margin="0" 
+                                     CornerRadius="0,0,20,20" 
+                                     Background="{StaticResource LinearGradientBrushFondo}"
+                                     VerticalOptions="FillAndExpand"/>
+                        </StackLayout>
+                        <StackLayout Padding="{Binding ThicknessPaddingTexto}"
+                                     Spacing="40"
+                                     Grid.Column="0"
+                                     Grid.Row="0">
+                            <StackLayout Spacing="20">
+                                <Image Source="iconoAlerta.png"
+                                       Aspect="AspectFit"
+                                       WidthRequest="{Binding AnchoIconoAlerta}"
+                                       VerticalOptions="Center"/>
+                                <Label Text="¡No hay conexión a internet!"
+                                       TextColor="#f77a1b"
+                                       FontAttributes="Bold"
+                                       FontSize="Large"
+                                       HorizontalTextAlignment="Center"/>
+                            </StackLayout>
+                            <Label Text="Este módulo requiere conexión a internet. Verifica tu wifi o datos móviles esten encendidos y vuelve a intentarlo"
+                                   TextColor="White"
+                                   HorizontalTextAlignment="Center"/>
+                        </StackLayout>
+                    </Grid>
+                </StackLayout>
+                <StackLayout HorizontalOptions="FillAndExpand"
+                             VerticalOptions="FillAndExpand">
+                    <StackLayout HorizontalOptions="Center"
+                                 VerticalOptions="CenterAndExpand">
+                        <StackLayout Orientation="{Binding StackOrientationContenedor}"
+                                     HorizontalOptions="Center"
+                                     Spacing="20">
+                            <Image Source="sinConexionaInternetWifi.png"
+                                   Aspect="AspectFit"
+                                   WidthRequest="{Binding AnchoLogoWifi}"
+                                   VerticalOptions="Center"/>
+                            <Button x:Name="XamlButtonCerrar"
+                                    Style="{StaticResource StyleBoton}"
+                                    Text="Cerrar"
+                                    VerticalOptions="Center"
+                                    Clicked="XamlButtonCerrarClicked"/>
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

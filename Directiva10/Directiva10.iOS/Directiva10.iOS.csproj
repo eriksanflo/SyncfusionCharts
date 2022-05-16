@@ -1,0 +1,248 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{80F179E8-4827-4B65-9FC4-1FE49792A2A8}</ProjectGuid>
+    <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TemplateGuid>{6143fdea-f3c2-4a09-aafa-6e230626515e}</TemplateGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Directiva10.iOS</RootNamespace>
+    <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
+    <AssemblyName>Directiva10.iOS</AssemblyName>
+    <MtouchEnableSGenConc>true</MtouchEnableSGenConc>
+    <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
+    <ProvisioningType>manual</ProvisioningType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>portable</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhoneSimulator\Debug</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <MtouchArch>x86_64</MtouchArch>
+    <MtouchLink>None</MtouchLink>
+    <MtouchDebug>true</MtouchDebug>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhoneSimulator\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <MtouchLink>None</MtouchLink>
+    <MtouchArch>x86_64</MtouchArch>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>portable</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhone\Debug</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <MtouchArch>ARM64</MtouchArch>
+    <CodesignKey>Apple Development: Marbella  Murillo Gil (32LB5543WS)</CodesignKey>
+    <MtouchDebug>true</MtouchDebug>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <MtouchLink>None</MtouchLink>
+    <MtouchInterpreter>-all</MtouchInterpreter>
+    <CodesignProvision>VS: WildCard Development</CodesignProvision>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhone\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <MtouchArch>ARM64</MtouchArch>
+    <CodesignKey>Apple Distribution: INNOVACION TECNOLOGICA GRUPMYL S.A. DE C.V. (2C7H472UU8)</CodesignKey>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <CodesignProvision>Procaf Directiva Distribución</CodesignProvision>
+    <BuildIpa>true</BuildIpa>
+    <IpaMetadata>app_procaf_directiva</IpaMetadata>
+    <IpaPackageName>app_procaf_directiva</IpaPackageName>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Main.cs" />
+    <Compile Include="AppDelegate.cs" />
+    <Compile Include="Renderizadores\TRenderizarEntry.cs" />
+    <Compile Include="Renderizadores\TRenderizarPicker.cs" />
+    <Compile Include="Renderizadores\TRenderizarSearchBar.cs" />
+    <Compile Include="Renderizadores\TRenderizarTDatePicker.cs" />
+    <Compile Include="Renderizadores\TRenderizarTEntry.cs" />
+    <Compile Include="ServiciosdeDependencia\TBarradeEstadoiOS.cs" />
+    <Compile Include="ServiciosdeDependencia\TBasedeDatosLocaliOS.cs" />
+    <Compile Include="ServiciosdeDependencia\TDirectorioLocaliOS.cs" />
+    <None Include="Entitlements.plist" />
+    <None Include="Info.plist" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon1024.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon180.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon167.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon152.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon120.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon87.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon80.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon76.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon60.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon58.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon40.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon29.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon20.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="Xamarin.iOS" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Rg.Plugins.Popup">
+      <Version>2.1.0</Version>
+    </PackageReference>
+    <PackageReference Include="Syncfusion.Xamarin.SfChart">
+      <Version>20.1.0.50</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2401" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
+    <PackageReference Include="Xamarin.Forms.OpenWhatsApp">
+      <Version>1.0.1</Version>
+    </PackageReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\Directiva10\Directiva10.csproj">
+      <Project>{F40EA7A9-D399-4AD7-AC29-98C9F69C4FE2}</Project>
+      <Name>Directiva10</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\logoLauncher.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\menuInferiorInicio.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\mensajeOk.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\mensajeCancelar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iniciodeSesionLogo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\sinConexionaInternetWifi.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iconoAlerta.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iconoPregunta.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\menuInferiorKPI.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\menuInferiorMonitoreo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\menuInferiorUsuarios.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\menuInferiorCajas.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\barradeNavegacionCampana.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\barradeNavegacionLupa.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\barradeNavegacionHamburguesa.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\barradeNavegacionFlechaRegreso.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iconoVentaCancelada.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iconoVentaEliminada.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iconoVenta.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iconoCalendarioAtras.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iconoReciboCancelado.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iconoReciboEliminado.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iconoCalendarioHoy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iconoUsuarioOffline.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iconoUsuario.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\menuLateralMonitoreo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\menuLateralKPI.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\menuLateralCajas.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\menuLateralUsuarios.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\menuLateralInicio.png" />
+  </ItemGroup>
+</Project>

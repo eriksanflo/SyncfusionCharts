@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:CarpetaACompartir="clr-namespace:Directiva10.A_Compartir"
+             x:Class="Directiva10.Plantilla.CVBarradeNavegacion">
+  <ContentView.Content>
+        <StackLayout Padding="{Binding ThicknessPadding}">
+            <Grid ColumnSpacing="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="20"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="{StaticResource OnPlatformHeightBarrraNavegacionVertical}"/>
+                </Grid.RowDefinitions>
+                <StackLayout IsVisible="{Binding MostrarIconoHamburguesa}"
+                             Grid.Column="0"
+                             Grid.Row="0">
+                    <Image Source="barradeNavegacionHamburguesa.png"
+                           Aspect="AspectFit"
+                           WidthRequest="{Binding AnchoIconos}"
+                           HeightRequest="{Binding AnchoIconos}"
+                           HorizontalOptions="CenterAndExpand"
+                           VerticalOptions="CenterAndExpand"/>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="XamlTapGestureRecognizerMostrarMenuLateral"/>
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+                <StackLayout IsVisible="{Binding MostrarIconoRegresar}"
+                             Grid.Column="0"
+                             Grid.Row="0">
+                    <StackLayout IsVisible="{Binding MostrarIconodeAlerta}" 
+                                 VerticalOptions="FillAndExpand">
+                        <Image Source="barradeNavegacionFlechaRegreso.png"
+                               Aspect="AspectFit"
+                               WidthRequest="{Binding AnchoIconos}"
+                               HeightRequest="{Binding AnchoIconos}"
+                               HorizontalOptions="CenterAndExpand"
+                               VerticalOptions="CenterAndExpand"/>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="XamlTapGestureRecognizerCerrarModulo"/>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                    <StackLayout IsVisible="{Binding MostrarIconodeAlerta, Converter={CarpetaACompartir:TInvertirValorBool}}" 
+                                 VerticalOptions="FillAndExpand">
+                        <Image Source="barradeNavegacionFlechaRegreso.png"
+                               Aspect="AspectFit"
+                               WidthRequest="{Binding AnchoIconos}"
+                               HeightRequest="{Binding AnchoIconos}"
+                               HorizontalOptions="CenterAndExpand"
+                               VerticalOptions="CenterAndExpand"/>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="XamlTapGestureRecognizerCerrarModal"/>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout Grid.Column="2"
+                             Grid.Row="0">
+                    <Label Text="{Binding Titulo}"
+                           TextColor="White"
+                           FontAttributes="Bold"
+                           HorizontalTextAlignment="Center"
+                           VerticalTextAlignment="Center"
+                           VerticalOptions="CenterAndExpand"/>
+                </StackLayout>
+                <StackLayout Grid.Column="3"
+                             Grid.Row="0">
+                    <Image Source="barradeNavegacionLupa.png"
+                           Aspect="AspectFit"
+                           WidthRequest="{Binding AnchoIconos}"
+                           HeightRequest="{Binding AnchoIconos}"
+                           IsVisible="False"
+                           HorizontalOptions="CenterAndExpand"
+                           VerticalOptions="CenterAndExpand"/>
+                </StackLayout>
+                <StackLayout IsVisible="{Binding MostrarIconodeAlerta}"
+                             Grid.Column="4"
+                             Grid.ColumnSpan="2"
+                             Grid.Row="0">
+                    <Image Source="barradeNavegacionCampana.png"
+                           Aspect="AspectFit"
+                           WidthRequest="{Binding AnchoIconos}"
+                           HeightRequest="{Binding AnchoIconos}"
+                           HorizontalOptions="CenterAndExpand"
+                           VerticalOptions="CenterAndExpand"/>
+                </StackLayout>
+                <StackLayout IsVisible="{Binding MostrarCirculoRojo}" 
+                             Grid.Column="5"
+                             Grid.Row="0">
+                    <Ellipse HorizontalOptions="CenterAndExpand"
+                             VerticalOptions="CenterAndExpand"
+                             WidthRequest="15"
+                             HeightRequest="15"
+                             Fill="Red"
+                             Stroke="Red"/>
+                </StackLayout>
+                <StackLayout IsVisible="{Binding MostrarCirculoRojo}"
+                             Grid.Column="5"
+                             Grid.Row="0">
+                    <Label Text="{Binding NumerodeNotificaciones}"
+                           TextColor="White"
+                           FontSize="Micro"
+                           HorizontalTextAlignment="Center"
+                           HorizontalOptions="CenterAndExpand"
+                           VerticalOptions="CenterAndExpand"/>
+                </StackLayout>
+                <StackLayout IsVisible="{Binding MostrarCirculoRojo}"
+                             Grid.Column="4"
+                             Grid.ColumnSpan="2"
+                             Grid.Row="0">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="XamlTapGestureRecognizerAbrirAlertas"/>
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+            </Grid>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

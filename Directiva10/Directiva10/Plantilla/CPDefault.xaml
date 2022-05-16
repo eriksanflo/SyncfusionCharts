@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Shell.NavBarIsVisible="False"
+             Shell.TabBarIsVisible="True"
+             Padding="0"
+             x:Class="Directiva10.Plantilla.CPDefault">
+    <StackLayout>
+        <StackLayout>
+            <StackLayout HorizontalOptions="Center"
+                         VerticalOptions="CenterAndExpand"
+                         Spacing="10">
+                <StackLayout Padding="20,20,20,30">
+                    <Image Source="logoLauncher.png"
+                           WidthRequest="120"
+                           Aspect="AspectFit"/>
+                    <Label Text="¡ Bienvenido a App Directiva !"
+                           HorizontalTextAlignment="Center"
+                           FontSize="Medium"/>
+                </StackLayout>
+                <ActivityIndicator x:Name="XamlActivityIndicator"
+                                   IsVisible="True"
+                                   IsRunning="True"/>
+                <Label Text="Inicializando recursos..."
+                       HorizontalTextAlignment="Center"
+                       FontSize="Small"/>
+            </StackLayout>
+            <StackLayout VerticalOptions="End"
+                         Padding="30">
+                <Label Text="Desarrollado por:"
+                        TextColor="White"
+                        FontSize="Micro"
+                        HorizontalTextAlignment="Center"/>
+                <Label Text="GRUPMYL CDIGITAL"
+                        TextColor="White"
+                        FontSize="Small"
+                        HorizontalTextAlignment="Center"/>
+            </StackLayout>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

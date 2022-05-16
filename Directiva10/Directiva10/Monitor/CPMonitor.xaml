@@ -1,0 +1,385 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:CarpetaACompartir="clr-namespace:Directiva10.A_Compartir"
+             xmlns:CarpetaPlantilla="clr-namespace:Directiva10.Plantilla"
+             Shell.NavBarIsVisible="False"
+             Shell.TabBarIsVisible="True"
+             Padding="0"
+             x:Class="Directiva10.Monitor.CPMonitor">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <LinearGradientBrush x:Key="LinearGradientBrushTarjeta"
+                                 StartPoint="0,0.3"
+                                 EndPoint="1,1.0">
+                <GradientStop Color="#f77a1b"
+                              Offset="0.1" />
+                <GradientStop Color="#f35a0f"
+                              Offset="1.0" />
+            </LinearGradientBrush>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout Spacing="0" 
+                     HorizontalOptions="FillAndExpand"
+                     VerticalOptions="FillAndExpand">
+            <CarpetaPlantilla:CVBarradeNavegacion x:Name="XamlCVBarradeNavegacion" 
+                                                  Titulo="Monitoreo"
+                                                  MostrarIconodeNavegacion="False"/>
+            <ScrollView>
+                <StackLayout Padding="0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="3*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Label Text="Large"
+                               TextColor="White"
+                               FontSize="Large"
+                               Grid.Column="0"
+                               Grid.Row="0"/>
+                        <Label Text="Murciélago es un texto de prueba"
+                               TextColor="White"
+                               FontSize="Large"
+                               Grid.Column="1"
+                               Grid.Row="0"/>
+                        <Label Text="Medium"
+                               TextColor="White"
+                               FontSize="Medium"
+                               Grid.Column="0"
+                               Grid.Row="1"/>
+                        <Label Text="Murciélago es un texto de prueba"
+                               TextColor="White"
+                               FontSize="Medium"
+                               Grid.Column="1"
+                               Grid.Row="1"/>
+                        <Label Text="Default"
+                               TextColor="White"
+                               FontSize="Default"
+                               Grid.Column="0"
+                               Grid.Row="2"/>
+                        <Label Text="Murciélago es un texto de prueba"
+                               TextColor="White"
+                               FontSize="Default"
+                               Grid.Column="1"
+                               Grid.Row="2"/>
+                        <Label Text="Small"
+                               TextColor="White"
+                               FontSize="Small"
+                               Grid.Column="0"
+                               Grid.Row="3"/>
+                        <Label Text="Murciélago es un texto de prueba"
+                               TextColor="White"
+                               FontSize="Small"
+                               Grid.Column="1"
+                               Grid.Row="3"/>
+                        <Label Text="Micro"
+                               TextColor="White"
+                               FontSize="Micro"
+                               Grid.Column="0"
+                               Grid.Row="4"/>
+                        <Label Text="Murciélago es un texto de prueba"
+                               TextColor="White"
+                               FontSize="Micro"
+                               Grid.Column="1"
+                               Grid.Row="4"/>
+
+                        <Label Text="10 unit"
+                               TextColor="White"
+                               FontSize="10"
+                               Grid.Column="0"
+                               Grid.Row="5"/>
+                        <Label Text="Murciélago es un texto de prueba"
+                               TextColor="White"
+                               FontSize="10"
+                               Grid.Column="1"
+                               Grid.Row="5"/>
+                        <Label Text="15 unit"
+                               TextColor="White"
+                               FontSize="15"
+                               Grid.Column="0"
+                               Grid.Row="6"/>
+                        <Label Text="Murciélago es un texto de prueba"
+                               TextColor="White"
+                               FontSize="15"
+                               Grid.Column="1"
+                               Grid.Row="6"/>
+                        <Label Text="20 unit"
+                               TextColor="White"
+                               FontSize="20"
+                               Grid.Column="0"
+                               Grid.Row="7"/>
+                        <Label Text="Murciélago es un texto de prueba"
+                               TextColor="White"
+                               FontSize="20"
+                               Grid.Column="1"
+                               Grid.Row="7"/>
+                        <Label Text="25 unit"
+                               TextColor="White"
+                               FontSize="25"
+                               Grid.Column="0"
+                               Grid.Row="8"/>
+                        <Label Text="Murciélago es un texto de prueba"
+                               TextColor="White"
+                               FontSize="25"
+                               Grid.Column="1"
+                               Grid.Row="8"/>
+
+                        <Label Text="14 unit"
+                               TextColor="White"
+                               FontSize="14"
+                               Grid.Column="0"
+                               Grid.Row="9"/>
+                        <Label Text="Murciélago es un texto de prueba"
+                               TextColor="White"
+                               FontSize="14"
+                               Grid.Column="1"
+                               Grid.Row="9"/>
+
+                        <Label Text="16 unit"
+                               TextColor="White"
+                               FontSize="16"
+                               Grid.Column="0"
+                               Grid.Row="10"/>
+                        <Label Text="Murciélago es un texto de prueba"
+                               TextColor="White"
+                               FontSize="16"
+                               Grid.Column="1"
+                               Grid.Row="10"/>
+
+                        <Label Text="17 unit"
+                               TextColor="White"
+                               FontSize="17"
+                               Grid.Column="0"
+                               Grid.Row="11"/>
+                        <Label Text="Murciélago es un texto de prueba"
+                               TextColor="White"
+                               FontSize="17"
+                               Grid.Column="1"
+                               Grid.Row="11"/>
+
+                        <Label Text="18 unit"
+                               TextColor="White"
+                               FontSize="18"
+                               Grid.Column="0"
+                               Grid.Row="12"/>
+                        <Label Text="Murciélago es un texto de prueba"
+                               TextColor="White"
+                               FontSize="18"
+                               Grid.Column="1"
+                               Grid.Row="12"/>
+
+                        <Label Text="19 unit"
+                               TextColor="White"
+                               FontSize="19"
+                               Grid.Column="0"
+                               Grid.Row="13"/>
+                        <Label Text="Murciélago es un texto de prueba"
+                               TextColor="White"
+                               FontSize="19"
+                               Grid.Column="1"
+                               Grid.Row="13"/>
+
+                        <Label Text="21 unit"
+                               TextColor="White"
+                               FontSize="21"
+                               Grid.Column="0"
+                               Grid.Row="14"/>
+                        <Label Text="Murciélago es un texto de prueba"
+                               TextColor="White"
+                               FontSize="21"
+                               Grid.Column="1"
+                               Grid.Row="14"/>
+
+                        <Label Text="22 unit"
+                               TextColor="White"
+                               FontSize="22"
+                               Grid.Column="0"
+                               Grid.Row="15"/>
+                        <Label Text="Murciélago es un texto de prueba"
+                               TextColor="White"
+                               FontSize="22"
+                               Grid.Column="1"
+                               Grid.Row="15"/>
+
+                        <Label Text="23 unit"
+                               TextColor="White"
+                               FontSize="23"
+                               Grid.Column="0"
+                               Grid.Row="16"/>
+                        <Label Text="Murciélago es un texto de prueba"
+                               TextColor="White"
+                               FontSize="23"
+                               Grid.Column="1"
+                               Grid.Row="16"/>
+
+                        <Label Text="24 unit"
+                               TextColor="White"
+                               FontSize="24"
+                               Grid.Column="0"
+                               Grid.Row="17"/>
+                        <Label Text="Murciélago es un texto de prueba"
+                               TextColor="White"
+                               FontSize="24"
+                               Grid.Column="1"
+                               Grid.Row="17"/>
+
+                        <Label Text="26 unit"
+                               TextColor="White"
+                               FontSize="26"
+                               Grid.Column="0"
+                               Grid.Row="18"/>
+                        <Label Text="Murciélago es un texto de prueba"
+                               TextColor="White"
+                               FontSize="26"
+                               Grid.Column="1"
+                               Grid.Row="18"/>
+
+                        <Label Text="27 unit"
+                               TextColor="White"
+                               FontSize="27"
+                               Grid.Column="0"
+                               Grid.Row="19"/>
+                        <Label Text="Murciélago es un texto de prueba"
+                               TextColor="White"
+                               FontSize="27"
+                               Grid.Column="1"
+                               Grid.Row="19"/>
+
+                        <Label Text="28 unit"
+                               TextColor="White"
+                               FontSize="28"
+                               Grid.Column="0"
+                               Grid.Row="20"/>
+                        <Label Text="Murciélago es un texto de prueba"
+                               TextColor="White"
+                               FontSize="28"
+                               Grid.Column="1"
+                               Grid.Row="20"/>
+
+                        <Label Text="29 unit"
+                               TextColor="White"
+                               FontSize="29"
+                               Grid.Column="0"
+                               Grid.Row="21"/>
+                        <Label Text="Murciélago es un texto de prueba"
+                               TextColor="White"
+                               FontSize="29"
+                               Grid.Column="1"
+                               Grid.Row="21"/>
+
+                        <Label Text="30 unit"
+                               TextColor="White"
+                               FontSize="30"
+                               Grid.Column="0"
+                               Grid.Row="22"/>
+                        <Label Text="Murciélago es un texto de prueba"
+                               TextColor="White"
+                               FontSize="30"
+                               Grid.Column="1"
+                               Grid.Row="22"/>
+
+                        <StackLayout Grid.Column="0"
+                                     Grid.Row="23">
+                            <BoxView WidthRequest="5"
+                                     HeightRequest="5"
+                                     BackgroundColor="Yellow"/>
+                        </StackLayout>
+                        <Label Text="5 unit"
+                               TextColor="White"
+                               FontSize="30"
+                               Grid.Column="1"
+                               Grid.Row="23"/>
+
+                        <StackLayout Grid.Column="0"
+                                     Grid.Row="24">
+                            <BoxView WidthRequest="10"
+                                     HeightRequest="10"
+                                     BackgroundColor="Yellow"/>
+                        </StackLayout>
+                        <Label Text="10 unit"
+                               TextColor="White"
+                               FontSize="30"
+                               Grid.Column="1"
+                               Grid.Row="24"/>
+
+                        <StackLayout Grid.Column="0"
+                                     Grid.Row="25">
+                            <BoxView WidthRequest="15"
+                                     HeightRequest="15"
+                                     BackgroundColor="Yellow"/>
+                        </StackLayout>
+                        <Label Text="15 unit"
+                               TextColor="White"
+                               FontSize="30"
+                               Grid.Column="1"
+                               Grid.Row="25"/>
+
+                    </Grid>
+                    <Label Text="31 unit"
+                           TextColor="White"
+                           FontSize="31"/>
+                    <Label Text="32 unit"
+                           TextColor="White"
+                           FontSize="32"/>
+                    <Label Text="33 unit"
+                           TextColor="White"
+                           FontSize="33"/>
+                    <Label Text="34 unit"
+                           TextColor="White"
+                           FontSize="34"/>
+                    <Label Text="35 unit"
+                           TextColor="White"
+                           FontSize="35"/>
+                    <Label Text="36 unit"
+                           TextColor="White"
+                           FontSize="36"/>
+                    <Label Text="37 unit"
+                           TextColor="White"
+                           FontSize="37"/>
+                    <Label Text="38 unit"
+                           TextColor="White"
+                           FontSize="38"/>
+                    <Label Text="39 unit"
+                           TextColor="White"
+                           FontSize="39"/>
+                    <Label Text="40 unit"
+                           TextColor="White"
+                           FontSize="40"/>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

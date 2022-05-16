@@ -1,0 +1,278 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:CarpetaACompartir="clr-namespace:Directiva10.A_Compartir"
+             xmlns:CarpetaPlantilla="clr-namespace:Directiva10.Plantilla"
+             Shell.NavBarIsVisible="False"
+             Shell.TabBarIsVisible="True"
+             Padding="0"
+             x:Class="Directiva10.Usuarios.CPUsuarios">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="ColorOnline">#8cc63f</Color>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout>
+            <CarpetaPlantilla:CVBarradeNavegacion x:Name="XamlCVBarradeNavegacion"
+                                                  Titulo="USUARIOS"
+                                                  MostrarIconodeNavegacion="True"
+                                                  MostrarIconodeAlerta="True"
+                                                  NumerodeNotificaciones="12"/>
+            <RefreshView HorizontalOptions="FillAndExpand" 
+                         Background="{StaticResource LinearGradientBrushFondo}"
+                         Command="{Binding CommandObtenerUsuarios}"
+                         IsRefreshing="{Binding EstaActualizando, Mode=TwoWay}"
+                         Padding="0">
+                <CollectionView x:Name="XamlCollectionViewUsuarios" 
+                                HorizontalOptions="FillAndExpand"
+                                BackgroundColor="{AppThemeBinding Default={StaticResource ColordeFondoCollectionViewClaro}, Dark={StaticResource ColordeFondoCollectionViewOscuro}}"
+                                SelectionMode="Single"
+                                IsGrouped="False"
+                                ItemSizingStrategy="MeasureAllItems"
+                                ItemsLayout="VerticalList"
+                                ItemsSource="{Binding ObservableCollectionUsuarios}"
+                                SelectionChanged="XamlCollectionViewUsuariosSelectionChanged">
+                    <CollectionView.Header>
+                        <StackLayout HorizontalOptions="FillAndExpand"
+                                     Padding="-1"
+                                     Spacing="0">
+                            <StackLayout BackgroundColor="{AppThemeBinding Default={StaticResource ColorBarradeNavegacionClaro}, Dark={StaticResource ColorBarradeNavegacionOscuro}}">
+                                <!-- En iOS al CollectionView oculta parte de la vista, por eso se coloca este espacio -->
+                            </StackLayout>
+                            <Grid Padding="-1"
+                                  ColumnSpacing="0"
+                                  RowSpacing="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="20"/>
+                                </Grid.RowDefinitions>
+                                <StackLayout BackgroundColor="{AppThemeBinding Default={StaticResource ColordeFondoCollectionViewClaro}, Dark={StaticResource ColordeFondoCollectionViewOscuro}}"
+                                             Grid.Column="0"
+                                             Grid.ColumnSpan="3"
+                                             Grid.Row="1"
+                                             Grid.RowSpan="1">
+                                </StackLayout>
+                                <StackLayout Grid.Column="0"
+                                             Grid.ColumnSpan="3"
+                                             Grid.Row="0"
+                                             Grid.RowSpan="2">
+                                    <BoxView Margin="0" 
+                                             CornerRadius="0,0,20,20" 
+                                             Background="#11263d"
+                                             VerticalOptions="FillAndExpand"/>
+                                </StackLayout>
+                                <StackLayout BackgroundColor="{AppThemeBinding Default={StaticResource ColordeFondoCollectionViewClaro}, Dark={StaticResource ColordeFondoCollectionViewOscuro}}"
+                                             Grid.ColumnSpan="3"
+                                             Grid.Row="2">
+                                    <!--Se pone esta etiqueta para generar un espacio entre el area azul y el area gris de fondo y así permitir un espacio con el primer registro-->
+                                </StackLayout>
+                            </Grid>
+                        </StackLayout>
+                    </CollectionView.Header>
+                    <CollectionView.EmptyView>
+                        <StackLayout BackgroundColor="{AppThemeBinding Default={StaticResource ColordeFondoCollectionViewClaro}, Dark={StaticResource ColordeFondoCollectionViewOscuro}}" 
+                                     Padding="20">
+                            <Label Text="{StaticResource StringMensajeSinRegistros}"
+                                   Style="{StaticResource StyleEtiqueta}"
+                                   FontSize="Medium"
+                                   HorizontalTextAlignment="Center"
+                                   HorizontalOptions="CenterAndExpand"/>
+                        </StackLayout>
+                    </CollectionView.EmptyView>
+                    <CollectionView.ItemTemplate >
+                        <DataTemplate>
+                            <StackLayout BackgroundColor="{AppThemeBinding Default={StaticResource ColordeFondoCollectionViewClaro}, Dark={StaticResource ColordeFondoCollectionViewOscuro}}" 
+                                         Spacing="0">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup Name="CommonStates">
+                                        <VisualState Name="Normal">
+                                            <VisualState.Setters>
+                                                <Setter Property="BackgroundColor" Value="Transparent"/>
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState Name="Selected">
+                                            <VisualState.Setters>
+                                                <Setter Property="BackgroundColor" Value="Transparent"/>
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <StackLayout BackgroundColor="{AppThemeBinding Default={StaticResource ColordeFondoCollectionViewClaro}, Dark={StaticResource ColordeFondoCollectionViewOscuro}}"
+                                             Padding="30,5,30,5">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="4"/>
+                                            <RowDefinition Height="4"/>
+                                        </Grid.RowDefinitions>
+                                        <StackLayout Grid.Column="0"
+                                                     Grid.Row="0"
+                                                     Grid.RowSpan="2">
+                                            <BoxView Margin="0" 
+                                                     CornerRadius="15,15,15,15" 
+                                                     Background="{AppThemeBinding Default={StaticResource ColorTarjetaFondoClaro}, Dark={StaticResource ColorTarjetaFondoOscuro}}"
+                                                     VerticalOptions="FillAndExpand"/>
+                                        </StackLayout>
+                                        <StackLayout IsVisible="{Binding EstaOnline}"
+                                                     Grid.Column="0"
+                                                     Grid.Row="1"
+                                                     Grid.RowSpan="2">
+                                            <BoxView BackgroundColor="{AppThemeBinding Default={StaticResource ColorSeparadorFuerteClaro}, Dark={StaticResource ColorSeparadorFuerteOscuro}}"
+                                                     HorizontalOptions="FillAndExpand"
+                                                     CornerRadius="3"
+                                                     Margin="10,0,10,0"
+                                                     HeightRequest="8"/>
+                                        </StackLayout>
+                                        <StackLayout Padding="15"
+                                                     Spacing="10"
+                                                     Grid.Column="0"
+                                                     Grid.Row="0"
+                                                     Grid.RowSpan="2">
+                                            <StackLayout>
+                                                <Grid RowSpacing="0">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="60"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="Auto"/>
+                                                        <RowDefinition Height="Auto"/>
+                                                    </Grid.RowDefinitions>
+                                                    <StackLayout Grid.Column="0"
+                                                                 Grid.Row="0"
+                                                                 Grid.RowSpan="2">
+                                                        <Image Source="{Binding Icono}" 
+                                                               WidthRequest="30"/>
+                                                        <Label Text="ONLINE"
+                                                               FontSize="12"
+                                                               IsVisible="{Binding EstaOnline}"
+                                                               HorizontalTextAlignment="Center"
+                                                               TextColor="{StaticResource ColorOnline}"/>
+                                                        <Label Text="OFFLINE"
+                                                               FontSize="12"
+                                                               Style="{StaticResource StyleEtiqueta}"
+                                                               IsVisible="{Binding EstaOnline, Converter={CarpetaACompartir:TInvertirValorBool}}"
+                                                               HorizontalTextAlignment="Center"/>
+                                                    </StackLayout>
+                                                    <StackLayout Grid.Column="1"
+                                                                 Grid.Row="0">
+                                                        <Label Text="{Binding Nombre}"
+                                                               FontSize="18"
+                                                               FontAttributes="Bold"
+                                                               VerticalTextAlignment="Center"/>
+                                                    </StackLayout>
+                                                    <StackLayout Spacing="2" 
+                                                                 Grid.Column="1"
+                                                                 Grid.Row="1">
+                                                        <StackLayout Orientation="Horizontal">
+                                                            <Label Text="Conexión"
+                                                                   Style="{StaticResource StyleEtiqueta}"
+                                                                   FontSize="16"
+                                                                   VerticalTextAlignment="Center"/>
+                                                            <Label Text="{Binding FechadeConexion, Converter={CarpetaACompartir:TDateTimeToFormatoFecha}}"
+                                                                   Style="{StaticResource StyleEtiqueta}"
+                                                                   FontAttributes="Bold"
+                                                                   FontSize="16"/>
+                                                        </StackLayout>
+                                                    </StackLayout>
+                                                    <StackLayout Padding="0" 
+                                                                 Grid.Column="2"
+                                                                 Grid.Row="0">
+                                                        <Path Stroke="{AppThemeBinding Default={StaticResource ColorBotonPrimarioClaro}, Dark={StaticResource ColorBotonPrimarioOscuro}}"
+                                                              Fill="{AppThemeBinding Default={StaticResource ColorBotonPrimarioClaro}, Dark={StaticResource ColorBotonPrimarioOscuro}}"  
+                                                              HorizontalOptions="End"
+                                                              VerticalOptions="End"
+                                                              Rotation="{Binding RotacionIcono}">
+                                                            <Path.Data>
+                                                                <PathGeometry>
+                                                                    <PathGeometry.Figures>
+                                                                        <PathFigureCollection>
+                                                                            <PathFigure IsClosed="True"
+                                                                                        StartPoint="0,0">
+                                                                                <PathFigure.Segments>
+                                                                                    <PathSegmentCollection>
+                                                                                        <LineSegment Point="14,7"/>
+                                                                                        <LineSegment Point="0,14"/>
+                                                                                        <LineSegment Point="4,7"/>
+                                                                                    </PathSegmentCollection>
+                                                                                </PathFigure.Segments>
+                                                                            </PathFigure>
+                                                                        </PathFigureCollection>
+                                                                    </PathGeometry.Figures>
+                                                                </PathGeometry>
+                                                            </Path.Data>
+                                                        </Path>
+                                                    </StackLayout>
+                                                </Grid>
+                                            </StackLayout>
+                                            <StackLayout IsVisible="{Binding EstaOnline}">
+                                                <BoxView HorizontalOptions="FillAndExpand" 
+                                                         HeightRequest="1"
+                                                         BackgroundColor="{AppThemeBinding Default={StaticResource ColorSeparadorClaro}, Dark={StaticResource ColorSeparadorOscuro}}"/>
+                                            </StackLayout>
+                                            <StackLayout IsVisible="{Binding EstaOnline}">
+                                                <Grid ColumnSpacing="0">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="1"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="Auto"/>
+                                                    </Grid.RowDefinitions>
+                                                    <StackLayout Spacing="0" 
+                                                                 Grid.Column="0"
+                                                                 Grid.Row="0">
+                                                        <Label Text="Sistema:"
+                                                               Style="{StaticResource StyleEtiqueta}"
+                                                               FontSize="16"
+                                                               HorizontalTextAlignment="Center"/>
+                                                        <Label Text="{Binding Sistema}"
+                                                               FontSize="15"
+                                                               FontAttributes="Bold"
+                                                               HorizontalTextAlignment="Center"/>
+                                                    </StackLayout>
+                                                    <StackLayout Grid.Column="1"
+                                                                 Grid.Row="0">
+                                                        <BoxView HorizontalOptions="FillAndExpand"
+                                                                 VerticalOptions="FillAndExpand"
+                                                                 WidthRequest="1"
+                                                                 BackgroundColor="{AppThemeBinding Default={StaticResource ColorSeparadorClaro}, Dark={StaticResource ColorSeparadorOscuro}}"/>
+                                                    </StackLayout>
+                                                    <StackLayout Spacing="0" 
+                                                                 Grid.Column="2"
+                                                                 Grid.Row="0">
+                                                        <Label Text="Versión Instalada"
+                                                               Style="{StaticResource StyleEtiqueta}"
+                                                               FontSize="15"
+                                                               HorizontalTextAlignment="Center"/>
+                                                        <Label Text="{Binding VersionInstalada}"
+                                                               FontSize="15"
+                                                               FontAttributes="Bold"
+                                                               HorizontalTextAlignment="Center"/>
+                                                    </StackLayout>
+                                                </Grid>
+                                            </StackLayout>
+                                        </StackLayout>
+                                    </Grid>
+                                </StackLayout>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                    <CollectionView.Footer>
+                        <StackLayout BackgroundColor="Transparent" 
+                                     Padding="{StaticResource OnPlatformPaddingCollectionViewFooteriOS}">
+                            <!-- En iOS al CollectionView oculta parte de la vista, por eso se coloca este espacio -->
+                        </StackLayout>
+                    </CollectionView.Footer>
+                </CollectionView>
+            </RefreshView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

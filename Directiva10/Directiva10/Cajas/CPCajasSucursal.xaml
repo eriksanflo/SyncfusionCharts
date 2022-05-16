@@ -1,0 +1,283 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:CarpetaACompartir="clr-namespace:Directiva10.A_Compartir"
+             xmlns:CarpetaPlantilla="clr-namespace:Directiva10.Plantilla"
+             Shell.NavBarIsVisible="False"
+             Padding="0"
+             x:Class="Directiva10.Cajas.CPCajasSucursal">
+    <ContentPage.Content>
+        <StackLayout Spacing="0" 
+                     HorizontalOptions="FillAndExpand"
+                     VerticalOptions="FillAndExpand">
+            <CarpetaPlantilla:CVBarradeNavegacion x:Name="XamlCVBarradeNavegacion"
+                                                  Titulo="SUCURSAL"
+                                                  MostrarIconodeNavegacion="True"
+                                                  EsIconoRegresar="True"
+                                                  MostrarIconodeAlerta="True"/>
+            <RefreshView HorizontalOptions="FillAndExpand"
+                         Background="{StaticResource LinearGradientBrushFondo}"
+                         Command="{Binding CommandObtenerBalanceporUsuariosdeSucursal}"
+                         IsRefreshing="{Binding EstaActualizando, Mode=TwoWay}"
+                         Padding="0,10,0,0">
+                <CollectionView x:Name="XamlCollectionViewCajas"
+                                HorizontalOptions="FillAndExpand"
+                                BackgroundColor="Transparent" 
+                                SelectionMode="Single"
+                                IsGrouped="False"
+                                ItemSizingStrategy="MeasureAllItems"
+                                ItemsLayout="VerticalList"
+                                ItemsSource="{Binding ObservableCollectionBalancedeUsuarios}"
+                                SelectionChanged="XamlCollectionViewCajasSelectionChanged">
+                    <CollectionView.Header>
+                        <StackLayout HorizontalOptions="FillAndExpand"
+                                     Padding="30,0,30,20"
+                                     Spacing="0">
+                            <StackLayout BackgroundColor="{AppThemeBinding Default={StaticResource ColorBarradeNavegacionClaro}, Dark={StaticResource ColorBarradeNavegacionOscuro}}">
+                                <!-- En iOS al CollectionView oculta parte de la vista, por eso se coloca este espacio -->
+                            </StackLayout>
+                            <Grid Padding="-1"
+                                  ColumnSpacing="0"
+                                  RowSpacing="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <StackLayout Grid.Column="0"
+                                             Grid.Row="0">
+                                    <BoxView Margin="0" 
+                                             CornerRadius="15,15,15,15" 
+                                             Background="{StaticResource LinearGradientBrushTarjetaDegradado}"
+                                             VerticalOptions="FillAndExpand"/>
+                                </StackLayout>
+                                <StackLayout Padding="25"
+                                             Spacing="0"
+                                             Grid.Column="0"
+                                             Grid.Row="0">
+                                    <Label Text="Total sucursal diario"
+                                           TextColor="White"
+                                           FontSize="14"/>
+                                    <Label Text="{Binding Total, Converter={CarpetaACompartir:TDoubleToFormatoMoneda}}"
+                                           TextColor="White"
+                                           FontSize="42"
+                                           FontAttributes="Bold"
+                                           HorizontalTextAlignment="Center"/>
+                                </StackLayout>
+                            </Grid>
+                        </StackLayout>
+                    </CollectionView.Header>
+                    <CollectionView.EmptyView>
+                        <StackLayout Padding="20">
+                            <Label Text="{StaticResource StringMensajeSinRegistros}"
+                                   Style="{StaticResource StyleEtiqueta}"
+                                   FontSize="Medium"
+                                   HorizontalTextAlignment="Center"
+                                   HorizontalOptions="CenterAndExpand"/>
+                        </StackLayout>
+                    </CollectionView.EmptyView>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Spacing="0">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup Name="CommonStates">
+                                        <VisualState Name="Normal">
+                                            <VisualState.Setters>
+                                                <Setter Property="BackgroundColor" Value="Transparent"/>
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState Name="Selected">
+                                            <VisualState.Setters>
+                                                <Setter Property="BackgroundColor" Value="Transparent"/>
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <StackLayout Margin="30,5,30,5">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="4"/>
+                                            <RowDefinition Height="4"/>
+                                        </Grid.RowDefinitions>
+                                        <StackLayout Grid.Column="0"
+                                                     Grid.Row="0"
+                                                     Grid.RowSpan="2">
+                                            <BoxView Margin="0" 
+                                                     CornerRadius="15,15,15,15" 
+                                                     Background="{AppThemeBinding Default={StaticResource ColorTarjetaFondoClaro}, Dark={StaticResource ColorTarjetaFondoOscuro}}"
+                                                     VerticalOptions="FillAndExpand"/>
+                                        </StackLayout>
+                                        <StackLayout Grid.Column="0"
+                                                     Grid.Row="1"
+                                                     Grid.RowSpan="2">
+                                            <BoxView BackgroundColor="{AppThemeBinding Default={StaticResource ColorSeparadorFuerteClaro}, Dark={StaticResource ColorSeparadorFuerteOscuro}}"
+                                                     HorizontalOptions="FillAndExpand"
+                                                     CornerRadius="3"
+                                                     Margin="10,0,10,0"
+                                                     HeightRequest="8"/>
+                                        </StackLayout>
+                                        <StackLayout Padding="15"
+                                                     Spacing="10"
+                                                     Grid.Column="0"
+                                                     Grid.Row="0"
+                                                     Grid.RowSpan="2">
+                                            <StackLayout>
+                                                <Grid RowSpacing="0">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="14"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="Auto"/>
+                                                        <RowDefinition Height="Auto"/>
+                                                    </Grid.RowDefinitions>
+                                                    <StackLayout Padding="0,0,0,0" 
+                                                                 Grid.Column="0"
+                                                                 Grid.Row="0">
+                                                        <Path Stroke="{AppThemeBinding Default={StaticResource ColorBotonPrimarioClaro}, Dark={StaticResource ColorBotonPrimarioOscuro}}"
+                                                              Fill="{AppThemeBinding Default={StaticResource ColorBotonPrimarioClaro}, Dark={StaticResource ColorBotonPrimarioOscuro}}"  
+                                                              HorizontalOptions="End"
+                                                              VerticalOptions="End"
+                                                              Rotation="{Binding RotacionIcono}">
+                                                            <Path.Data>
+                                                                <PathGeometry>
+                                                                    <PathGeometry.Figures>
+                                                                        <PathFigureCollection>
+                                                                            <PathFigure IsClosed="True"
+                                                                                        StartPoint="0,0">
+                                                                                <PathFigure.Segments>
+                                                                                    <PathSegmentCollection>
+                                                                                        <LineSegment Point="14,7"/>
+                                                                                        <LineSegment Point="0,14"/>
+                                                                                        <LineSegment Point="4,7"/>
+                                                                                    </PathSegmentCollection>
+                                                                                </PathFigure.Segments>
+                                                                            </PathFigure>
+                                                                        </PathFigureCollection>
+                                                                    </PathGeometry.Figures>
+                                                                </PathGeometry>
+                                                            </Path.Data>
+                                                        </Path>
+                                                    </StackLayout>
+                                                    <StackLayout Grid.Column="1"
+                                                                 Grid.Row="0">
+                                                        <Label Text="{Binding Nombre}"
+                                                               TextColor="{Binding ColorNombre}"
+                                                               FontSize="18"
+                                                               FontAttributes="Bold"/>
+                                                    </StackLayout>
+                                                    <StackLayout Spacing="2" 
+                                                                 Grid.Column="1"
+                                                                 Grid.Row="1">
+                                                        <StackLayout Orientation="Horizontal">
+                                                            <Label Text="Total cobrado"
+                                                                   TextColor="{Binding ColorTotalCobrado}"
+                                                                   FontSize="16"/>
+                                                            <Label Text="{Binding TotalCobrado, Converter={CarpetaACompartir:TDoubleToFormatoMoneda}}"
+                                                                   TextColor="{Binding ColorTotalCobrado}"
+                                                                   FontAttributes="Bold"
+                                                                   FontSize="16"/>
+                                                        </StackLayout>
+                                                        <StackLayout Orientation="Horizontal">
+                                                            <Label Text="Total efectivo"
+                                                                   Style="{StaticResource StyleEtiqueta}"
+                                                                   FontSize="16"/>
+                                                            <Label Text="{Binding TotalEfectivo, Converter={CarpetaACompartir:TDoubleToFormatoMoneda}}"
+                                                                   TextColor="{Binding ColorTotalEfectivo}"
+                                                                   FontAttributes="Bold"
+                                                                   FontSize="16"/>
+                                                        </StackLayout>
+                                                    </StackLayout>
+                                                </Grid>
+                                            </StackLayout>
+                                            <StackLayout IsVisible="{Binding EstaSeleccionado}">
+                                                <BoxView HorizontalOptions="FillAndExpand" 
+                                                         HeightRequest="1"
+                                                         BackgroundColor="{AppThemeBinding Default={StaticResource ColorSeparadorClaro}, Dark={StaticResource ColorSeparadorOscuro}}"/>
+                                            </StackLayout>
+                                            <StackLayout IsVisible="{Binding EstaSeleccionado}">
+                                                <Grid ColumnSpacing="0">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="1"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="1"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="Auto"/>
+                                                    </Grid.RowDefinitions>
+                                                    <StackLayout Spacing="0" 
+                                                                 Grid.Column="0"
+                                                                 Grid.Row="0">
+                                                        <Label Text="{Binding Efectivo, Converter={CarpetaACompartir:TDoubleToFormatoMoneda}}"
+                                                               FontSize="15"
+                                                               FontAttributes="Bold"
+                                                               HorizontalTextAlignment="Center"/>
+                                                        <Label Text="Efectivo"
+                                                               Style="{StaticResource StyleEtiqueta}"
+                                                               FontSize="15"
+                                                               HorizontalTextAlignment="Center"/>
+                                                    </StackLayout>
+                                                    <StackLayout Grid.Column="1"
+                                                                 Grid.Row="0">
+                                                        <BoxView HorizontalOptions="FillAndExpand"
+                                                                 VerticalOptions="FillAndExpand"
+                                                                 WidthRequest="1"
+                                                                 BackgroundColor="{AppThemeBinding Default={StaticResource ColorSeparadorClaro}, Dark={StaticResource ColorSeparadorOscuro}}"/>
+                                                    </StackLayout>
+                                                    <StackLayout Spacing="0" 
+                                                                 Grid.Column="2"
+                                                                 Grid.Row="0">
+                                                        <Label Text="{Binding Depositos, Converter={CarpetaACompartir:TDoubleToFormatoMoneda}}"
+                                                               FontSize="15"
+                                                               FontAttributes="Bold"
+                                                               HorizontalTextAlignment="Center"/>
+                                                        <Label Text="Depositos"
+                                                               Style="{StaticResource StyleEtiqueta}"
+                                                               FontSize="15"
+                                                               HorizontalTextAlignment="Center"/>
+                                                    </StackLayout>
+                                                    <StackLayout Grid.Column="3"
+                                                                 Grid.Row="0">
+                                                        <BoxView HorizontalOptions="FillAndExpand"
+                                                                 VerticalOptions="FillAndExpand"
+                                                                 WidthRequest="1"
+                                                                 BackgroundColor="{AppThemeBinding Default={StaticResource ColorSeparadorClaro}, Dark={StaticResource ColorSeparadorOscuro}}"/>
+                                                    </StackLayout>
+                                                    <StackLayout Spacing="0" 
+                                                                 Grid.Column="4"
+                                                                 Grid.Row="0">
+                                                        <Label Text="{Binding Gastos, Converter={CarpetaACompartir:TDoubleToFormatoMoneda}}"
+                                                               FontSize="15"
+                                                               FontAttributes="Bold"
+                                                               HorizontalTextAlignment="Center"/>
+                                                        <Label Text="Gastos"
+                                                               Style="{StaticResource StyleEtiqueta}"
+                                                               FontSize="15"
+                                                               HorizontalTextAlignment="Center"/>
+                                                    </StackLayout>
+                                                </Grid>
+                                            </StackLayout>
+                                        </StackLayout>
+                                    </Grid>
+                                </StackLayout>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                    <CollectionView.Footer>
+                        <StackLayout BackgroundColor="Transparent" 
+                                     Padding="{StaticResource OnPlatformPaddingCollectionViewFooteriOS}">
+                            <!-- En iOS al CollectionView oculta parte de la vista, por eso se coloca este espacio -->
+                        </StackLayout>
+                    </CollectionView.Footer>
+                </CollectionView>
+            </RefreshView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

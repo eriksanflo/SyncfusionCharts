@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:CarpetaACompartir="clr-namespace:Directiva10.A_Compartir"
+             xmlns:CarpetaInterfaces="clr-namespace:Directiva10.Interfaces"
+             NavigationPage.HasNavigationBar="False"
+             NavigationPage.HasBackButton="False"
+             x:Class="Directiva10.IniciodeSesion.CPIniciodeSesion">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <OnPlatform x:TypeArguments="Thickness"  x:Key="OnPlatformMovilPaggingPiedePagina"  Android="0,30,0,30" iOS="0,30,0,30" Default="0,30,0,30"/>
+            <OnPlatform x:TypeArguments="Thickness"  x:Key="OnPlatformTabletPaggingPiedePagina" Android="0,70,0,70" iOS="0,70,0,70" Default="0,70,0,70"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <ScrollView Padding="0,0,0,0"
+                    BackgroundColor="Transparent">
+            <StackLayout Spacing="0"
+                         BackgroundColor="Transparent" VerticalOptions="CenterAndExpand">
+                <StackLayout Spacing="0"
+                             Padding="0"
+                             Orientation="{Binding StackOrientationContenedor}">
+                    <StackLayout HorizontalOptions="FillAndExpand"
+                                 VerticalOptions="Center"
+                                 Margin="0"
+                                 Padding="0">
+                        <Grid ColumnSpacing="0" 
+                              RowSpacing="0"
+                              Margin="0"
+                              Padding="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <StackLayout VerticalOptions="Center" 
+                                         Padding="{Binding ThicknessPaddingFormulario}"
+                                         Spacing="{StaticResource OnPlatformSpacingComponentes}"
+                                         Grid.Column="0"
+                                         Grid.Row="0">
+                                <CarpetaInterfaces:TEntry x:Name="XamlEntryUsuario"
+                                                          BorderColor="{StaticResource OnPlatformBorderColorTEntry}"
+                                                          BorderRadius="{StaticResource OnPlatformBorderRadiusTEntry}"
+                                                          BorderWidth="{StaticResource OnPlatformBorderWidthTEntry}"
+                                                          Padding="{StaticResource OnPlatformPaddingTEntry}"
+                                                          Placeholder="Usuario"
+                                                          Keyboard="Text" 
+                                                          TextTransform="Lowercase"
+                                                          MaxLength="100"
+                                                          Completed="XamlEntryUsuarioCompleted">
+                                    <Entry.Behaviors>
+                                        <CarpetaACompartir:TValidarRequerido/>
+                                    </Entry.Behaviors>
+                                </CarpetaInterfaces:TEntry>
+                                <CarpetaInterfaces:TEntry x:Name="XamlEntryContrasena"
+                                                          BorderColor="{StaticResource OnPlatformBorderColorTEntry}"
+                                                          BorderRadius="{StaticResource OnPlatformBorderRadiusTEntry}"
+                                                          BorderWidth="{StaticResource OnPlatformBorderWidthTEntry}"
+                                                          Padding="{StaticResource OnPlatformPaddingTEntry}"
+                                                          Placeholder="Contraseña"
+                                                          Keyboard="Text"
+                                                          IsPassword="True"
+                                                          MaxLength="100"
+                                                          Completed="XamlEntryContrasenaCompleted">
+                                    <Entry.Behaviors>
+                                        <CarpetaACompartir:TValidarRequerido/>
+                                    </Entry.Behaviors>
+                                </CarpetaInterfaces:TEntry>
+                                <CarpetaInterfaces:TEntry x:Name="XamlEntryDistribucion"
+                                                          BorderColor="{StaticResource OnPlatformBorderColorTEntry}"
+                                                          BorderRadius="{StaticResource OnPlatformBorderRadiusTEntry}"
+                                                          BorderWidth="{StaticResource OnPlatformBorderWidthTEntry}"
+                                                          Padding="{StaticResource OnPlatformPaddingTEntry}"
+                                                          Placeholder="Distribución"
+                                                          MaxLength="100">
+                                    <CarpetaInterfaces:TEntry.Keyboard>
+                                        <Keyboard x:FactoryMethod="Create">
+                                            <x:Arguments>
+                                                <KeyboardFlags>Suggestions,CapitalizeCharacter</KeyboardFlags>
+                                            </x:Arguments>
+                                        </Keyboard>
+                                    </CarpetaInterfaces:TEntry.Keyboard>
+                                    <Entry.Behaviors>
+                                        <CarpetaACompartir:TValidarRequerido/>
+                                    </Entry.Behaviors>
+                                </CarpetaInterfaces:TEntry>
+                                <StackLayout HorizontalOptions="Center"
+                                             Padding="20,20,20,0">
+                                    <Button x:Name="XamlButtonIniciarSesion" 
+                                            Style="{StaticResource StyleBoton}"
+                                            Text="Iniciar sesión" 
+                                            FontSize="Medium"
+                                            Clicked="XamlButtonIniciarSesionClicked"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </Grid>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

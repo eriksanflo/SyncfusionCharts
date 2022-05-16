@@ -1,0 +1,344 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:CarpetaACompartir="clr-namespace:Directiva10.A_Compartir"
+             xmlns:CarpetaPlantilla="clr-namespace:Directiva10.Plantilla"
+             Shell.NavBarIsVisible="False"
+             Shell.TabBarIsVisible="True"
+             Padding="0"
+             x:Class="Directiva10.Alertas.CPAlertas">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <OnPlatform x:TypeArguments="x:Double" x:Key="OnPlatformWidthIconoPrincipal"    Android="35"    iOS="35"    Default="35"/>
+            <OnPlatform x:TypeArguments="x:Double" x:Key="OnPlatformWidthIconoSecundario"   Android="32"    iOS="32"    Default="32"/>
+            <OnPlatform x:TypeArguments="x:Double" x:Key="OnPlatformWidthIconoTercero"      Android="20"    iOS="20"    Default="20"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+        
+    <ContentPage.Content>
+        <StackLayout Spacing="0"
+                     HorizontalOptions="FillAndExpand"
+                     VerticalOptions="FillAndExpand">
+            <CarpetaPlantilla:CVBarradeNavegacion x:Name="XamlCVBarradeNavegacion" 
+                                                  Titulo="NOTIFICACIONES"
+                                                  MostrarIconodeNavegacion="True"
+                                                  EsIconoRegresar="True"
+                                                  MostrarIconodeAlerta ="False"/>
+            <ScrollView HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand">
+                <StackLayout HorizontalOptions="FillAndExpand"
+                             VerticalOptions="FillAndExpand"
+                             BackgroundColor="{AppThemeBinding Default={StaticResource ColordeFondoCollectionViewClaro}, Dark={StaticResource ColordeFondoCollectionViewOscuro}}"
+                             Padding="-1"
+                             Spacing="0">
+                    <StackLayout BackgroundColor="{AppThemeBinding Default={StaticResource ColorBarradeNavegacionClaro}, Dark={StaticResource ColorBarradeNavegacionOscuro}}">
+                        <!-- En iOS al CollectionView oculta parte de la vista, por eso se coloca este espacio -->
+                    </StackLayout>
+                    <Grid Padding="-1"
+                          ColumnSpacing="10"
+                          RowSpacing="15">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="30"/>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="30"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackLayout Grid.Column="0"
+                                     Grid.ColumnSpan="5"
+                                     Grid.Row="0"
+                                     Grid.RowSpan="10">
+                            <BoxView Margin="0" 
+                                     CornerRadius="0,0,20,20" 
+                                     Background="{StaticResource LinearGradientBrushFondo}"
+                                     VerticalOptions="FillAndExpand"/>
+                        </StackLayout>
+                        <StackLayout Grid.Column="1"
+                                     Grid.Row="0">
+                            <Image Source="iconoCalendarioHoy.png"
+                                   HeightRequest="{StaticResource OnPlatformWidthIconoPrincipal}"
+                                   WidthRequest="{StaticResource OnPlatformWidthIconoPrincipal}"
+                                   Aspect="AspectFit"
+                                   HorizontalOptions="Center"/>
+                        </StackLayout>
+                        <StackLayout Spacing="0"
+                                     Grid.Column="2"
+                                     Grid.ColumnSpan="2"
+                                     Grid.Row="0">
+                            <Label Text="Hoy"
+                                   TextColor="White"
+                                   FontAttributes="Bold"
+                                   FontSize="30"/>
+                            <Label Text="23 de marzo de 2022"
+                                   TextColor="{AppThemeBinding Default={StaticResource ColorBotonPrimarioClaro}, Dark={StaticResource ColorBotonPrimarioOscuro}}"
+                                   FontAttributes="Bold"
+                                   FontSize="16"/>
+                        </StackLayout>
+                        <StackLayout Grid.Column="1"
+                                     Grid.ColumnSpan="3"
+                                     Grid.Row="1">
+                            <BoxView BackgroundColor="{AppThemeBinding Default={StaticResource ColorSeparadorClaro}, Dark={StaticResource ColorSeparadorOscuro}}"
+                                     HeightRequest="1"
+                                     HorizontalOptions="FillAndExpand"/>
+                        </StackLayout>
+                        <StackLayout Grid.Column="1"
+                                     Grid.Row="2">
+                            <Image Source="iconoReciboCancelado.png"
+                                   WidthRequest="{StaticResource OnPlatformWidthIconoSecundario}"
+                                   Aspect="AspectFit"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="CenterAndExpand"/>
+                        </StackLayout>
+                        <StackLayout Grid.Column="2"
+                                     Grid.Row="2">
+                            <Label Text="2"
+                                   TextColor="{AppThemeBinding Default={StaticResource ColorBotonPrimarioClaro}, Dark={StaticResource ColorBotonPrimarioOscuro}}"
+                                   FontAttributes="Bold"
+                                   FontSize="20"
+                                   HorizontalTextAlignment="End"
+                                   VerticalOptions="CenterAndExpand"/>
+                        </StackLayout>
+                        <StackLayout Grid.Column="3"
+                                     Grid.Row="2">
+                            <Label Text="Recibos Cancelados"
+                                   TextColor="White"
+                                   FontAttributes="Bold"
+                                   FontSize="15"
+                                   VerticalOptions="CenterAndExpand"/>
+                        </StackLayout>
+                        <StackLayout Grid.Column="1"
+                                     Grid.ColumnSpan="3"
+                                     Grid.Row="3">
+                            <BoxView BackgroundColor="{AppThemeBinding Default={StaticResource ColorSeparadorClaro}, Dark={StaticResource ColorSeparadorOscuro}}"
+                                     HeightRequest="1"
+                                     Opacity="0.4"
+                                     HorizontalOptions="FillAndExpand"/>
+                        </StackLayout>
+                        <StackLayout Grid.Column="1"
+                                     Grid.Row="4">
+                            <Image Source="iconoReciboEliminado.png"
+                                   WidthRequest="{StaticResource OnPlatformWidthIconoSecundario}"
+                                   Aspect="AspectFit"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="CenterAndExpand"/>
+                        </StackLayout>
+                        <StackLayout Grid.Column="2"
+                                     Grid.Row="4">
+                            <Label Text="2"
+                                   TextColor="{AppThemeBinding Default={StaticResource ColorBotonPrimarioClaro}, Dark={StaticResource ColorBotonPrimarioOscuro}}"
+                                   FontAttributes="Bold"
+                                   FontSize="20"
+                                   HorizontalTextAlignment="End"
+                                   VerticalOptions="CenterAndExpand"/>
+                        </StackLayout>
+                        <StackLayout Grid.Column="3"
+                                     Grid.Row="4">
+                            <Label Text="Recibos Cancelados"
+                                   TextColor="White"
+                                   FontAttributes="Bold"
+                                   FontSize="15"
+                                   VerticalOptions="CenterAndExpand"/>
+                        </StackLayout>
+                        <StackLayout Grid.Column="1"
+                                     Grid.ColumnSpan="3"
+                                     Grid.Row="5">
+                            <BoxView BackgroundColor="{AppThemeBinding Default={StaticResource ColorSeparadorClaro}, Dark={StaticResource ColorSeparadorOscuro}}"
+                                     HeightRequest="1"
+                                     Opacity="0.4"
+                                     HorizontalOptions="FillAndExpand"/>
+                        </StackLayout>
+                        <StackLayout Grid.Column="1"
+                                     Grid.Row="6">
+                            <Image Source="iconoVentaCancelada.png"
+                                   WidthRequest="{StaticResource OnPlatformWidthIconoSecundario}"
+                                   Aspect="AspectFit"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="CenterAndExpand"/>
+                        </StackLayout>
+                        <StackLayout Grid.Column="2"
+                                     Grid.Row="6">
+                            <Label Text="2"
+                                   TextColor="{AppThemeBinding Default={StaticResource ColorBotonPrimarioClaro}, Dark={StaticResource ColorBotonPrimarioOscuro}}"
+                                   FontAttributes="Bold"
+                                   FontSize="20"
+                                   HorizontalTextAlignment="End"
+                                   VerticalOptions="CenterAndExpand"/>
+                        </StackLayout>
+                        <StackLayout Grid.Column="3"
+                                     Grid.Row="6">
+                            <Label Text="Ventas Canceladas"
+                                   TextColor="White"
+                                   FontAttributes="Bold"
+                                   FontSize="15"
+                                   VerticalOptions="CenterAndExpand"/>
+                        </StackLayout>
+                        <StackLayout Grid.Column="1"
+                                     Grid.ColumnSpan="3"
+                                     Grid.Row="7">
+                            <BoxView BackgroundColor="{AppThemeBinding Default={StaticResource ColorSeparadorClaro}, Dark={StaticResource ColorSeparadorOscuro}}"
+                                     HeightRequest="1"
+                                     Opacity="0.4"
+                                     HorizontalOptions="FillAndExpand"/>
+                        </StackLayout>
+                        <StackLayout Grid.Column="1"
+                                     Grid.Row="8">
+                            <Image Source="iconoVentaEliminada.png"
+                                   WidthRequest="{StaticResource OnPlatformWidthIconoSecundario}"
+                                   Aspect="AspectFit"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="CenterAndExpand"/>
+                        </StackLayout>
+                        <StackLayout Grid.Column="2"
+                                     Grid.Row="8">
+                            <Label Text="2"
+                                   TextColor="{AppThemeBinding Default={StaticResource ColorBotonPrimarioClaro}, Dark={StaticResource ColorBotonPrimarioOscuro}}"
+                                   FontAttributes="Bold"
+                                   FontSize="20"
+                                   HorizontalTextAlignment="End"
+                                   VerticalOptions="CenterAndExpand"/>
+                        </StackLayout>
+                        <StackLayout Grid.Column="3"
+                                     Grid.Row="8">
+                            <Label Text="Ventas Eliminadas"
+                                   TextColor="White"
+                                   FontAttributes="Bold"
+                                   FontSize="15"
+                                   VerticalOptions="CenterAndExpand"/>
+                        </StackLayout>
+                        <StackLayout Grid.Column="1"
+                                     Grid.ColumnSpan="3"
+                                     Grid.Row="9">
+                            <BoxView BackgroundColor="Transparent"
+                                     HeightRequest="1"
+                                     Opacity="0.0"
+                                     HorizontalOptions="FillAndExpand"/>
+                        </StackLayout>
+                    </Grid>
+                    <StackLayout Padding="30,20,30,30"
+                                 Spacing="15">
+                        <StackLayout>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <StackLayout Grid.Column="0"
+                                             Grid.Row="0">
+                                    <BoxView Margin="0" 
+                                         CornerRadius="10" 
+                                         Background="{AppThemeBinding Default={StaticResource ColorTarjetaFondoClaro}, Dark={StaticResource ColorTarjetaFondoOscuro}}"
+                                         VerticalOptions="FillAndExpand"/>
+                                </StackLayout>
+                                <StackLayout Padding="25,15,25,15" 
+                                             Grid.Column="0"
+                                             Grid.Row="0">
+                                    <StackLayout Orientation="Horizontal"
+                                                 Spacing="10">
+                                        <Image Source="iconoVenta.png"
+                                               WidthRequest="{StaticResource OnPlatformWidthIconoTercero}"
+                                               Aspect="AspectFit"
+                                               HorizontalOptions="Center"
+                                               VerticalOptions="CenterAndExpand"/>
+                                        <Label FontAttributes="Bold"
+                                               FontSize="15"
+                                               VerticalOptions="CenterAndExpand">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="Ventas Eliminadas "/>
+                                                    <Span Text="1"
+                                                          TextColor="{AppThemeBinding Default={StaticResource ColorBotonPrimarioClaro}, Dark={StaticResource ColorBotonPrimarioOscuro}}"/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                    </StackLayout>
+                                    <Label Text="Ver informes de Movimientos Realizados"
+                                           Style="{StaticResource StyleEtiqueta}"
+                                           FontSize="15"/>
+                                </StackLayout>
+                            </Grid>
+                        </StackLayout>
+                        <StackLayout>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <StackLayout Grid.Column="0"
+                                             Grid.Row="0">
+                                    <BoxView Margin="0" 
+                                         CornerRadius="10" 
+                                         Background="{AppThemeBinding Default={StaticResource ColorTarjetaFondoClaro}, Dark={StaticResource ColorTarjetaFondoOscuro}}"
+                                         VerticalOptions="FillAndExpand"/>
+                                </StackLayout>
+                                <StackLayout Padding="25,15,25,15" 
+                                             Grid.Column="0"
+                                             Grid.Row="0">
+                                    <StackLayout Orientation="Horizontal"
+                                                 Spacing="10">
+                                        <Image Source="iconoVenta.png"
+                                               WidthRequest="{StaticResource OnPlatformWidthIconoTercero}"
+                                               Aspect="AspectFit"
+                                               HorizontalOptions="Center"
+                                               VerticalOptions="CenterAndExpand"/>
+                                        <Label FontAttributes="Bold"
+                                               FontSize="15"
+                                               VerticalOptions="CenterAndExpand">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="Nuevas Ventas "/>
+                                                    <Span Text="1"
+                                                          TextColor="{AppThemeBinding Default={StaticResource ColorBotonPrimarioClaro}, Dark={StaticResource ColorBotonPrimarioOscuro}}"/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                    </StackLayout>
+                                    <Label Text="Ver informes de Movimientos Realizados"
+                                           Style="{StaticResource StyleEtiqueta}"
+                                           FontSize="15"/>
+                                </StackLayout>
+                            </Grid>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal"
+                                     Padding="25,0,25,0"
+                                     Spacing="10">
+                            <Image Source="iconoCalendarioAtras.png"
+                                   HeightRequest="{StaticResource OnPlatformWidthIconoPrincipal}"
+                                   WidthRequest="{StaticResource OnPlatformWidthIconoPrincipal}"
+                                   Aspect="AspectFit"
+                                   HorizontalOptions="Center"/>
+                            <StackLayout Spacing="0"
+                                     Grid.Column="2"
+                                     Grid.ColumnSpan="2"
+                                     Grid.Row="0">
+                                <Label Text="Ayer"
+                                       Style="{StaticResource StyleEtiqueta}"
+                                       FontAttributes="Bold"
+                                       FontSize="30"/>
+                                <Label Text="23 de marzo de 2022"
+                                       Style="{StaticResource StyleEtiqueta}"
+                                       FontAttributes="Bold"
+                                       FontSize="16"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

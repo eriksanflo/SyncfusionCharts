@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <!-- Color de fondo del Launcher -->
+  <color name="launcher_background">#FFFFFF</color>
+  <!-- Color predeterminado a la barra de titulos -->
+  <color name="colorPrimary">#3F51B5</color>
+  <!-- Color predeterminado que esta debajo de la barra de notificaciones -->
+  <color name="colorPrimaryDark">#303F9F</color>
+  <!-- Color predeterminado texto del boton de los cuadros de dialogo -->
+  <color name="colorAccent">#FF4081</color>
+  <!-- Color de fondo del Splash Screen -->
+  <color name="splash_background">#FFFFFF</color>
+</resources>

@@ -1,0 +1,443 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:CarpetaInterfaces="clr-namespace:Directiva10.Interfaces"
+             x:Class="Directiva10.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <!-- Sirve para Enlazar un Color 
+                        Xaml = {StaticResource ColorClaroLogo} 
+                        C# = (Color)Application.Current.Resources["ColorClaroLogo"] 
+            -->
+
+            <!-- Color Barra de Navegación -->
+            <Color x:Key="ColorBarradeNavegacionClaro">#11263d</Color>
+            <Color x:Key="ColorBarradeNavegacionOscuro">#11263d</Color>
+            <Color x:Key="ColorTabdeNavegacionClaro">#11263d</Color>
+            <Color x:Key="ColorTabdeNavegacionOscuro">#11263d</Color>
+            <Color x:Key="ColorFlechaNavegacionClaro">#ffffff</Color>
+            <Color x:Key="ColorFlechaNavegacionOscuro">#ffffff</Color>
+            <Color x:Key="ColorTextoNavegacionClaro">#ffffff</Color>
+            <Color x:Key="ColorTextoNavegacionOscuro">#ffffff</Color>
+            <Color x:Key="ColorTextoNavegacionActivoClaro">#f35a0f</Color>
+            <Color x:Key="ColorTextoNavegacionActivoOscuro">#f35a0f</Color>
+            <Color x:Key="ColorTextoNavegacionInactivoClaro">#ffffff</Color>
+            <Color x:Key="ColorTextoNavegacionInactivoOscuro">#ffffff</Color>
+            <Color x:Key="ColorTextoNavegacionDeshabilitadoClaro">#38ABA3</Color>
+            <Color x:Key="ColorTextoNavegacionDeshabilitadoOscuro">#38ABA3</Color>
+
+            <!-- Color Default de Textos-->
+            <Color x:Key="ColorTextoClaro">#142b48</Color>
+            <Color x:Key="ColorTextoOscuro">#142b48</Color>
+            <Color x:Key="ColorEtiquetaClaro">#A6A6A6</Color>
+            <Color x:Key="ColorEtiquetaOscuro">#A6A6A6</Color>
+            <Color x:Key="ColorTextoEntryClaro">#4d4d4d</Color>
+            <Color x:Key="ColorTextoEntryOscuro">#4d4d4d</Color>
+            <Color x:Key="ColorTextoEntryActivoClaro">#056597</Color>
+            <Color x:Key="ColorTextoEntryActivoOscuro">#056597</Color>
+            <Color x:Key="ColorPlaceHolderClaro">#A6A6A6</Color>
+            <Color x:Key="ColorPlaceHolderOscuro">#A6A6A6</Color>
+            <Color x:Key="ColorPlaceHolderCampoObligatorio">#DB252E</Color>
+
+            <!-- Color Menu Lateral -->
+
+            <Color x:Key="ColorMenuElementoClaro">#767779</Color>
+            <Color x:Key="ColorMenuElementoOscuro">#767779</Color>
+            <Color x:Key="ColorMenuElementoSeleccionadoClaro">#F7F7F7</Color>
+            <Color x:Key="ColorMenuElementoSeleccionadoOscuro">#F7F7F7</Color>
+
+            <Color x:Key="ColorMenuLateralClaro1">#EDEDED</Color>
+            <Color x:Key="ColorMenuLateralClaro2">#EDEDED</Color>
+            <Color x:Key="ColorMenuLateralClaro3">#FAFAFA</Color>
+            <Color x:Key="ColorMenuLateralClaro4">#FAFAFA</Color>
+
+            <Color x:Key="ColorMenuLateralOscuro1">#EDEDED</Color>
+            <Color x:Key="ColorMenuLateralOscuro2">#EDEDED</Color>
+            <Color x:Key="ColorMenuLateralOscuro3">#FAFAFA</Color>
+            <Color x:Key="ColorMenuLateralOscuro4">#FAFAFA</Color>
+
+            <Color x:Key="ColorMenuLateralFondoClaro1">#066699</Color>
+            <Color x:Key="ColorMenuLateralFondoClaro2">#055c89</Color>
+            <Color x:Key="ColorMenuLateralFondoClaro3">#003756</Color>
+            <Color x:Key="ColorMenuLateralFondoClaro4">#022c44</Color>
+
+            <Color x:Key="ColorMenuLateralFondoOscuro1">#066699</Color>
+            <Color x:Key="ColorMenuLateralFondoOscuro2">#055c89</Color>
+            <Color x:Key="ColorMenuLateralFondoOscuro3">#003756</Color>
+            <Color x:Key="ColorMenuLateralFondoOscuro4">#022c44</Color>
+
+            <Color x:Key="ColorFondoSolidoClaro">#2a3035</Color>
+            <Color x:Key="ColorFondoSolidoOscuro">#2a3035</Color>
+
+            <Color x:Key="ColorFondoClaro1">#11263d</Color>
+            <Color x:Key="ColorFondoClaro2">#11263d</Color>
+            <Color x:Key="ColorFondoClaro3">#183251</Color>
+            <Color x:Key="ColorFondoClaro4">#183251</Color>
+
+            <Color x:Key="ColorFondoOscuro1">#11263d</Color>
+            <Color x:Key="ColorFondoOscuro2">#11263d</Color>
+            <Color x:Key="ColorFondoOscuro3">#183251</Color>
+            <Color x:Key="ColorFondoOscuro4">#183251</Color>
+
+            <!-- Color Tarjetas -->
+            <Color x:Key="ColorTarjetaFondoClaro">#ffffff</Color>
+            <Color x:Key="ColorTarjetaFondoOscuro">#ffffff</Color>
+            <Color x:Key="ColorTarjetaBordeClaro">#E8E3DF</Color>
+            <Color x:Key="ColorTarjetaBordeOscuro">#E8E3DF</Color>
+            <Color x:Key="ColorSeparadorClaro">#B3B3B3</Color>
+            <Color x:Key="ColorSeparadorOscuro">#B3B3B3</Color>
+            <Color x:Key="ColorSeparadorFuerteClaro">#f14407</Color>
+            <Color x:Key="ColorSeparadorFuerteOscuro">#f14407</Color>
+
+            <LinearGradientBrush x:Key="LinearGradientBrushTarjetaDegradado"
+                                 StartPoint="0,0.3"
+                                 EndPoint="1,1.0">
+                <GradientStop Color="#f77a1b"
+                              Offset="0.1" />
+                <GradientStop Color="#f35a0f"
+                              Offset="1.0" />
+            </LinearGradientBrush>
+            <!--Color x:Key="ColordeFondoCollectionViewClaro">#f6f6f6</Color>
+            <Color x:Key="ColordeFondoCollectionViewOscuro">#f6f6f6</Color-->
+            <Color x:Key="ColordeFondoCollectionViewClaro">#ededed</Color>
+            <Color x:Key="ColordeFondoCollectionViewOscuro">#ededed</Color>
+
+            <Color x:Key="ColorTarjetaClaro1">#37accf</Color>
+            <Color x:Key="ColorTarjetaClaro2">#0099c5</Color>
+            <Color x:Key="ColorTarjetaClaro3">#0169a6</Color>
+            <Color x:Key="ColorTarjetaClaro4">#014c90</Color>
+
+            <Color x:Key="ColorTarjetaOscuro1">#138086</Color>
+            <Color x:Key="ColorTarjetaOscuro2">#534666</Color>
+            <Color x:Key="ColorTarjetaOscuro3">#cd7672</Color>
+            <Color x:Key="ColorTarjetaOscuro4">#eeb462</Color>
+            
+            <!-- Boton -->
+            <Color x:Key="ColorBotonPrimarioClaro">#f35a0f</Color>
+            <Color x:Key="ColorBotonPrimarioOscuro">#f35a0f</Color>
+            <Color x:Key="ColorBotonSecundarioClaro">#4d4d4d</Color>
+            <Color x:Key="ColorBotonSecundarioOscuro">#4d4d4d</Color>
+
+            <!-- Color Tarjeta de Contacto -->
+            <Color x:Key="ColorTarjetaContactoPrimarioClaro">#046799</Color>
+            <Color x:Key="ColorTarjetaContactoPrimarioOscuro">#046799</Color>
+            <Color x:Key="ColorTarjetaContactoSecundarioClaro">#ff9803</Color>
+            <Color x:Key="ColorTarjetaContactoSecundarioOscuro">#ff9803</Color>
+
+            <!-- Textos -->
+            <x:String x:Key="StringMensajeTitulo">Aviso</x:String>
+            <x:String x:Key="StringMensajeErrorTitulo">Oops...</x:String>
+            <x:String x:Key="StringMensajeBoton">Aceptar</x:String>
+            <x:String x:Key="StringMensajeBotonCancelar">Cancelar</x:String>
+            <x:String x:Key="StringMensajeSinRegistros">Sin registros</x:String>
+            <x:String x:Key="StringMensajeSincronizar">Para realizar esta acción es necesario sincronizar la aplicación</x:String>
+            <x:String x:Key="StringMensajeFaltaCampo">Falta llenar campo</x:String>
+            <x:String x:Key="StringMensajeNoSincronizo">No se pudo actualizar a la información mas reciente</x:String>
+
+            <!-- Imagen de Fondo -->
+            <FileImageSource x:Key="FileImageSourceFondoMenuLateralClaro">menuFondoClaroA.png</FileImageSource>
+            <FileImageSource x:Key="FileImageSourceFondoMenuLateralOscuro">menuFondoOscuroA.png</FileImageSource>
+            <FileImageSource x:Key="FileImageSourceFondoClaro">fondoImagenClaro.png</FileImageSource>
+            <FileImageSource x:Key="FileImageSourceFondoOscuro">fondoImagenOscuro.png</FileImageSource>
+
+            <!-- Fuentes -->
+            <OnPlatform x:TypeArguments="x:String"  x:Key="OnPlatformFontFamily"        Android="Monserrat-Regular" iOS="Monserrat-Regular" Default="Monserrat-Regular"/>
+            <OnPlatform x:TypeArguments="x:String"  x:Key="OnPlatformFontFamilyItalica" Android="Monserrat-Italic"  iOS="Monserrat-Italic"  Default="Monserrat-Italic"/>
+            <OnPlatform x:TypeArguments="x:String"  x:Key="OnPlatformFontFamilyNegrita" Android="Monserrat-Bold"    iOS="Monserrat-Bold"    Default="Monserrat-Bold"/>
+
+            <!-- Barra de Navegación Personalizada -->
+            <OnPlatform x:TypeArguments="Thickness"     x:Key="OnPlatformPaddingHeaderBarraNavegacioniOS"   Android="15,0,15,0" iOS="0,20,0,0"      Default="0"/>
+            <OnPlatform x:TypeArguments="GridLength"    x:Key="OnPlatformHeightBarrraNavegacionVertical"    Android="50"        iOS="60"            Default="50"/>
+
+            <!-- Tarjeta -->
+            <OnPlatform x:TypeArguments="x:Single"  x:Key="OnPlatformTarjetaCornerRadius"   Android="15"            iOS="16"            Default="15"/>
+            <OnPlatform x:TypeArguments="Thickness" x:Key="OnPlatformTarjetaPadding"        Android="17,17,17,17"   iOS="18,18,18,18"   Default="20,17,20,17"/>
+            <OnPlatform x:TypeArguments="x:Boolean" x:Key="OnPlatformTarjetaHasShadow"      Android="True"          iOS="False"         Default="True"/>
+
+            <!-- ActivityIndicator -->
+            <OnPlatform x:TypeArguments="x:Single"  x:Key="OnPlatformCargandoCornerRadius"  Android="30"            iOS="30"            Default="30"/>
+            <OnPlatform x:TypeArguments="Thickness" x:Key="OnPlatformCargandoPadding"       Android="15,10,15,10"   iOS="15,10,15,10"   Default="15,15,15,15"/>
+            <OnPlatform x:TypeArguments="x:Double"  x:Key="OnPlatformCargandoHeightRequest" Android="30"            iOS="33"            Default="30"/>
+
+            <!-- Espacio Entre Etiquetas -->
+            <OnPlatform x:TypeArguments="x:Double" x:Key="OnPlatformSpacingComponentes"         Android="14"    iOS="20"    Default="14"/>
+            <OnPlatform x:TypeArguments="x:Double" x:Key="OnPlatformSpacingEtiquetaDetalles"    Android="15"    iOS="15"    Default="15"/>
+            <OnPlatform x:TypeArguments="x:Double" x:Key="OnPlatformSpacingEtiquetaEditar"      Android="20"    iOS="20"    Default="20"/>
+
+            <!-- Botones -->
+            <OnPlatform x:TypeArguments="x:Int32"  x:Key="OnPlatformCornerRadiusBotones"   Android="20"    iOS="20"    Default="20"/>
+
+            <!-- Iconos -->
+            <OnPlatform x:TypeArguments="Thickness" x:Key="OnPlatformPaddingIconodeNavegacion"          Android="20,20,0,0"     iOS="20,20,0,0" Default="20,20,0,0"/>
+            <OnPlatform x:TypeArguments="x:Double"  x:Key="OnPlatformHeightRequestIconodeNavegacion"    Android="25"            iOS="30"        Default="25"/>
+            <OnPlatform x:TypeArguments="x:Double"  x:Key="OnPlatformHeightRequestIconoContacto"        Android="55"            iOS="50"        Default="55"/>
+
+            <!-- Padding -->
+            <OnPlatform x:TypeArguments="Thickness" x:Key="OnPlatformPaddingScrollView"                     Android="14,14,14,14"   iOS="16,16,16,16"   Default="14,14,14,14"/>
+            <OnPlatform x:TypeArguments="Thickness" x:Key="OnPlatformMarginListViewElemento"                Android="14,0,14,0"     iOS="16,0,16,0"     Default="14,0,14,0"/>
+            <OnPlatform x:TypeArguments="x:Double"  x:Key="OnPlatformHeightRequestCollectionViewHeaderiOS"  Android="0"             iOS="40"            Default="0"/>
+            <OnPlatform x:TypeArguments="Thickness" x:Key="OnPlatformPaddingCollectionViewHeaderiOS"        Android="0,0,0,0"       iOS="0,40,0,0"      Default="0"/>
+            <OnPlatform x:TypeArguments="Thickness" x:Key="OnPlatformPaddingCollectionViewFooteriOS"        Android="0,0,0,0"       iOS="0,100,0,0"     Default="0"/>
+
+            <OnPlatform x:TypeArguments="Thickness" x:Key="OnPlatformPaddingTitulos"                        Android="0,30,40,0"     iOS="0,30,40,0"     Default="0,30,40,0"/>
+
+            <!-- TEntry tiene un fondo circular, no se agregan dentro del Style porque son campos personalizados y no los reconoce -->
+            <OnPlatform x:TypeArguments="Color"     x:Key="OnPlatformBorderColorTEntry"     Android="White"       iOS="White"       Default="White"/>
+            <OnPlatform x:TypeArguments="x:Int32"   x:Key="OnPlatformBorderRadiusTEntry"    Android="15"            iOS="20"            Default="25"/>
+            <OnPlatform x:TypeArguments="x:Int32"   x:Key="OnPlatformBorderWidthTEntry"     Android="1"             iOS="1"             Default="1"/>
+            <OnPlatform x:TypeArguments="Thickness" x:Key="OnPlatformPaddingTEntry"         Android="20,10,20,10"   iOS="20,10,20,10"   Default="20,10,20,10"/>
+
+
+            <!-- Estilos de Barra de Navegación -->
+            <Style TargetType="Element" x:Key="StyleShellNavegacion">
+                <Setter Property="Shell.BackgroundColor"        Value="{AppThemeBinding Default={StaticResource ColorBarradeNavegacionClaro},           Dark={StaticResource ColorBarradeNavegacionOscuro}}"/>
+                <Setter Property="Shell.ForegroundColor"        Value="{AppThemeBinding Default={StaticResource ColorFlechaNavegacionClaro},            Dark={StaticResource ColorFlechaNavegacionOscuro}}"/>
+                <Setter Property="Shell.TitleColor"             Value="{AppThemeBinding Default={StaticResource ColorTextoNavegacionClaro},             Dark={StaticResource ColorTextoNavegacionOscuro}}"/>
+                <Setter Property="Shell.TabBarTitleColor"       Value="{AppThemeBinding Default={StaticResource ColorTextoNavegacionActivoClaro},       Dark={StaticResource ColorTextoNavegacionActivoOscuro}}"/>
+                <Setter Property="Shell.TabBarBackgroundColor"  Value="{AppThemeBinding Default={StaticResource ColorTabdeNavegacionClaro},             Dark={StaticResource ColorTabdeNavegacionOscuro}}"/>
+                <Setter Property="Shell.UnselectedColor"        Value="{AppThemeBinding Default={StaticResource ColorTextoNavegacionInactivoClaro},     Dark={StaticResource ColorTextoNavegacionInactivoOscuro}}"/>
+                <Setter Property="Shell.DisabledColor"          Value="{AppThemeBinding Default={StaticResource ColorTextoNavegacionDeshabilitadoClaro},Dark={StaticResource ColorTextoNavegacionDeshabilitadoOscuro}}"/>
+            </Style>
+
+            <!-- Estilos de NavegationPage -->
+            <Style TargetType="{x:Type NavigationPage}">
+                <Setter Property="BarBackgroundColor"   Value="{AppThemeBinding Default={StaticResource ColorBarradeNavegacionClaro},   Dark={StaticResource ColorBarradeNavegacionOscuro}}"/>
+                <Setter Property="BarTextColor"         Value="{AppThemeBinding Default={StaticResource ColorTextoNavegacionClaro},     Dark={StaticResource ColorTextoNavegacionOscuro}}"/>
+            </Style>
+
+            <!-- Estilos Menú Lateral -->
+            <LinearGradientBrush x:Key="LinearGradientBrushMenuLateral" 
+                                 StartPoint="0.5,0"
+                                 EndPoint="0.5,1">
+                <GradientStop Color="{AppThemeBinding Default={StaticResource ColorMenuLateralClaro1}, Dark={StaticResource ColorMenuLateralOscuro1}}"
+                              Offset="0.0" />
+                <GradientStop Color="{AppThemeBinding Default={StaticResource ColorMenuLateralClaro2}, Dark={StaticResource ColorMenuLateralOscuro2}}"
+                              Offset="0.3" />
+                <GradientStop Color="{AppThemeBinding Default={StaticResource ColorMenuLateralClaro3}, Dark={StaticResource ColorMenuLateralOscuro3}}"
+                              Offset="0.7" />
+                <GradientStop Color="{AppThemeBinding Default={StaticResource ColorMenuLateralClaro4}, Dark={StaticResource ColorMenuLateralOscuro4}}"
+                              Offset="1.0" />
+            </LinearGradientBrush>
+            <LinearGradientBrush x:Key="LinearGradientBrushMenuLateralFondo"
+                                 StartPoint="1,0"
+                                 EndPoint="0,1">
+                <GradientStop Color="{AppThemeBinding Default={StaticResource ColorMenuLateralFondoClaro1}, Dark={StaticResource ColorMenuLateralFondoOscuro1}}"
+                              Offset="0.0" />
+                <GradientStop Color="{AppThemeBinding Default={StaticResource ColorMenuLateralFondoClaro2}, Dark={StaticResource ColorMenuLateralFondoOscuro2}}"
+                              Offset="0.3" />
+                <GradientStop Color="{AppThemeBinding Default={StaticResource ColorMenuLateralFondoClaro3}, Dark={StaticResource ColorMenuLateralFondoOscuro3}}"
+                              Offset="0.7" />
+                <GradientStop Color="{AppThemeBinding Default={StaticResource ColorMenuLateralFondoClaro4}, Dark={StaticResource ColorMenuLateralFondoOscuro4}}"
+                              Offset="1.0" />
+            </LinearGradientBrush>
+            <Style TargetType="{x:Type Label}" Class="FlyoutItemLabelStyle">
+                <Setter Property="TextColor"        Value="{AppThemeBinding Default={StaticResource ColorMenuElementoClaro}, Dark={StaticResource ColorMenuElementoOscuro}}"/>
+                <Setter Property="FontFamily"       Value="{StaticResource OnPlatformFontFamily}"/>
+                <Setter Property="FontSize"         Value="Medium"/>
+            </Style>
+            <Style TargetType="{x:Type Image}" Class="FlyoutItemImageStyle">
+                <Setter Property="Aspect"   Value="AspectFit"/>
+            </Style>
+            <Style TargetType="Layout" Class="FlyoutItemLayoutStyle"
+                   ApplyToDerivedTypes="True">
+                <Setter Property="HeightRequest" Value="50" />
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="Transparent"/>
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Selected">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="{AppThemeBinding Default={StaticResource ColorMenuElementoSeleccionadoClaro},   Dark={StaticResource ColorMenuElementoSeleccionadoOscuro}}"/>
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Disabled">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="Transparent"/>
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+
+            <!-- Estilos de Fondo de ContentPage -->
+            <LinearGradientBrush x:Key="LinearGradientBrushFondo"
+                                 StartPoint="0.5,0"
+                                 EndPoint="0.5,1.0">
+                <GradientStop Color="{AppThemeBinding Default={StaticResource ColorFondoClaro1}, Dark={StaticResource ColorFondoOscuro1}}"
+                              Offset="0.1" />
+                <GradientStop Color="{AppThemeBinding Default={StaticResource ColorFondoClaro2}, Dark={StaticResource ColorFondoOscuro2}}"
+                              Offset="0.3" />
+                <GradientStop Color="{AppThemeBinding Default={StaticResource ColorFondoClaro3}, Dark={StaticResource ColorFondoOscuro3}}"
+                              Offset="0.5"/>
+                <GradientStop Color="{AppThemeBinding Default={StaticResource ColorFondoClaro4}, Dark={StaticResource ColorFondoOscuro4}}"
+                              Offset="1.0" />
+            </LinearGradientBrush>
+
+            <Style TargetType="{x:Type ContentPage}"
+                   ApplyToDerivedTypes="True">
+                <Setter Property="Background"               Value="{StaticResource LinearGradientBrushFondo}"/>
+                <!--Setter Property="BackgroundColor"          Value="{AppThemeBinding Default={StaticResource ColorFondoSolidoClaro},     Dark={StaticResource ColorFondoSolidoOscuro}}"/-->
+                <!--Setter Property="BackgroundImageSource"    Value="{AppThemeBinding Default={StaticResource FileImageSourceFondoClaro}, Dark={StaticResource FileImageSourceFondoOscuro}}"/-->
+            </Style>
+
+            <!-- Estilos Generales -->
+            <Style TargetType="{x:Type SearchBar}">
+                <Setter Property="TextColor"            Value="{AppThemeBinding Default={StaticResource ColorTextoEntryClaro}, Dark={StaticResource ColorTextoEntryOscuro}}"/>
+                <Setter Property="FontFamily"           Value="{StaticResource OnPlatformFontFamily}"/>
+                <Setter Property="BackgroundColor"      Value="Transparent"/>
+            </Style>
+            <Style TargetType="{x:Type Label, Span}">
+                <Setter Property="TextColor"    Value="{AppThemeBinding Default={StaticResource ColorTextoClaro},  Dark={StaticResource ColorTextoOscuro}}"/>
+                <Setter Property="FontFamily"   Value="{StaticResource OnPlatformFontFamily}"/>
+            </Style>
+            <Style TargetType="Entry">
+                <Setter Property="FontFamily"           Value="{StaticResource OnPlatformFontFamily}"/>
+                <Setter Property="BackgroundColor"      Value="Transparent"/>
+                <Setter Property="PlaceholderColor"     Value="{AppThemeBinding Default={StaticResource ColorPlaceHolderClaro}, Dark={StaticResource ColorPlaceHolderOscuro}}"/>
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="TextColor" Value="{AppThemeBinding Default={StaticResource ColorTextoEntryClaro}, Dark={StaticResource ColorTextoEntryOscuro}}"/>
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Focused">
+                                <VisualState.Setters>
+                                    <Setter Property="TextColor" Value="{AppThemeBinding Default={StaticResource ColorTextoEntryActivoClaro},   Dark={StaticResource ColorTextoEntryActivoOscuro}}"/>
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Disabled">
+                                <VisualState.Setters>
+                                    <Setter Property="TextColor" Value="Transparent"/>
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+            <Style TargetType="CarpetaInterfaces:TEntry">
+                <Setter Property="FontFamily"           Value="{StaticResource OnPlatformFontFamily}"/>
+                <Setter Property="BackgroundColor"      Value="White"/>
+                <Setter Property="PlaceholderColor"     Value="{AppThemeBinding Default={StaticResource ColorPlaceHolderClaro}, Dark={StaticResource ColorPlaceHolderOscuro}}"/>
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="TextColor" Value="{AppThemeBinding Default={StaticResource ColorTextoEntryClaro}, Dark={StaticResource ColorTextoEntryOscuro}}"/>
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Focused">
+                                <VisualState.Setters>
+                                    <Setter Property="TextColor" Value="{AppThemeBinding Default={StaticResource ColorTextoEntryActivoClaro},   Dark={StaticResource ColorTextoEntryActivoOscuro}}"/>
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Disabled">
+                                <VisualState.Setters>
+                                    <Setter Property="TextColor" Value="Transparent"/>
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+            <Style TargetType="Editor">
+                <Setter Property="FontFamily"           Value="{StaticResource OnPlatformFontFamily}"/>
+                <Setter Property="BackgroundColor"      Value="Transparent"/>
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="TextColor" Value="{AppThemeBinding Default={StaticResource ColorTextoEntryClaro}, Dark={StaticResource ColorTextoEntryOscuro}}"/>
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Focused">
+                                <VisualState.Setters>
+                                    <Setter Property="TextColor" Value="{AppThemeBinding Default={StaticResource ColorTextoEntryActivoClaro},   Dark={StaticResource ColorTextoEntryActivoOscuro}}"/>
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Disabled">
+                                <VisualState.Setters>
+                                    <Setter Property="TextColor" Value="Transparent"/>
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+            <Style TargetType="{x:Type Picker}">
+                <Setter Property="TextColor"            Value="{AppThemeBinding Default={StaticResource ColorTextoEntryClaro}, Dark={StaticResource ColorTextoEntryOscuro}}"/>
+                <Setter Property="FontFamily"           Value="{StaticResource OnPlatformFontFamily}"/>
+                <Setter Property="BackgroundColor"      Value="Transparent"/>
+            </Style>
+            <Style TargetType="{x:Type DatePicker}">
+                <Setter Property="TextColor"            Value="{AppThemeBinding Default={StaticResource ColorTextoEntryClaro}, Dark={StaticResource ColorTextoEntryOscuro}}"/>
+                <Setter Property="FontFamily"           Value="{StaticResource OnPlatformFontFamily}"/>
+                <Setter Property="BackgroundColor"      Value="Transparent"/>
+            </Style>
+            <Style TargetType="{x:Type TimePicker}">
+                <Setter Property="TextColor"            Value="{AppThemeBinding Default={StaticResource ColorTextoEntryClaro}, Dark={StaticResource ColorTextoEntryOscuro}}"/>
+                <Setter Property="FontFamily"           Value="{StaticResource OnPlatformFontFamily}"/>
+                <Setter Property="BackgroundColor"      Value="Transparent"/>
+            </Style>
+            <Style TargetType="{x:Type ActivityIndicator}" x:Key="StyleActivityIndicatorCargando">
+                <Setter Property="Color"            Value="{AppThemeBinding Default={StaticResource ColorBarradeNavegacionClaro},   Dark={StaticResource ColorBarradeNavegacionOscuro}}"/>
+                <Setter Property="HeightRequest"    Value="{StaticResource OnPlatformCargandoHeightRequest}"/>
+                <Setter Property="WidthRequest"     Value="{StaticResource OnPlatformCargandoHeightRequest}"/>
+            </Style>
+
+            <!-- Estilos de Tarjetas -->
+            <!--LinearGradientBrush x:Key="LinearGradientBrushTarjeta" 
+                                 StartPoint="0.5,0"
+                                 EndPoint="0.5,1">
+                <GradientStop Color="{AppThemeBinding Default={StaticResource ColorTarjetaClaro1}, Dark={StaticResource ColorTarjetaOscuro1}}"
+                              Offset="0.0" />
+                <GradientStop Color="{AppThemeBinding Default={StaticResource ColorTarjetaClaro2}, Dark={StaticResource ColorTarjetaOscuro2}}"
+                              Offset="0.3" />
+                <GradientStop Color="{AppThemeBinding Default={StaticResource ColorTarjetaClaro3}, Dark={StaticResource ColorTarjetaOscuro3}}"
+                              Offset="0.7" />
+                <GradientStop Color="{AppThemeBinding Default={StaticResource ColorTarjetaClaro4}, Dark={StaticResource ColorTarjetaOscuro4}}"
+                              Offset="1.0" />
+            </LinearGradientBrush-->
+
+            <Style TargetType="{x:Type Frame}" x:Key="StyleFrameTarjeta">
+                <Setter Property="CornerRadius"     Value="{StaticResource OnPlatformTarjetaCornerRadius}"/>
+                <Setter Property="BorderColor"      Value="{AppThemeBinding Default={StaticResource ColorTarjetaBordeClaro}, Dark={StaticResource ColorTarjetaBordeOscuro}}"/>
+                <Setter Property="BackgroundColor"  Value="{AppThemeBinding Default={StaticResource ColorTarjetaFondoClaro}, Dark={StaticResource ColorTarjetaFondoOscuro}}"/>
+                <Setter Property="Background"       Value="{AppThemeBinding Default={StaticResource ColorTarjetaFondoClaro}, Dark={StaticResource ColorTarjetaFondoOscuro}}"/>
+                <!--Setter Property="Background"       Value="{StaticResource LinearGradientBrushTarjeta}"/-->
+                <Setter Property="Padding"      Value="{StaticResource OnPlatformTarjetaPadding}"/>
+                <Setter Property="HasShadow"    Value="{StaticResource OnPlatformTarjetaHasShadow}"/>
+            </Style>
+            <Style TargetType="{x:Type StackLayout}" x:Key="StyleStackLayoutTarjeta">
+                <Setter Property="BackgroundColor"  Value="{AppThemeBinding Default={StaticResource ColorTarjetaFondoClaro}, Dark={StaticResource ColorTarjetaFondoOscuro}}"/>
+                <!--Setter Property="Background"  Value="{StaticResource LinearGradientBrushTarjeta}"/-->
+                <Setter Property="Padding"          Value="{StaticResource OnPlatformTarjetaPadding}"/>
+            </Style>
+            <Style TargetType="{x:Type Label, Span}" x:Key="StyleEtiqueta">
+                <Setter Property="TextColor"    Value="{AppThemeBinding Default={StaticResource ColorEtiquetaClaro}, Dark={StaticResource ColorEtiquetaOscuro}}"/>
+            </Style>
+            <Style TargetType="{x:Type Button}" x:Key="StyleBoton">
+                <Setter Property="CornerRadius"     Value="{StaticResource OnPlatformCornerRadiusBotones}"/>
+                <Setter Property="BackgroundColor"  Value="{AppThemeBinding Default={StaticResource ColorBotonPrimarioClaro}, Dark={StaticResource ColorBotonPrimarioOscuro}}"/>
+                <Setter Property="Padding"          Value="40,15,40,15"/>
+                <Setter Property="TextColor"        Value="White"/>
+            </Style>
+            <Style TargetType="{x:Type Button}" x:Key="StyleBotonSecundario">
+                <Setter Property="CornerRadius"     Value="{StaticResource OnPlatformCornerRadiusBotones}"/>
+                <Setter Property="BackgroundColor"  Value="Transparent"/>
+                <Setter Property="BorderColor"      Value="#7e92aa"/>
+                <Setter Property="BorderWidth"      Value="2"/>
+                <Setter Property="Padding"          Value="35,15,35,15"/>
+                <Setter Property="TextColor"        Value="#7e92aa"/>
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
