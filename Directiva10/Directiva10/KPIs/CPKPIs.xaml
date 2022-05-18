@@ -25,92 +25,10 @@
                 <StackLayout>
                     <StackLayout x:Name="XamlStackLayoutContenedordeGraficas"                               
                                  Spacing="20"/>
-
-                    <!--<chart:SfChart
-                        Background="red"
-
-                        >
-
-                        <chart:DoughnutSeries ItemsSource ="{Binding Source}"
-                                          
-                        XBindingPath="Nombre"
-                        YBindingPath="Valor"
-                        IsStackedDoughnut="true"
-                        CapStyle="BothCurve"
-                        Spacing="0.4"
-                        MaximumValue="100" />
-
-                </chart:SfChart>-->
                 </StackLayout>
-
-                <!--<chart:SfChart>
-
-
-                    <chart:DoughnutSeries ItemsSource ="{Binding Data}"
-    XBindingPath="Expense"
-    YBindingPath="Value"
-    IsStackedDoughnut="true"
-    CapStyle="BothCurve"
-    Spacing="0.4"
-    MaximumValue="100" />
-
-                </chart:SfChart>-->
             </ScrollView>
 
-            <!--<Label
-                Text="Abril 2022"
-                TextColor="White"
-                FontSize="Large"
-                FontAttributes="Bold"
-                HorizontalTextAlignment="Center"
-                Margin="0,0,0,15" >
-            </Label>
 
-            <Grid >
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width=".25*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width=".25*" />
-                </Grid.ColumnDefinitions>
-
-                <Button
-                    Grid.Column="1"
-                    WidthRequest      ="330"
-                    HeightRequest     ="330"
-                    CornerRadius      ="500"
-                    VerticalOptions   ="Center"
-                    HorizontalOptions ="Center"
-                    FontSize="Title"
-                    FontAttributes="Bold"
-                    BorderColor="Gray"
-                    Margin="0,0,0,25"
-                    BorderWidth="3"
-                    BackgroundColor   ="Transparent"/>
-
-                <Button
-                    Grid.Column="1"
-                    WidthRequest      ="300"
-                    HeightRequest     ="300"
-                    CornerRadius      ="500"
-                    VerticalOptions   ="Center"
-                    HorizontalOptions ="Center"
-                    Text="-12%"
-                    FontSize="50"
-                    FontAttributes="Bold"
-                    TextColor="White"
-                    Margin="0,0,0,25"
-                    BackgroundColor   ="Orange"/>
-
-                <Image 
-                    Grid.Column="1"
-                    Source="desc_red.png"
-                    Aspect="AspectFit"
-                    WidthRequest="60"
-                    VerticalOptions="End"/>
-            </Grid>-->
 
         </StackLayout>
     </ContentPage.Content>

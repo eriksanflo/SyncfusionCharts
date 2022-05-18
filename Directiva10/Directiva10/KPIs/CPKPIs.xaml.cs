@@ -15,7 +15,7 @@ using Xamarin.Forms.Xaml;
 
 namespace Directiva10.KPIs
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
+	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class CPKPIs : ContentPage
 	{
 		private object ObjectBloqueo;
@@ -24,7 +24,7 @@ namespace Directiva10.KPIs
 		private Color ColorEncabezado, ColorMalla, ColorDescripcion, ColorLeyendaSecundaria;
 
 		TViewModelKPIs ViewModelKPIs;
-        public CPKPIs()
+		public CPKPIs()
 		{
 			ObjectBloqueo = new object();
 			BotonOcupado = false;
@@ -76,8 +76,8 @@ namespace Directiva10.KPIs
 					XamlStackLayoutContenedordeGraficas.Children.Clear();
 					foreach (TIndicador Indicador in ListaGraficas)
 					{
-                        switch (Indicador.Tipo)
-                        {
+						switch (Indicador.Tipo)
+						{
 							case "DOUGHNUT":
 								DibujarGraficaDona(CrearObjetoEncabezadodeGrafica(Indicador.Id, Indicador.Titulo), CrearObjetoPiedeGrafica(Indicador.ListDetalles), Indicador.Medicion, Indicador.MostrarLeyenda, Indicador.LegendPlacementPosicionLeyenda, Indicador.MostrarLeyendaSecundaria, Indicador.FormatoPorcentaje, Indicador.ListSeries);
 								break;
@@ -288,13 +288,14 @@ namespace Directiva10.KPIs
 
 		private void DibujarGraficaProgressBar(Grid GridEncabezado, double porcentaje)
 		{
-            ChartSeriesCollection ChartSeriesCollectionSeries = new ChartSeriesCollection();
+			ChartSeriesCollection ChartSeriesCollectionSeries = new ChartSeriesCollection();
 			ChartSeriesCollection PieChartSeriesCollectionSeries = new ChartSeriesCollection();
 
 			DoughnutSeries DoughnutSeriesSerie = new DoughnutSeries
 			{
 				ItemsSource = new ObservableCollection<TPunto>()
 				{
+					//Lineas ocupadas
 					new TPunto { Nombre = "", Valor = 0 },
 					new TPunto { Nombre = "", Valor = 0 },
 					new TPunto { Nombre = "", Valor = 0 },
@@ -306,7 +307,7 @@ namespace Directiva10.KPIs
 				CapStyle = DoughnutCapStyle.BothCurve,
 				Spacing = 0.8,
 				MaximumValue = 100,
-				
+
 				EnableAnimation = true,
 				AnimationDuration = DuraciondeAnimacion,
 				ColorModel = new ChartColorModel
@@ -326,36 +327,36 @@ namespace Directiva10.KPIs
 				{
 					new TPunto { Nombre = "", Valor = 100 },
 				},
-                XBindingPath = "Nombre",
-                YBindingPath = "Valor",
-                EnableAnimation = true,
+				XBindingPath = "Nombre",
+				YBindingPath = "Valor",
+				EnableAnimation = true,
 				AnimationDuration = DuraciondeAnimacion,
 				ColorModel = new ChartColorModel
 				{
 					Palette = ChartColorPalette.Custom,
 					CustomBrushes = new List<Color>()
 					{
-                        Color.Orange
-                    }
+						Color.Orange
+					}
 				},
 			};
 			PieChartSeriesCollectionSeries.Add(PieSeriesSerie);
 			SfChart PieChart = new SfChart
 			{
-				BackgroundColor=Color.Transparent,
+				BackgroundColor = Color.Transparent,
 				Series = PieChartSeriesCollectionSeries,
-				Margin = new Thickness(35, 35, 35, 35),
+				Margin = new Thickness(20, 20, 20, 20),
 			};
-            PieChart.SetBinding<TViewModelKPIs>(SfChart.HeightRequestProperty, ViewModel => ViewModel.AltodeGraficaSecundaria, mode: BindingMode.TwoWay);
+			PieChart.SetBinding<TViewModelKPIs>(SfChart.HeightRequestProperty, ViewModel => ViewModel.AltodeGraficaSecundaria, mode: BindingMode.TwoWay);
 
-            SfChart SfChartGrafica = new SfChart
-            {
-				BackgroundColor=Color.Transparent,
-                Series = ChartSeriesCollectionSeries,
+			SfChart SfChartGrafica = new SfChart
+			{
+				BackgroundColor = Color.Transparent,
+				Series = ChartSeriesCollectionSeries,
 				Margin = new Thickness(-30, -30, -30, -30),
-				Rotation = porcentaje < 0 ? ClculateRotation(porcentaje) : 90,
+				Rotation = porcentaje < 0 ? ClculateRotation(porcentaje) : 90, //Rotacion del color
 			};
-            SfChartGrafica.SetBinding<TViewModelKPIs>(SfChart.HeightRequestProperty, ViewModel => ViewModel.AltodeGraficaPrincipal, mode: BindingMode.TwoWay);
+			SfChartGrafica.SetBinding<TViewModelKPIs>(SfChart.HeightRequestProperty, ViewModel => ViewModel.AltodeGraficaPrincipal, mode: BindingMode.TwoWay);
 
 			Label labelTitle = new Label
 			{
@@ -378,23 +379,23 @@ namespace Directiva10.KPIs
 			Image imageButtom = new Image
 			{
 				Source = porcentaje < 0 ? "desc_red.png" : "asc_green.png",
-				WidthRequest = 120,
-				HeightRequest = 120,
+				WidthRequest = 80,
+				HeightRequest = 80,
 				HorizontalOptions = LayoutOptions.Center,
 				VerticalOptions = LayoutOptions.Center,
-                Margin = new Thickness(0, (int)ViewModelKPIs?.AltodeGraficaPrincipal + 80, 0, 0),
-            };
+				Margin = new Thickness(0, (int)ViewModelKPIs?.AltodeGraficaPrincipal, 0, 0),
+			};
 
 			Grid gridGrafica = new Grid();
 			gridGrafica.BackgroundColor = Color.WhiteSmoke;
 			gridGrafica.RowDefinitions.Add(new RowDefinition());
 			gridGrafica.ColumnDefinitions.Add(new ColumnDefinition());
-			gridGrafica.Children.Add(SfChartGrafica, 0, 0); 
+			gridGrafica.Children.Add(SfChartGrafica, 0, 0);
 			gridGrafica.Children.Add(PieChart, 0, 0);
-            gridGrafica.Children.Add(labelCenter, 0, 0);
-            gridGrafica.Children.Add(imageButtom, 0, 0);
+			gridGrafica.Children.Add(labelCenter, 0, 0);
+			gridGrafica.Children.Add(imageButtom, 0, 0);
 
-            StackLayout StackLayoutTarjetaGrafica = new StackLayout
+			StackLayout StackLayoutTarjetaGrafica = new StackLayout
 			{
 				Spacing = 0,
 				Children = {
@@ -405,7 +406,7 @@ namespace Directiva10.KPIs
 							GridEncabezado
 						}
 					},
-                    labelTitle,
+					labelTitle,
 					gridGrafica,
 				}
 			};
@@ -464,9 +465,9 @@ namespace Directiva10.KPIs
 					},
 					labelTitle,
 					labelTotal,
-                    imageDescription,
-                    labelPorcentaje,
-                }
+					imageDescription,
+					labelPorcentaje,
+				}
 			};
 			XamlStackLayoutContenedordeGraficas.Children.Add(StackLayoutTarjetaGrafica);
 		}
@@ -635,17 +636,17 @@ namespace Directiva10.KPIs
 		}
 
 		private int ClculateRotation(double porcentaje)
-        {
+		{
 			var porcentPositive = porcentaje < 0 ? porcentaje * -1 : porcentaje;
 			if (porcentPositive > 25)
-            {
+			{
 				return (int)((porcentPositive * 3.6) - 90) * -1;
-            }
-            else
-            {
+			}
+			else
+			{
 				return (int)((25 - porcentPositive) * 3.6);
-            }
-        }
+			}
+		}
 	}
 
 	public class TViewModelKPIs : INotifyPropertyChanged

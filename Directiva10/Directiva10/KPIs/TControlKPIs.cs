@@ -34,7 +34,7 @@ namespace Directiva10.KPIs
                 //    ListRespuesta = JObjectToGraficas(JObjectServidor.Value<JObject>("INDICADORES"));//Le mandas la respuesta al servidor
                 //else
                 //    Device.BeginInvokeOnMainThread(async () => { await Application.Current.MainPage.DisplayAlert((string)Application.Current.Resources["StringMensajeTitulo"], TMensaje.ObtenerMensajeDefault(JObjectServidor.Value<string>("Respuesta")), (string)Application.Current.Resources["StringMensajeBoton"]); });
-                   ListRespuesta = JObjectToGraficas(new JObject());//Le mandas la respuesta al servidor
+                ListRespuesta = JObjectToGraficas(new JObject());//Le mandas la respuesta al servidor
 
             }
             catch (Exception e)
@@ -55,7 +55,7 @@ namespace Directiva10.KPIs
             {
                 Indicador = new TIndicador();
                 Indicador.Id = indicador.Value.Value<int>("ID_INDICADOR");
-                if (Indicador.Id.Equals(12)) 
+                if (Indicador.Id.Equals(12))
                 {
                     break;
                 }
@@ -158,6 +158,7 @@ namespace Directiva10.KPIs
                 }
             );
             ListRespuesta.Add(Indicador);
+            //llenado de las graficas
 
             Indicador = new TIndicador();
             Indicador.Titulo = "Margen de Beneficio Bruto";
@@ -167,13 +168,13 @@ namespace Directiva10.KPIs
 
             Indicador = new TIndicador();
             Indicador.Titulo = "Margen de Beneficio Bruto";
-            Indicador.Tipo = "PORCENTAGE";
+            Indicador.Tipo = "circularProgressBar";
             Indicador.Porcentaje = 34;
             ListRespuesta.Add(Indicador);
 
             Indicador = new TIndicador();
             Indicador.Titulo = "Crecimiento de Ingresos";
-            Indicador.Tipo = "PORCENTAGE_DETAIL";
+            Indicador.Tipo = "crecimiento";
             Indicador.Porcentaje = -3.5;
             ListRespuesta.Add(Indicador);
 
