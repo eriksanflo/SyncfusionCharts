@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
@@ -83,11 +84,11 @@ namespace Directiva10.KPIs
 								break;
 
 							case "circularProgressBar":
-								DibujarGraficaProgressBar(CrearObjetoEncabezadodeGrafica(Indicador.Id, Indicador.Titulo), Indicador.Porcentaje);
+								DibujarGraficaProgressBar(CrearObjetoEncabezadodeGrafica(Indicador.Id, Indicador.Titulo), Indicador.ListSeries);
 								break;
 
 							case "crecimiento":
-								DibujarGraficaCrecimiento(CrearObjetoEncabezadodeGrafica(Indicador.Id, Indicador.Titulo), Indicador.Porcentaje, "Marzo 2022", 1025600.45m);
+								DibujarGraficaCrecimiento(CrearObjetoEncabezadodeGrafica(Indicador.Id, Indicador.Titulo), Indicador.ListSeries, Indicador.Filtros, "Marzo 2022", 1025600.45m);
 								break;
 						}
 					}
@@ -286,10 +287,12 @@ namespace Directiva10.KPIs
 			XamlStackLayoutContenedordeGraficas.Children.Add(StackLayoutTarjetaGrafica);
 		}
 
-		private void DibujarGraficaProgressBar(Grid GridEncabezado, double porcentaje)
+		private void DibujarGraficaProgressBar(Grid GridEncabezado, List<TSerie> listSeries)
 		{
 			ChartSeriesCollection ChartSeriesCollectionSeries = new ChartSeriesCollection();
 			ChartSeriesCollection PieChartSeriesCollectionSeries = new ChartSeriesCollection();
+
+			var porcentaje = listSeries.FirstOrDefault().ObservableCollectionPuntos.ToList().FirstOrDefault().Valor;
 
 			DoughnutSeries DoughnutSeriesSerie = new DoughnutSeries
 			{
@@ -378,7 +381,7 @@ namespace Directiva10.KPIs
 
 			Image imageButtom = new Image
 			{
-				Source = porcentaje < 0 ? "desc_red.png" : "asc_green.png",
+				Source = porcentaje < 0 ? "AD_Icono_KPIS02.png" : "AD_Icono_KPIS01.png",
 				WidthRequest = 80,
 				HeightRequest = 80,
 				HorizontalOptions = LayoutOptions.Center,
@@ -413,8 +416,10 @@ namespace Directiva10.KPIs
 			XamlStackLayoutContenedordeGraficas.Children.Add(StackLayoutTarjetaGrafica);
 		}
 
-		private void DibujarGraficaCrecimiento(Grid GridEncabezado, double porcentaje, string month, decimal total)
+		private void DibujarGraficaCrecimiento(Grid GridEncabezado, List<TSerie> listSeries, List<TFiltro> listFilters, string month, decimal total)
 		{
+			var porcentaje = listSeries.FirstOrDefault().ObservableCollectionPuntos.ToList().FirstOrDefault().Valor;
+
 			Label labelTitle = new Label
 			{
 				Text = month,
@@ -436,7 +441,7 @@ namespace Directiva10.KPIs
 
 			Image imageDescription = new Image
 			{
-				Source = porcentaje < 0 ? "desc_red.png" : "asc_green.png",
+				Source = porcentaje < 0 ? "AD_Icono_KPIS05.png" : "AD_Icono_KPIS04.png",
 				WidthRequest = (int)ViewModelKPIs?.AltodeGraficaPrincipal,
 				HeightRequest = (int)ViewModelKPIs?.AltodeGraficaPrincipal,
 			};
@@ -444,12 +449,31 @@ namespace Directiva10.KPIs
 			Label labelPorcentaje = new Label()
 			{
 				Text = $"{porcentaje}%",
-				FontSize = 80,
+				FontSize = 60,
 				FontAttributes = FontAttributes.Bold,
 				TextColor = Color.Black,
 				BackgroundColor = Color.White,
 				HorizontalTextAlignment = TextAlignment.Center,
 			};
+
+			//Grid gridFilters = new Grid()
+			//{
+			//	RowDefinitions = new RowDefinitionCollection
+			//             {
+			//		new RowDefinition(),
+			//		new RowDefinition(),
+			//		new RowDefinition(),
+			//		new RowDefinition(),
+			//	},
+			//	ColumnDefinitions = new ColumnDefinitionCollection
+			//             {
+			//		new ColumnDefinition(),
+			//             }
+			//};
+			//gridFilters.Children.Add(CreateGridPeriodo(listFilters.FirstOrDefault(x => x.TipoFiltro == "PERIODO").ValoresFiltro), 0, 0);
+			//         gridFilters.Children.Add(CreateGridRangoTitle(), 0, 1);
+			//         gridFilters.Children.Add(CreateGridAnios(listFilters.FirstOrDefault(x => x.TipoFiltro == "AÑOS").ValoresFiltro), 0, 2);
+			Grid gridFilters = CreateGridFilter(listFilters);
 
 			StackLayout StackLayoutTarjetaGrafica = new StackLayout
 			{
@@ -463,6 +487,7 @@ namespace Directiva10.KPIs
 							GridEncabezado
 						}
 					},
+					gridFilters,
 					labelTitle,
 					labelTotal,
 					imageDescription,
@@ -471,6 +496,385 @@ namespace Directiva10.KPIs
 			};
 			XamlStackLayoutContenedordeGraficas.Children.Add(StackLayoutTarjetaGrafica);
 		}
+
+        #region Chart Crecimiento
+		private Grid CreateGridFilter(List<TFiltro> listFilters)
+        {
+			Grid gridFilters = new Grid()
+			{
+				RowDefinitions = new RowDefinitionCollection
+				{
+					new RowDefinition(),
+					new RowDefinition(),
+					new RowDefinition(),
+					new RowDefinition(),
+				},
+				ColumnDefinitions = new ColumnDefinitionCollection
+				{
+					new ColumnDefinition(),
+				}
+			};
+            #region Periodo
+            Grid periodo = new Grid()
+			{
+				RowDefinitions = new RowDefinitionCollection
+				{
+					new RowDefinition(){ Height = GridLength.Auto },
+				},
+				ColumnDefinitions = new ColumnDefinitionCollection
+				{
+					new ColumnDefinition(){ Width = GridLength.Auto },
+					new ColumnDefinition(),
+				}
+			};
+			Label label = new Label()
+			{
+				Text = "PERIODO:",
+				FontAttributes = FontAttributes.Bold,
+				HorizontalTextAlignment = TextAlignment.Start,
+				VerticalTextAlignment = TextAlignment.End,
+				FontSize = 20,
+			};
+			Picker values = new Picker()
+			{
+				ItemsSource = listFilters.FirstOrDefault(x => x.TipoFiltro == "PERIODO").ValoresFiltro.Select(x => x.FiltroValor).ToList(),
+			};
+			values.SelectedIndexChanged += (sender, args) =>
+			{
+				var picker = (Picker)sender;
+				int selectedIndex = picker.SelectedIndex;
+
+				if (selectedIndex != -1)
+				{
+					var selected = picker.Items[selectedIndex].ToLower();
+					if(selected != "anual")
+                    {
+						var specifics = listFilters.FirstOrDefault(x => x.TipoFiltro == "ESPECIFICOS").ValoresFiltro;
+						RemoveSpecific();
+						switch (selected)
+                        {
+							case "mensual":
+								var mensuales = specifics.FirstOrDefault(x => x.Nombre == "PERIODOS_MENSUAL").Valores;
+								CreateSpecifics(mensuales);
+								break;
+
+							case "trimestral":
+								var trimestrales = specifics.FirstOrDefault(x => x.Nombre == "PERIODOS_TRIMESTRAL").Valores;
+								CreateSpecifics(trimestrales);
+								break;
+
+							case "semestral":
+								var semestrales = specifics.FirstOrDefault(x => x.Nombre == "PERIODOS_SEMESTRE").Valores;
+								CreateSpecifics(semestrales);
+								break;
+						}
+                    }
+                    else
+                    {
+						RemoveSpecific();
+					}
+				}
+			};
+            #region Specifics
+            void CreateSpecifics(List<TFiltroValor> Valores)
+            {
+				Grid gridSpecifics = new Grid()
+				{
+					RowDefinitions = new RowDefinitionCollection
+					{
+						new RowDefinition(),
+					},
+						ColumnDefinitions = new ColumnDefinitionCollection
+					{
+						new ColumnDefinition(){ Width = GridLength.Auto },
+						new ColumnDefinition(),
+						new ColumnDefinition(){ Width = GridLength.Auto },
+						new ColumnDefinition(),
+					}
+				};
+				Label Specifics1 = new Label()
+				{
+					Text = "ESPECÍFICO:",
+					FontAttributes = FontAttributes.Bold,
+					VerticalTextAlignment = TextAlignment.Start,
+					FontSize = 20,
+				};
+				Label Specifics2 = new Label()
+				{
+					Text = "ESPECÍFICO:",
+					FontAttributes = FontAttributes.Bold,
+					VerticalTextAlignment = TextAlignment.Start,
+					FontSize = 20,
+				};
+				Picker valuesSpecifics1 = new Picker()
+				{
+					ItemsSource = Valores.Select(x => x.FiltroValor).ToList(),
+				};
+				Picker valuesSpecifics2 = new Picker()
+				{
+					ItemsSource = Valores.Select(x => x.FiltroValor).ToList(),
+				};
+				gridSpecifics.Children.Add(Specifics1, 0, 0);
+				gridSpecifics.Children.Add(valuesSpecifics1, 1, 0);
+				gridSpecifics.Children.Add(Specifics2, 2, 0);
+				gridSpecifics.Children.Add(valuesSpecifics2, 3, 0);
+				gridFilters.Children.Add(gridSpecifics, 0, 3);
+			}
+			void RemoveSpecific()
+            {
+				if (gridFilters.Children.Count() == 4)
+                {
+					var rowThree = gridFilters.Children[3];
+					gridFilters.Children.Remove(rowThree);
+				}
+			}
+            #endregion
+			periodo.Children.Add(label, 0, 0);
+			periodo.Children.Add(values, 1, 0);
+			gridFilters.Children.Add(periodo, 0, 0);
+			#endregion
+			#region Rango Title
+			Grid rangos = new Grid()
+			{
+				RowDefinitions = new RowDefinitionCollection
+				{
+					new RowDefinition(),
+				},
+				ColumnDefinitions = new ColumnDefinitionCollection
+				{
+					new ColumnDefinition(),
+					new ColumnDefinition(),
+				}
+			};
+			Label rango1 = new Label()
+			{
+				Text = "RANGO 1",
+				FontAttributes = FontAttributes.Bold,
+				HorizontalTextAlignment = TextAlignment.Center,
+				FontSize = 20,
+			};
+			Label rango2 = new Label()
+			{
+				Text = "RANGO 2",
+				FontAttributes = FontAttributes.Bold,
+				HorizontalTextAlignment = TextAlignment.Center,
+				FontSize = 20,
+			};
+			rangos.Children.Add(rango1, 0, 0);
+			rangos.Children.Add(rango2, 1, 0);
+			gridFilters.Children.Add(rangos, 0, 1);
+			#endregion
+			#region Years
+			Grid years = new Grid()
+			{
+				RowDefinitions = new RowDefinitionCollection
+				{
+					new RowDefinition(),
+				},
+				ColumnDefinitions = new ColumnDefinitionCollection
+				{
+					new ColumnDefinition(){ Width = GridLength.Auto },
+					new ColumnDefinition(),
+					new ColumnDefinition(){ Width = GridLength.Auto },
+					new ColumnDefinition(),
+				}
+			};
+			Label years1 = new Label()
+			{
+				Text = "AÑO:",
+				FontAttributes = FontAttributes.Bold,
+				VerticalTextAlignment = TextAlignment.Start,
+				FontSize = 20,
+			};
+			Label years2 = new Label()
+			{
+				Text = "AÑO:",
+				FontAttributes = FontAttributes.Bold,
+				VerticalTextAlignment = TextAlignment.Start,
+				FontSize = 20,
+			};
+			Picker valuesyears1 = new Picker()
+			{
+				ItemsSource = listFilters.FirstOrDefault(x => x.TipoFiltro == "AÑOS").ValoresFiltro.Select(x => x.FiltroValor).ToList(),
+			};
+			Picker valuesyears2 = new Picker()
+			{
+				ItemsSource = new List<string>() { DateTime.Now.ToString("yyyy") },
+			};
+			years.Children.Add(years1, 0, 0);
+			years.Children.Add(valuesyears1, 1, 0);
+			years.Children.Add(years2, 2, 0);
+			years.Children.Add(valuesyears2, 3, 0);
+			gridFilters.Children.Add(years, 0, 2);
+			#endregion
+			return gridFilters;
+		}
+		private Grid CreateGridPeriodo(List<TFiltroValor> periodoFilter)
+        {
+			Grid periodo = new Grid()
+			{
+				RowDefinitions = new RowDefinitionCollection
+                {
+					new RowDefinition(){ Height = GridLength.Auto },
+                },
+				ColumnDefinitions = new ColumnDefinitionCollection
+                {
+					new ColumnDefinition(){ Width = GridLength.Auto },
+					new ColumnDefinition(),
+                }
+			};
+			Label label = new Label()
+			{
+				Text = "PERIODO:",
+				FontAttributes = FontAttributes.Bold,
+				HorizontalTextAlignment = TextAlignment.Start,
+				VerticalTextAlignment = TextAlignment.End,
+				FontSize = 20,
+			};
+			Picker values = new Picker()
+			{
+				ItemsSource = periodoFilter.Select(x => x.FiltroValor).ToList(),
+			};
+			//values.SelectedIndexChanged += Values_SelectedIndexChanged;
+			values.SelectedIndexChanged += (sender, args) =>
+			{
+				var picker = (Picker)sender;
+				int selectedIndex = picker.SelectedIndex;
+
+				if (selectedIndex != -1)
+				{
+					var selected = picker.Items[selectedIndex];
+				}
+			};
+			periodo.Children.Add(label, 0, 0);
+			periodo.Children.Add(values, 1, 0);
+			return periodo;
+        }
+
+        private void Values_SelectedIndexChanged(object sender, EventArgs e)
+        {
+			var picker = (Picker)sender;
+			int selectedIndex = picker.SelectedIndex;
+
+			if (selectedIndex != -1)
+			{
+				var selected = picker.Items[selectedIndex];
+			}
+		}
+
+        private Grid CreateGridRangoTitle()
+		{
+			Grid periodo = new Grid()
+			{
+				RowDefinitions = new RowDefinitionCollection
+				{
+					new RowDefinition(),
+				},
+				ColumnDefinitions = new ColumnDefinitionCollection
+				{
+					new ColumnDefinition(),
+					new ColumnDefinition(),
+				}
+			};
+			Label label1 = new Label()
+			{
+				Text = "RANGO 1",
+				FontAttributes = FontAttributes.Bold,
+				HorizontalTextAlignment = TextAlignment.Center,
+				FontSize = 20,
+			};
+			Label label2 = new Label()
+			{
+				Text = "RANGO 2",
+				FontAttributes = FontAttributes.Bold,
+				HorizontalTextAlignment = TextAlignment.Center,
+				FontSize = 20,
+			};
+			periodo.Children.Add(label1, 0, 0);
+			periodo.Children.Add(label2, 1, 0);
+			return periodo;
+		}
+		private Grid CreateGridAnios(List<TFiltroValor> periodoFilter)
+		{
+			Grid periodo = new Grid()
+			{
+				RowDefinitions = new RowDefinitionCollection
+				{
+					new RowDefinition(),
+				},
+				ColumnDefinitions = new ColumnDefinitionCollection
+				{
+					new ColumnDefinition(){ Width = GridLength.Auto },
+					new ColumnDefinition(),
+					new ColumnDefinition(){ Width = GridLength.Auto },
+					new ColumnDefinition(),
+				}
+			};
+			Label label1 = new Label()
+			{
+				Text = "AÑO:",
+				FontAttributes = FontAttributes.Bold,
+				VerticalTextAlignment = TextAlignment.Start,
+				FontSize = 20,
+			};
+			Label label2 = new Label()
+			{
+				Text = "AÑO:",
+				FontAttributes = FontAttributes.Bold,
+				VerticalTextAlignment = TextAlignment.Start,
+				FontSize = 20,
+			};
+			Picker values1 = new Picker()
+			{
+				ItemsSource = periodoFilter.Select(x => x.FiltroValor).ToList(),
+			};
+			Picker values2 = new Picker()
+			{
+				ItemsSource = new List<string>() { DateTime.Now.ToString("yyyy") },
+			};
+			periodo.Children.Add(label1, 0, 0);
+			periodo.Children.Add(values1, 1, 0);
+			periodo.Children.Add(label2, 2, 0);
+			periodo.Children.Add(values2, 3, 0);
+			return periodo;
+		}
+		private Grid CreateGridSpecifics(List<TFiltroValor> periodoFilter)
+		{
+			Grid periodo = new Grid()
+			{
+				RowDefinitions = new RowDefinitionCollection
+				{
+					new RowDefinition(),
+				},
+				ColumnDefinitions = new ColumnDefinitionCollection
+				{
+					new ColumnDefinition(),
+					new ColumnDefinition(),
+					new ColumnDefinition(),
+					new ColumnDefinition(),
+				}
+			};
+			Label label1 = new Label()
+			{
+				Text = "AÑO:",
+				FontAttributes = FontAttributes.Bold,
+				FontSize = 20,
+			};
+			Picker values1 = new Picker()
+			{
+				ItemsSource = periodoFilter.Select(x => x.FiltroValor).ToList(),
+			};
+			Picker values2 = new Picker()
+			{
+				ItemsSource = new List<string>() { DateTime.Now.ToString("yyyy") },
+			};
+			periodo.Children.Add(label1, 0, 0);
+			periodo.Children.Add(values1, 0, 1);
+			periodo.Children.Add(label1, 0, 2);
+			periodo.Children.Add(values1, 0, 3);
+			return periodo;
+		}
+		#endregion
 
 		private Grid CrearObjetoEncabezadodeGrafica(int ID_INDICADOR, string TITULO)
 		{

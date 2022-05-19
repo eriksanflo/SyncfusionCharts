@@ -60,7 +60,7 @@
     <PackageReference Include="Syncfusion.Xamarin.SfChart">
       <Version>20.1.0.50</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2401" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
     <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
     <PackageReference Include="Xamarin.Forms.OpenWhatsApp">
       <Version>1.0.1</Version>
@@ -205,10 +205,16 @@
     <AndroidResource Include="Resources\drawable\menuLateralInicio.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\desc_red.jpeg" />
+    <AndroidResource Include="Resources\drawable\AD_Icono_KPIS01.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\asc_green.jpeg" />
+    <AndroidResource Include="Resources\drawable\AD_Icono_KPIS02.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\AD_Icono_KPIS04.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\AD_Icono_KPIS05.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

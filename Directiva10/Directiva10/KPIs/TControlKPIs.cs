@@ -163,22 +163,137 @@ namespace Directiva10.KPIs
             Indicador = new TIndicador();
             Indicador.Titulo = "Margen de Beneficio Bruto";
             Indicador.Tipo = "circularProgressBar";
-            Indicador.Porcentaje = -12;
+            Indicador.ListSeries = new List<TSerie>
+            {
+                new TSerie
+                {
+                    Nombre = "PORCENTAJE_DE_AVANCE",
+                    ObservableCollectionPuntos = new ObservableCollection<TPunto>
+                    {
+                        new TPunto{ Nombre = "PORCENTAJE_DE_AVANCE", Valor = -12}
+                    },
+                }
+            };
             ListRespuesta.Add(Indicador);
 
             Indicador = new TIndicador();
             Indicador.Titulo = "Margen de Beneficio Bruto";
             Indicador.Tipo = "circularProgressBar";
-            Indicador.Porcentaje = 34;
+            Indicador.ListSeries = new List<TSerie>
+            {
+                new TSerie
+                {
+                    Nombre = "PORCENTAJE_DE_AVANCE",
+                    ObservableCollectionPuntos = new ObservableCollection<TPunto>
+                    {
+                        new TPunto{ Nombre = "PORCENTAJE_DE_AVANCE", Valor = 34 }
+                    },
+                }
+            };
             ListRespuesta.Add(Indicador);
 
             Indicador = new TIndicador();
+            Indicador.Id = 13;
             Indicador.Titulo = "Crecimiento de Ingresos";
             Indicador.Tipo = "crecimiento";
-            Indicador.Porcentaje = -3.5;
+            Indicador.ListSeries = new List<TSerie>
+            {
+                new TSerie
+                {
+                    Nombre = "PORCENTAJE_DE_AVANCE",
+                    ObservableCollectionPuntos = new ObservableCollection<TPunto>
+                    {
+                        new TPunto{ Nombre = "PORCENTAJE_DE_AVANCE", Valor = -93.325678245115 }  
+                    },
+                }
+            };
+            Indicador.Filtros = new List<TFiltro>()
+            {
+                new TFiltro
+                {
+                    TipoFiltro = "PERIODO",
+                    ValoresFiltro = new List<TFiltroValor>
+                    {
+                        new TFiltroValor { IdFiltroValor = 1, FiltroValor = "Mensual" },
+                        new TFiltroValor { IdFiltroValor = 2, FiltroValor = "Trimestral" },
+                        new TFiltroValor { IdFiltroValor = 3, FiltroValor = "Semestral" },
+                        new TFiltroValor { IdFiltroValor = 4, FiltroValor = "Anual" },
+                    }
+                },
+                new TFiltro
+                {
+                    TipoFiltro = "AÑOS",
+                    ValoresFiltro = GetAniosFromRange(1990, 2022),
+                },
+                new TFiltro
+                {
+                    TipoFiltro = "ESPECIFICOS",
+                    ValoresFiltro = new List<TFiltroValor>
+                    {
+                        new TFiltroValor
+                        {
+                            Nombre = "PERIODOS_MENSUAL",
+                            Valores = GetMonthsOfYear(),
+                        },
+                        new TFiltroValor
+                        {
+                            Nombre = "PERIODOS_TRIMESTRAL",
+                            Valores = GetTrimesterOfYear(),
+                        },
+                        new TFiltroValor
+                        {
+                            Nombre = "PERIODOS_SEMESTRE",
+                            Valores = GetSemesterOfYear(),
+                        }
+                    }
+                }
+            };
             ListRespuesta.Add(Indicador);
 
             return ListRespuesta;
+        }
+
+        private List<TFiltroValor> GetAniosFromRange(int start, int end)
+        {
+            var response = new List<TFiltroValor>();
+            for (int i = start; i <= end; i++)
+            {
+                response.Add(new TFiltroValor { IdFiltroValor = i, FiltroValor = i.ToString() });
+            }
+            return response;
+        }
+        private List<TFiltroValor> GetMonthsOfYear()
+        {
+            var response = new List<TFiltroValor>();
+            response.Add(new TFiltroValor { IdFiltroValor = 1, FiltroValor = "Enero" });
+            response.Add(new TFiltroValor { IdFiltroValor = 2, FiltroValor = "Febrero" });
+            response.Add(new TFiltroValor { IdFiltroValor = 3, FiltroValor = "Marzo" });
+            response.Add(new TFiltroValor { IdFiltroValor = 4, FiltroValor = "Abril" });
+            response.Add(new TFiltroValor { IdFiltroValor = 5, FiltroValor = "Mayo" });
+            response.Add(new TFiltroValor { IdFiltroValor = 6, FiltroValor = "Junio" });
+            response.Add(new TFiltroValor { IdFiltroValor = 7, FiltroValor = "Julio" });
+            response.Add(new TFiltroValor { IdFiltroValor = 8, FiltroValor = "Agosto" });
+            response.Add(new TFiltroValor { IdFiltroValor = 9, FiltroValor = "Septiembre" });
+            response.Add(new TFiltroValor { IdFiltroValor = 10, FiltroValor = "Octubre" });
+            response.Add(new TFiltroValor { IdFiltroValor = 11, FiltroValor = "Noviembre" });
+            response.Add(new TFiltroValor { IdFiltroValor = 12, FiltroValor = "Diciembre" });
+            return response;
+        }
+        private List<TFiltroValor> GetTrimesterOfYear()
+        {
+            var response = new List<TFiltroValor>();
+            response.Add(new TFiltroValor { IdFiltroValor = 1, FiltroValor = "1er Trimestre" });
+            response.Add(new TFiltroValor { IdFiltroValor = 2, FiltroValor = "2do Trimestre" });
+            response.Add(new TFiltroValor { IdFiltroValor = 3, FiltroValor = "3er Trimestre" });
+            response.Add(new TFiltroValor { IdFiltroValor = 4, FiltroValor = "4to Trimestre" });
+            return response;
+        }
+        private List<TFiltroValor> GetSemesterOfYear()
+        {
+            var response = new List<TFiltroValor>();
+            response.Add(new TFiltroValor { IdFiltroValor = 1, FiltroValor = "1er Semestre" });
+            response.Add(new TFiltroValor { IdFiltroValor = 2, FiltroValor = "2do Semestre" });
+            return response;
         }
     }
 }

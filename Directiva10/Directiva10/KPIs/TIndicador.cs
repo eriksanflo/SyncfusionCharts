@@ -16,10 +16,11 @@ namespace Directiva10.KPIs
         public bool MostrarLeyendaSecundaria { get; set; }
         public bool MostrarPorcentajeSobrelaGrafica { get; set; }
         public double ValorMaximo { get; set; }
-        public double Porcentaje { get; set; }
         public LegendPlacement LegendPlacementPosicionLeyenda { get; set; }
         public List<TSerie> ListSeries { get; set; }
         public List<TEtiqueta> ListDetalles { get; set; }
+        public List<TFiltroAplicado> FiltrosAplicados { get; set; }
+        public List<TFiltro> Filtros { get; set; }
 
         public TIndicador()
         {

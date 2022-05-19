@@ -23,13 +23,10 @@
                 VerticalOptions="FillAndExpand">
 
                 <StackLayout>
-                    <StackLayout x:Name="XamlStackLayoutContenedordeGraficas"                               
-                                 Spacing="20"/>
+                    <StackLayout x:Name="XamlStackLayoutContenedordeGraficas" Spacing="20"/>
                 </StackLayout>
+                
             </ScrollView>
-
-
-
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
