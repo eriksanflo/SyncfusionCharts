@@ -248,6 +248,34 @@ namespace Directiva10.KPIs
                     }
                 }
             };
+            Indicador.FiltrosAplicados = new List<TFiltroAplicado>()
+            {
+                new TFiltroAplicado()
+                {
+                    TipoFiltro = "PERIODO",
+                    Valor = "Mensual",
+                },
+                new TFiltroAplicado()
+                {
+                    TipoFiltro = "AÑO_INICIAL",
+                    Valor = "2021",
+                },
+                new TFiltroAplicado()
+                {
+                    TipoFiltro = "ESPECIFICO_INICIAL",
+                    Valor = "5",
+                },
+                new TFiltroAplicado()
+                {
+                    TipoFiltro = "AÑO_FINAL",
+                    Valor = "2021",
+                },
+                new TFiltroAplicado()
+                {
+                    TipoFiltro = "ESPECIFICO_FINAL",
+                    Valor = "7",
+                },
+            };
             ListRespuesta.Add(Indicador);
 
             return ListRespuesta;

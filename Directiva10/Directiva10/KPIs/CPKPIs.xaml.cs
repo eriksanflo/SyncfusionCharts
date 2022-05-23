@@ -88,7 +88,7 @@ namespace Directiva10.KPIs
 								break;
 
 							case "crecimiento":
-								DibujarGraficaCrecimiento(CrearObjetoEncabezadodeGrafica(Indicador.Id, Indicador.Titulo), Indicador.ListSeries, Indicador.Filtros, "Marzo 2022", 1025600.45m);
+								DibujarGraficaCrecimiento(CrearObjetoEncabezadodeGrafica(Indicador.Id, Indicador.Titulo), Indicador.ListSeries, Indicador.Filtros, Indicador.FiltrosAplicados, "Marzo 2022", 1025600.45m);
 								break;
 						}
 					}
@@ -416,7 +416,7 @@ namespace Directiva10.KPIs
 			XamlStackLayoutContenedordeGraficas.Children.Add(StackLayoutTarjetaGrafica);
 		}
 
-		private void DibujarGraficaCrecimiento(Grid GridEncabezado, List<TSerie> listSeries, List<TFiltro> listFilters, string month, decimal total)
+		private void DibujarGraficaCrecimiento(Grid GridEncabezado, List<TSerie> listSeries, List<TFiltro> listFilters, List<TFiltroAplicado> filtrosAplicados, string month, decimal total)
 		{
 			var porcentaje = listSeries.FirstOrDefault().ObservableCollectionPuntos.ToList().FirstOrDefault().Valor;
 
@@ -456,24 +456,7 @@ namespace Directiva10.KPIs
 				HorizontalTextAlignment = TextAlignment.Center,
 			};
 
-			//Grid gridFilters = new Grid()
-			//{
-			//	RowDefinitions = new RowDefinitionCollection
-			//             {
-			//		new RowDefinition(),
-			//		new RowDefinition(),
-			//		new RowDefinition(),
-			//		new RowDefinition(),
-			//	},
-			//	ColumnDefinitions = new ColumnDefinitionCollection
-			//             {
-			//		new ColumnDefinition(),
-			//             }
-			//};
-			//gridFilters.Children.Add(CreateGridPeriodo(listFilters.FirstOrDefault(x => x.TipoFiltro == "PERIODO").ValoresFiltro), 0, 0);
-			//         gridFilters.Children.Add(CreateGridRangoTitle(), 0, 1);
-			//         gridFilters.Children.Add(CreateGridAnios(listFilters.FirstOrDefault(x => x.TipoFiltro == "AÑOS").ValoresFiltro), 0, 2);
-			Grid gridFilters = CreateGridFilter(listFilters);
+			Grid gridFilters = CreateGridFilter(listFilters, filtrosAplicados);
 
 			StackLayout StackLayoutTarjetaGrafica = new StackLayout
 			{
@@ -498,7 +481,7 @@ namespace Directiva10.KPIs
 		}
 
         #region Chart Crecimiento
-		private Grid CreateGridFilter(List<TFiltro> listFilters)
+		private Grid CreateGridFilter(List<TFiltro> listFilters, List<TFiltroAplicado> filtrosAplicados)
         {
 			Grid gridFilters = new Grid()
 			{
@@ -539,6 +522,26 @@ namespace Directiva10.KPIs
 			{
 				ItemsSource = listFilters.FirstOrDefault(x => x.TipoFiltro == "PERIODO").ValoresFiltro.Select(x => x.FiltroValor).ToList(),
 			};
+			var _periodoSleccionado = filtrosAplicados.Where(x => x.TipoFiltro == "PERIODO").ToList();
+			if (_periodoSleccionado.Any())
+            {
+				values.SelectedItem = _periodoSleccionado.FirstOrDefault().Valor;
+				if (_periodoSleccionado.FirstOrDefault().Valor != "anual")
+                {
+					var _selectedSpecific1 = filtrosAplicados.Where(x => x.TipoFiltro == "ESPECIFICO_INICIAL").ToList();
+					var _selectedSpecific2 = filtrosAplicados.Where(x => x.TipoFiltro == "ESPECIFICO_FINAL").ToList();
+					string _specificIdSelected1 = string.Empty, _specificIdSelected2 = string.Empty;
+					if (_selectedSpecific1.Any())
+                    {
+						_specificIdSelected1 = _selectedSpecific1.FirstOrDefault().Valor;
+					}
+					if (_selectedSpecific2.Any())
+					{
+						_specificIdSelected2 = _selectedSpecific2.FirstOrDefault().Valor;
+					}
+					Specifics(_periodoSleccionado.FirstOrDefault().Valor.ToLower(), _specificIdSelected1, _specificIdSelected2);
+				}
+            }
 			values.SelectedIndexChanged += (sender, args) =>
 			{
 				var picker = (Picker)sender;
@@ -549,26 +552,8 @@ namespace Directiva10.KPIs
 					var selected = picker.Items[selectedIndex].ToLower();
 					if(selected != "anual")
                     {
-						var specifics = listFilters.FirstOrDefault(x => x.TipoFiltro == "ESPECIFICOS").ValoresFiltro;
-						RemoveSpecific();
-						switch (selected)
-                        {
-							case "mensual":
-								var mensuales = specifics.FirstOrDefault(x => x.Nombre == "PERIODOS_MENSUAL").Valores;
-								CreateSpecifics(mensuales);
-								break;
-
-							case "trimestral":
-								var trimestrales = specifics.FirstOrDefault(x => x.Nombre == "PERIODOS_TRIMESTRAL").Valores;
-								CreateSpecifics(trimestrales);
-								break;
-
-							case "semestral":
-								var semestrales = specifics.FirstOrDefault(x => x.Nombre == "PERIODOS_SEMESTRE").Valores;
-								CreateSpecifics(semestrales);
-								break;
-						}
-                    }
+						Specifics(selected, string.Empty, string.Empty);
+					}
                     else
                     {
 						RemoveSpecific();
@@ -576,7 +561,29 @@ namespace Directiva10.KPIs
 				}
 			};
             #region Specifics
-            void CreateSpecifics(List<TFiltroValor> Valores)
+			void Specifics(string typeFilter, string _selectedValue1, string _selectedValue2)
+            {
+				var specifics = listFilters.FirstOrDefault(x => x.TipoFiltro == "ESPECIFICOS").ValoresFiltro;
+				RemoveSpecific();
+				switch (typeFilter)
+				{
+					case "mensual":
+						var mensuales = specifics.FirstOrDefault(x => x.Nombre == "PERIODOS_MENSUAL").Valores;
+						CreateSpecifics(mensuales, _selectedValue1, _selectedValue2);
+						break;
+
+					case "trimestral":
+						var trimestrales = specifics.FirstOrDefault(x => x.Nombre == "PERIODOS_TRIMESTRAL").Valores;
+						CreateSpecifics(trimestrales, _selectedValue1, _selectedValue2);
+						break;
+
+					case "semestral":
+						var semestrales = specifics.FirstOrDefault(x => x.Nombre == "PERIODOS_SEMESTRE").Valores;
+						CreateSpecifics(semestrales, _selectedValue1, _selectedValue2);
+						break;
+				}
+			}
+            void CreateSpecifics(List<TFiltroValor> Valores, string _selectedValue1, string _selectedValue2)
             {
 				Grid gridSpecifics = new Grid()
 				{
@@ -610,10 +617,26 @@ namespace Directiva10.KPIs
 				{
 					ItemsSource = Valores.Select(x => x.FiltroValor).ToList(),
 				};
+				if (!string.IsNullOrEmpty(_selectedValue1))
+                {
+					var matched1 = Valores.Where(x => x.IdFiltroValor.ToString() == _selectedValue1).ToList();
+					if (matched1.Any())
+                    {
+						valuesSpecifics1.SelectedItem = matched1.FirstOrDefault().FiltroValor;
+					}
+				}
 				Picker valuesSpecifics2 = new Picker()
 				{
 					ItemsSource = Valores.Select(x => x.FiltroValor).ToList(),
 				};
+				if (!string.IsNullOrEmpty(_selectedValue2))
+				{
+					var matched2 = Valores.Where(x => x.IdFiltroValor.ToString() == _selectedValue2).ToList();
+					if (matched2.Any())
+					{
+						valuesSpecifics2.SelectedItem = matched2.FirstOrDefault().FiltroValor;
+					}
+				}
 				gridSpecifics.Children.Add(Specifics1, 0, 0);
 				gridSpecifics.Children.Add(valuesSpecifics1, 1, 0);
 				gridSpecifics.Children.Add(Specifics2, 2, 0);
@@ -625,7 +648,7 @@ namespace Directiva10.KPIs
 				if (gridFilters.Children.Count() == 4)
                 {
 					var rowThree = gridFilters.Children[3];
-					gridFilters.Children.Remove(rowThree);
+                    gridFilters.Children.Remove(rowThree);
 				}
 			}
             #endregion
@@ -699,8 +722,19 @@ namespace Directiva10.KPIs
 			};
 			Picker valuesyears2 = new Picker()
 			{
-				ItemsSource = new List<string>() { DateTime.Now.ToString("yyyy") },
+				ItemsSource = listFilters.FirstOrDefault(x => x.TipoFiltro == "AÑOS").ValoresFiltro.Select(x => x.FiltroValor).ToList(),
+				//ItemsSource = new List<string>() { DateTime.Now.ToString("yyyy") },
 			};
+			var _yearOneSelected = filtrosAplicados.Where(x => x.TipoFiltro == "AÑO_INICIAL").ToList();
+			var _yearTwoSelected = filtrosAplicados.Where(x => x.TipoFiltro == "AÑO_FINAL").ToList();
+			if (_yearOneSelected.Any())
+			{
+				valuesyears1.SelectedItem = _yearOneSelected.FirstOrDefault().Valor;
+			}
+			if (_yearTwoSelected.Any())
+			{
+				valuesyears2.SelectedItem = _yearTwoSelected.FirstOrDefault().Valor;
+			}
 			years.Children.Add(years1, 0, 0);
 			years.Children.Add(valuesyears1, 1, 0);
 			years.Children.Add(years2, 2, 0);
@@ -708,171 +742,6 @@ namespace Directiva10.KPIs
 			gridFilters.Children.Add(years, 0, 2);
 			#endregion
 			return gridFilters;
-		}
-		private Grid CreateGridPeriodo(List<TFiltroValor> periodoFilter)
-        {
-			Grid periodo = new Grid()
-			{
-				RowDefinitions = new RowDefinitionCollection
-                {
-					new RowDefinition(){ Height = GridLength.Auto },
-                },
-				ColumnDefinitions = new ColumnDefinitionCollection
-                {
-					new ColumnDefinition(){ Width = GridLength.Auto },
-					new ColumnDefinition(),
-                }
-			};
-			Label label = new Label()
-			{
-				Text = "PERIODO:",
-				FontAttributes = FontAttributes.Bold,
-				HorizontalTextAlignment = TextAlignment.Start,
-				VerticalTextAlignment = TextAlignment.End,
-				FontSize = 20,
-			};
-			Picker values = new Picker()
-			{
-				ItemsSource = periodoFilter.Select(x => x.FiltroValor).ToList(),
-			};
-			//values.SelectedIndexChanged += Values_SelectedIndexChanged;
-			values.SelectedIndexChanged += (sender, args) =>
-			{
-				var picker = (Picker)sender;
-				int selectedIndex = picker.SelectedIndex;
-
-				if (selectedIndex != -1)
-				{
-					var selected = picker.Items[selectedIndex];
-				}
-			};
-			periodo.Children.Add(label, 0, 0);
-			periodo.Children.Add(values, 1, 0);
-			return periodo;
-        }
-
-        private void Values_SelectedIndexChanged(object sender, EventArgs e)
-        {
-			var picker = (Picker)sender;
-			int selectedIndex = picker.SelectedIndex;
-
-			if (selectedIndex != -1)
-			{
-				var selected = picker.Items[selectedIndex];
-			}
-		}
-
-        private Grid CreateGridRangoTitle()
-		{
-			Grid periodo = new Grid()
-			{
-				RowDefinitions = new RowDefinitionCollection
-				{
-					new RowDefinition(),
-				},
-				ColumnDefinitions = new ColumnDefinitionCollection
-				{
-					new ColumnDefinition(),
-					new ColumnDefinition(),
-				}
-			};
-			Label label1 = new Label()
-			{
-				Text = "RANGO 1",
-				FontAttributes = FontAttributes.Bold,
-				HorizontalTextAlignment = TextAlignment.Center,
-				FontSize = 20,
-			};
-			Label label2 = new Label()
-			{
-				Text = "RANGO 2",
-				FontAttributes = FontAttributes.Bold,
-				HorizontalTextAlignment = TextAlignment.Center,
-				FontSize = 20,
-			};
-			periodo.Children.Add(label1, 0, 0);
-			periodo.Children.Add(label2, 1, 0);
-			return periodo;
-		}
-		private Grid CreateGridAnios(List<TFiltroValor> periodoFilter)
-		{
-			Grid periodo = new Grid()
-			{
-				RowDefinitions = new RowDefinitionCollection
-				{
-					new RowDefinition(),
-				},
-				ColumnDefinitions = new ColumnDefinitionCollection
-				{
-					new ColumnDefinition(){ Width = GridLength.Auto },
-					new ColumnDefinition(),
-					new ColumnDefinition(){ Width = GridLength.Auto },
-					new ColumnDefinition(),
-				}
-			};
-			Label label1 = new Label()
-			{
-				Text = "AÑO:",
-				FontAttributes = FontAttributes.Bold,
-				VerticalTextAlignment = TextAlignment.Start,
-				FontSize = 20,
-			};
-			Label label2 = new Label()
-			{
-				Text = "AÑO:",
-				FontAttributes = FontAttributes.Bold,
-				VerticalTextAlignment = TextAlignment.Start,
-				FontSize = 20,
-			};
-			Picker values1 = new Picker()
-			{
-				ItemsSource = periodoFilter.Select(x => x.FiltroValor).ToList(),
-			};
-			Picker values2 = new Picker()
-			{
-				ItemsSource = new List<string>() { DateTime.Now.ToString("yyyy") },
-			};
-			periodo.Children.Add(label1, 0, 0);
-			periodo.Children.Add(values1, 1, 0);
-			periodo.Children.Add(label2, 2, 0);
-			periodo.Children.Add(values2, 3, 0);
-			return periodo;
-		}
-		private Grid CreateGridSpecifics(List<TFiltroValor> periodoFilter)
-		{
-			Grid periodo = new Grid()
-			{
-				RowDefinitions = new RowDefinitionCollection
-				{
-					new RowDefinition(),
-				},
-				ColumnDefinitions = new ColumnDefinitionCollection
-				{
-					new ColumnDefinition(),
-					new ColumnDefinition(),
-					new ColumnDefinition(),
-					new ColumnDefinition(),
-				}
-			};
-			Label label1 = new Label()
-			{
-				Text = "AÑO:",
-				FontAttributes = FontAttributes.Bold,
-				FontSize = 20,
-			};
-			Picker values1 = new Picker()
-			{
-				ItemsSource = periodoFilter.Select(x => x.FiltroValor).ToList(),
-			};
-			Picker values2 = new Picker()
-			{
-				ItemsSource = new List<string>() { DateTime.Now.ToString("yyyy") },
-			};
-			periodo.Children.Add(label1, 0, 0);
-			periodo.Children.Add(values1, 0, 1);
-			periodo.Children.Add(label1, 0, 2);
-			periodo.Children.Add(values1, 0, 3);
-			return periodo;
 		}
 		#endregion
 
