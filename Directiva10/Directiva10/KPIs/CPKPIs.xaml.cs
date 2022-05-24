@@ -483,6 +483,7 @@ namespace Directiva10.KPIs
         #region Chart Crecimiento
 		private Grid CreateGridFilter(List<TFiltro> listFilters, List<TFiltroAplicado> filtrosAplicados)
         {
+			var _idGridSpecifics = Guid.NewGuid();
 			Grid gridFilters = new Grid()
 			{
 				RowDefinitions = new RowDefinitionCollection
@@ -591,14 +592,15 @@ namespace Directiva10.KPIs
 					{
 						new RowDefinition(),
 					},
-						ColumnDefinitions = new ColumnDefinitionCollection
+					ColumnDefinitions = new ColumnDefinitionCollection
 					{
 						new ColumnDefinition(){ Width = GridLength.Auto },
 						new ColumnDefinition(),
 						new ColumnDefinition(){ Width = GridLength.Auto },
 						new ColumnDefinition(),
-					}
+					} 					
 				};
+				_idGridSpecifics = gridSpecifics.Id;
 				Label Specifics1 = new Label()
 				{
 					Text = "ESPECÍFICO:",
@@ -645,11 +647,20 @@ namespace Directiva10.KPIs
 			}
 			void RemoveSpecific()
             {
-				if (gridFilters.Children.Count() == 4)
+				var index = 0;
+                foreach (var _child in gridFilters.Children.ToList())
                 {
-					var rowThree = gridFilters.Children[3];
-                    gridFilters.Children.Remove(rowThree);
-				}
+					if (_child.Id == _idGridSpecifics)
+                    {
+						gridFilters.Children.Remove(_child);
+					}
+					index++;
+                }
+				//if (gridFilters.Children.Count() == 4)
+    //            {
+				//	var rowThree = gridFilters.Children[3];
+    //                gridFilters.Children.Remove(rowThree);
+				//}
 			}
             #endregion
 			periodo.Children.Add(label, 0, 0);
