@@ -492,6 +492,7 @@ namespace Directiva10.KPIs
 					new RowDefinition(),
 					new RowDefinition(),
 					new RowDefinition(),
+					new RowDefinition(),
 				},
 				ColumnDefinitions = new ColumnDefinitionCollection
 				{
@@ -656,11 +657,6 @@ namespace Directiva10.KPIs
 					}
 					index++;
                 }
-				//if (gridFilters.Children.Count() == 4)
-    //            {
-				//	var rowThree = gridFilters.Children[3];
-    //                gridFilters.Children.Remove(rowThree);
-				//}
 			}
             #endregion
 			periodo.Children.Add(label, 0, 0);
@@ -751,6 +747,13 @@ namespace Directiva10.KPIs
 			years.Children.Add(years2, 2, 0);
 			years.Children.Add(valuesyears2, 3, 0);
 			gridFilters.Children.Add(years, 0, 2);
+			#endregion
+			#region Button Refresh
+			Button btnRefresh = new Button()
+			{
+				Text = "Update Data"
+			};
+			gridFilters.Children.Add(years, 0, 4);
 			#endregion
 			return gridFilters;
 		}
