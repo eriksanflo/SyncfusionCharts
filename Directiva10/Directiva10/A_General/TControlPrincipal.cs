@@ -10,6 +10,7 @@ namespace Directiva10.A_General
 {
     class TControlPrincipal
     {
+        //http://25.104.125.195/
         private static string IpServidor { get { return "25.104.125.195"; } }
         public static string VersionApp { get { return "0.0.0"; } }
         public static int VersionBDRequerida { get { return 1; } }
