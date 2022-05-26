@@ -27,14 +27,14 @@ namespace Directiva10.KPIs
             List<TIndicador> ListRespuesta = new List<TIndicador>();
             try
             {
-                JObjectParametros["ID_INDICADOR"] = "0";
-                TConexion.CalcularPuertoAleatorio();
-                JObject JObjectServidor = await TConexion.RealizarPeticionGetWebData("TSM_TablerosdeControl", "getKPIs_ADesarrollo", JObjectParametros, CancellationTokenCancelar);//Linea de consumo api
-                if (JObjectServidor.Value<string>("Respuesta") == "true")
-                    ListRespuesta = JObjectToGraficas(JObjectServidor.Value<JObject>("INDICADORES"));//Le mandas la respuesta al servidor
-                else
-                    Device.BeginInvokeOnMainThread(async () => { await Application.Current.MainPage.DisplayAlert((string)Application.Current.Resources["StringMensajeTitulo"], TMensaje.ObtenerMensajeDefault(JObjectServidor.Value<string>("Respuesta")), (string)Application.Current.Resources["StringMensajeBoton"]); });
-                //ListRespuesta = JObjectToGraficas(new JObject());//Le mandas la respuesta al servidor
+                //JObjectParametros["ID_INDICADOR"] = "0";
+                //TConexion.CalcularPuertoAleatorio();
+                //JObject JObjectServidor = await TConexion.RealizarPeticionGetWebData("TSM_TablerosdeControl", "getKPIs_ADesarrollo", JObjectParametros, CancellationTokenCancelar);//Linea de consumo api
+                //if (JObjectServidor.Value<string>("Respuesta") == "true")
+                //    ListRespuesta = JObjectToGraficas(JObjectServidor.Value<JObject>("INDICADORES"));//Le mandas la respuesta al servidor
+                //else
+                //    Device.BeginInvokeOnMainThread(async () => { await Application.Current.MainPage.DisplayAlert((string)Application.Current.Resources["StringMensajeTitulo"], TMensaje.ObtenerMensajeDefault(JObjectServidor.Value<string>("Respuesta")), (string)Application.Current.Resources["StringMensajeBoton"]); });
+                ListRespuesta = JObjectToGraficas(new JObject());//Le mandas la respuesta al servidor
 
             }
             catch (Exception e)
@@ -116,10 +116,6 @@ namespace Directiva10.KPIs
                             EtiquetaDetalle.Mensaje = detalle.Value.Value<string>("VALOR");
                             Indicador.ListDetalles.Add(EtiquetaDetalle);
                         }
-                    }
-                    if(Indicador.Tipo.ToLower() == "circularprogressbar")
-                    {
-
                     }
                     ListRespuesta.Add(Indicador);
                 }

@@ -458,7 +458,7 @@ namespace Directiva10.KPIs
 
 			Label labelPorcentaje = new Label()
 			{
-				Text = $"{porcentaje.ToString("#.00")}%",
+				Text = $"{porcentaje.ToString("#.0")}%",
 				FontSize = 40,
 				FontAttributes = FontAttributes.Bold,
 				TextColor = Color.Black,
@@ -535,7 +535,7 @@ namespace Directiva10.KPIs
 				FontAttributes = FontAttributes.Bold,
 				HorizontalTextAlignment = TextAlignment.Start,
 				VerticalTextAlignment = TextAlignment.End,
-				FontSize = 20,
+				FontSize = 14,
 			};
 			Picker values = new Picker()
 			{
@@ -624,14 +624,14 @@ namespace Directiva10.KPIs
 					Text = "ESPECÍFICO:",
 					FontAttributes = FontAttributes.Bold,
 					VerticalTextAlignment = TextAlignment.Start,
-					FontSize = 20,
+					FontSize = 14,
 				};
 				Label Specifics2 = new Label()
 				{
 					Text = "ESPECÍFICO:",
 					FontAttributes = FontAttributes.Bold,
 					VerticalTextAlignment = TextAlignment.Start,
-					FontSize = 20,
+					FontSize = 14,
 				};
 				Picker valuesSpecifics1 = new Picker()
 				{
@@ -698,14 +698,14 @@ namespace Directiva10.KPIs
 				Text = "RANGO 1",
 				FontAttributes = FontAttributes.Bold,
 				HorizontalTextAlignment = TextAlignment.Center,
-				FontSize = 20,
+				FontSize = 16,
 			};
 			Label rango2 = new Label()
 			{
 				Text = "RANGO 2",
 				FontAttributes = FontAttributes.Bold,
 				HorizontalTextAlignment = TextAlignment.Center,
-				FontSize = 20,
+				FontSize = 16,
 			};
 			rangos.Children.Add(rango1, 0, 0);
 			rangos.Children.Add(rango2, 1, 0);
@@ -731,14 +731,14 @@ namespace Directiva10.KPIs
 				Text = "AÑO:",
 				FontAttributes = FontAttributes.Bold,
 				VerticalTextAlignment = TextAlignment.Start,
-				FontSize = 20,
+				FontSize = 14,
 			};
 			Label years2 = new Label()
 			{
 				Text = "AÑO:",
 				FontAttributes = FontAttributes.Bold,
 				VerticalTextAlignment = TextAlignment.Start,
-				FontSize = 20,
+				FontSize = 14,
 			};
 			Picker valuesyears1 = new Picker()
 			{
@@ -747,7 +747,6 @@ namespace Directiva10.KPIs
 			Picker valuesyears2 = new Picker()
 			{
 				ItemsSource = listFilters.FirstOrDefault(x => x.TipoFiltro == "AÑOS").ValoresFiltro.Select(x => x.FiltroValor).ToList(),
-				//ItemsSource = new List<string>() { DateTime.Now.ToString("yyyy") },
 			};
 			var _yearOneSelected = filtrosAplicados.Where(x => x.TipoFiltro == "AÑO_INICIAL").ToList();
 			var _yearTwoSelected = filtrosAplicados.Where(x => x.TipoFiltro == "AÑO_FINAL").ToList();
@@ -771,6 +770,7 @@ namespace Directiva10.KPIs
 				Text = "Update Data",
 				BackgroundColor = Color.Black,
 				TextColor = Color.White,
+				
 			};
 			gridFilters.Children.Add(btnRefresh, 0, 4);
 			#endregion
