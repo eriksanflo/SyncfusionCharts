@@ -339,7 +339,7 @@ namespace Directiva10.KPIs
 					Palette = ChartColorPalette.Custom,
 					CustomBrushes = new List<Color>()
 					{
-						Color.Orange
+						Color.FromHex("#fe7200")
 					}
 				},
 			};
@@ -369,11 +369,12 @@ namespace Directiva10.KPIs
 				BackgroundColor = Color.White,
 				FontSize = 32,
 				FontAttributes = FontAttributes.Bold,
+				Padding = new Thickness(0, 15, 0, 0),
 			};
 
 			Label labelCenter = new Label();
 			labelCenter.Text = $"{porcentaje}%";
-			labelCenter.FontSize = 80;
+			labelCenter.FontSize = 60;
 			labelCenter.FontAttributes = FontAttributes.Bold;
 			labelCenter.TextColor = Color.White;
 			labelCenter.HorizontalOptions = LayoutOptions.Center;
@@ -390,7 +391,7 @@ namespace Directiva10.KPIs
 			};
 
 			Grid gridGrafica = new Grid();
-			gridGrafica.BackgroundColor = Color.WhiteSmoke;
+			gridGrafica.BackgroundColor = Color.White;
 			gridGrafica.RowDefinitions.Add(new RowDefinition());
 			gridGrafica.ColumnDefinitions.Add(new ColumnDefinition());
 			gridGrafica.Children.Add(SfChartGrafica, 0, 0);
@@ -411,6 +412,12 @@ namespace Directiva10.KPIs
 					},
 					labelTitle,
 					gridGrafica,
+					new BoxView
+					{
+						CornerRadius = new CornerRadius(0, 0, 15, 15),
+						BackgroundColor = Color.White,
+						HeightRequest = AltoIconoLeyendas
+					}
 				}
 			};
 			XamlStackLayoutContenedordeGraficas.Children.Add(StackLayoutTarjetaGrafica);
@@ -426,42 +433,44 @@ namespace Directiva10.KPIs
 				HorizontalTextAlignment = TextAlignment.Center,
 				TextColor = Color.Gray,
 				BackgroundColor = Color.White,
-				FontSize = 32,
+				FontSize = 20,
 				FontAttributes = FontAttributes.Bold,
+				Padding = new Thickness(0, 15, 0, 0),
 			};
 
 			Label labelTotal = new Label()
 			{
 				Text = $"Total: {total.ToString("$ #,#.00")}",
-				FontSize = 24,
+				FontSize = 16,
 				HorizontalTextAlignment = TextAlignment.Center,
 				TextColor = Color.Gray,
 				BackgroundColor = Color.White,
+				Padding = new Thickness(0, 0, 0, 10),
 			};
 
 			Image imageDescription = new Image
 			{
 				Source = porcentaje < 0 ? "AD_Icono_KPIS05.png" : "AD_Icono_KPIS04.png",
-				WidthRequest = (int)ViewModelKPIs?.AltodeGraficaPrincipal,
-				HeightRequest = (int)ViewModelKPIs?.AltodeGraficaPrincipal,
+				WidthRequest = (int)ViewModelKPIs?.AltodeGraficaSecundaria,
+				HeightRequest = (int)ViewModelKPIs?.AltodeGraficaSecundaria,
+				BackgroundColor = Color.White,
 			};
 
 			Label labelPorcentaje = new Label()
 			{
-				Text = $"{porcentaje}%",
-				FontSize = 60,
+				Text = $"{porcentaje.ToString("#.00")}%",
+				FontSize = 40,
 				FontAttributes = FontAttributes.Bold,
 				TextColor = Color.Black,
 				BackgroundColor = Color.White,
 				HorizontalTextAlignment = TextAlignment.Center,
 			};
 
-			Grid gridFilters = CreateGridFilter(listFilters, filtrosAplicados);
+			Grid gridFilters = CreateGridFilter(listFilters, filtrosAplicados);			
 
 			StackLayout StackLayoutTarjetaGrafica = new StackLayout
 			{
 				Spacing = 0,
-				BackgroundColor = Color.White,
 				Children = {
 					new StackLayout
 					{
@@ -475,6 +484,12 @@ namespace Directiva10.KPIs
 					labelTotal,
 					imageDescription,
 					labelPorcentaje,
+					new BoxView
+					{
+						CornerRadius = new CornerRadius(0, 0, 15, 15),
+						BackgroundColor = Color.White,
+						HeightRequest = AltoIconoLeyendas
+					}
 				}
 			};
 			XamlStackLayoutContenedordeGraficas.Children.Add(StackLayoutTarjetaGrafica);
@@ -497,7 +512,9 @@ namespace Directiva10.KPIs
 				ColumnDefinitions = new ColumnDefinitionCollection
 				{
 					new ColumnDefinition(),
-				}
+				},
+				Padding = new Thickness(15, 10, 15, 10),
+				BackgroundColor = Color.White,
 			};
             #region Periodo
             Grid periodo = new Grid()
