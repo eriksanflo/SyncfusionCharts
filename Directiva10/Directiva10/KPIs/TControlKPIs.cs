@@ -27,14 +27,14 @@ namespace Directiva10.KPIs
             List<TIndicador> ListRespuesta = new List<TIndicador>();
             try
             {
-                //JObjectParametros["ID_INDICADOR"] = "0";
-                //TConexion.CalcularPuertoAleatorio();
-                //JObject JObjectServidor = await TConexion.RealizarPeticionGetWebData("TSM_TablerosdeControl", "getKPIs_ADesarrollo", JObjectParametros, CancellationTokenCancelar);//Linea de consumo api
-                //if (JObjectServidor.Value<string>("Respuesta") == "true")
-                //    ListRespuesta = JObjectToGraficas(JObjectServidor.Value<JObject>("INDICADORES"));//Le mandas la respuesta al servidor
-                //else
-                //    Device.BeginInvokeOnMainThread(async () => { await Application.Current.MainPage.DisplayAlert((string)Application.Current.Resources["StringMensajeTitulo"], TMensaje.ObtenerMensajeDefault(JObjectServidor.Value<string>("Respuesta")), (string)Application.Current.Resources["StringMensajeBoton"]); });
-                ListRespuesta = JObjectToGraficas(new JObject());//Le mandas la respuesta al servidor
+                JObjectParametros["ID_INDICADOR"] = "0";
+                TConexion.CalcularPuertoAleatorio();
+                JObject JObjectServidor = await TConexion.RealizarPeticionGetWebData("TSM_TablerosdeControl", "getKPIs_ADesarrollo", JObjectParametros, CancellationTokenCancelar);//Linea de consumo api
+                if (JObjectServidor.Value<string>("Respuesta") == "true")
+                    ListRespuesta = JObjectToGraficas(JObjectServidor.Value<JObject>("INDICADORES"));//Le mandas la respuesta al servidor
+                else
+                    Device.BeginInvokeOnMainThread(async () => { await Application.Current.MainPage.DisplayAlert((string)Application.Current.Resources["StringMensajeTitulo"], TMensaje.ObtenerMensajeDefault(JObjectServidor.Value<string>("Respuesta")), (string)Application.Current.Resources["StringMensajeBoton"]); });
+                //ListRespuesta = JObjectToGraficas(new JObject());//Le mandas la respuesta al servidor
 
             }
             catch (Exception e)
@@ -63,7 +63,7 @@ namespace Directiva10.KPIs
                 Indicador.Titulo = indicador.Value.Value<string>("NOMBRE_GRAFICA");
                 Indicador.EsFavorita = indicador.Value.Value<string>("FAVORITA") == "1";
                 Indicador.Medicion = indicador.Value.Value<string>("MEDICION");
-                if (Indicador.Medicion == "PESOS") // Solicitar a la Ing.
+                if (Indicador.Medicion == "PESOS")
                     Indicador.FormatodeMedicion = "$ ##,###.##";
                 JObject JObjectEtiquetas = indicador.Value.Value<JObject>("ETIQUETAS");
                 if (!string.IsNullOrWhiteSpace(Indicador.Tipo))
@@ -159,7 +159,6 @@ namespace Directiva10.KPIs
             );
             ListRespuesta.Add(Indicador);
             //llenado de las graficas
-
             Indicador = new TIndicador();
             Indicador.Titulo = "Margen de Beneficio Bruto";
             Indicador.Tipo = "circularProgressBar";

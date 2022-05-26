@@ -65,7 +65,8 @@ namespace Directiva10.KPIs
 			await InicializarTodaslasGraficas();
 		}
 
-		public async Task InicializarTodaslasGraficas()//En este metodo se consume la api y se manda los parametros a mostrar en la grafica
+        [Obsolete]
+        public async Task InicializarTodaslasGraficas()//En este metodo se consume la api y se manda los parametros a mostrar en la grafica
 		{
 			if (ViewModelKPIs != null)
 			{
@@ -88,7 +89,7 @@ namespace Directiva10.KPIs
 								break;
 
 							case "crecimiento":
-								DibujarGraficaCrecimiento(CrearObjetoEncabezadodeGrafica(Indicador.Id, Indicador.Titulo), Indicador.ListSeries, Indicador.Filtros, Indicador.FiltrosAplicados, "Marzo 2022", 1025600.45m);
+								DibujarGraficaCrecimiento(CrearObjetoEncabezadodeGrafica(Indicador.Id, Indicador.Titulo), Indicador.ListSeries, Indicador.Filtros, Indicador.FiltrosAplicados, "Marzo 2022", 1025600.45);
 								break;
 						}
 					}
@@ -102,7 +103,8 @@ namespace Directiva10.KPIs
 			}
 		}
 
-		private void DibujarGraficaDona(Grid GridEncabezado, StackLayout StackLayoutPie, string MEDICION, bool MOSTRAR_LEYENDAS, LegendPlacement LegendPlacementPosicionLeyenda, bool MOSTRAR_LEYENDA_SECUNDARIA, string FORMATO_PORCENTAJE, List<TSerie> ListSeries)
+        [Obsolete]
+        private void DibujarGraficaDona(Grid GridEncabezado, StackLayout StackLayoutPie, string MEDICION, bool MOSTRAR_LEYENDAS, LegendPlacement LegendPlacementPosicionLeyenda, bool MOSTRAR_LEYENDA_SECUNDARIA, string FORMATO_PORCENTAJE, List<TSerie> ListSeries)
 		{
 			// La grafica DOUGHNUT solo recibe una serie
 			LabelContent LabelContentMostrarPorcentaje = string.IsNullOrWhiteSpace(FORMATO_PORCENTAJE) ? LabelContent.YValue : LabelContent.Percentage;
@@ -287,7 +289,8 @@ namespace Directiva10.KPIs
 			XamlStackLayoutContenedordeGraficas.Children.Add(StackLayoutTarjetaGrafica);
 		}
 
-		private void DibujarGraficaProgressBar(Grid GridEncabezado, List<TSerie> listSeries)
+        [Obsolete]
+        private void DibujarGraficaProgressBar(Grid GridEncabezado, List<TSerie> listSeries)
 		{
 			ChartSeriesCollection ChartSeriesCollectionSeries = new ChartSeriesCollection();
 			ChartSeriesCollection PieChartSeriesCollectionSeries = new ChartSeriesCollection();
@@ -361,7 +364,7 @@ namespace Directiva10.KPIs
 			};
 			SfChartGrafica.SetBinding<TViewModelKPIs>(SfChart.HeightRequestProperty, ViewModel => ViewModel.AltodeGraficaPrincipal, mode: BindingMode.TwoWay);
 
-			Label labelTitle = new Label
+			Label LabelTitulo = new Label
 			{
 				Text = $"Mayo 2022",
 				HorizontalTextAlignment = TextAlignment.Center,
@@ -372,13 +375,13 @@ namespace Directiva10.KPIs
 				Padding = new Thickness(0, 15, 0, 0),
 			};
 
-			Label labelCenter = new Label();
-			labelCenter.Text = $"{porcentaje}%";
-			labelCenter.FontSize = 60;
-			labelCenter.FontAttributes = FontAttributes.Bold;
-			labelCenter.TextColor = Color.White;
-			labelCenter.HorizontalOptions = LayoutOptions.Center;
-			labelCenter.VerticalOptions = LayoutOptions.Center;
+			Label labelCentro = new Label();
+			labelCentro.Text = $"{porcentaje}%";
+			labelCentro.FontSize = 60;
+			labelCentro.FontAttributes = FontAttributes.Bold;
+			labelCentro.TextColor = Color.White;
+			labelCentro.HorizontalOptions = LayoutOptions.Center;
+			labelCentro.VerticalOptions = LayoutOptions.Center;
 
 			Image imageButtom = new Image
 			{
@@ -396,7 +399,7 @@ namespace Directiva10.KPIs
 			gridGrafica.ColumnDefinitions.Add(new ColumnDefinition());
 			gridGrafica.Children.Add(SfChartGrafica, 0, 0);
 			gridGrafica.Children.Add(PieChart, 0, 0);
-			gridGrafica.Children.Add(labelCenter, 0, 0);
+			gridGrafica.Children.Add(labelCentro, 0, 0);
 			gridGrafica.Children.Add(imageButtom, 0, 0);
 
 			StackLayout StackLayoutTarjetaGrafica = new StackLayout
@@ -410,7 +413,7 @@ namespace Directiva10.KPIs
 							GridEncabezado
 						}
 					},
-					labelTitle,
+					LabelTitulo,
 					gridGrafica,
 					new BoxView
 					{
@@ -423,13 +426,13 @@ namespace Directiva10.KPIs
 			XamlStackLayoutContenedordeGraficas.Children.Add(StackLayoutTarjetaGrafica);
 		}
 
-		private void DibujarGraficaCrecimiento(Grid GridEncabezado, List<TSerie> listSeries, List<TFiltro> listFilters, List<TFiltroAplicado> filtrosAplicados, string month, decimal total)
+		private void DibujarGraficaCrecimiento(Grid GridEncabezado, List<TSerie> listSeries, List<TFiltro> listFilters, List<TFiltroAplicado> filtrosAplicados, string MES, Double TOTAL)
 		{
 			var porcentaje = listSeries.FirstOrDefault().ObservableCollectionPuntos.ToList().FirstOrDefault().Valor;
 
-			Label labelTitle = new Label
+			Label LabelTitulo = new Label
 			{
-				Text = month,
+				Text = MES,
 				HorizontalTextAlignment = TextAlignment.Center,
 				TextColor = Color.Gray,
 				BackgroundColor = Color.White,
@@ -440,7 +443,7 @@ namespace Directiva10.KPIs
 
 			Label labelTotal = new Label()
 			{
-				Text = $"Total: {total.ToString("$ #,#.00")}",
+				Text = $"Total: {TOTAL.ToString("$ #,#.00")}",
 				FontSize = 16,
 				HorizontalTextAlignment = TextAlignment.Center,
 				TextColor = Color.Gray,
@@ -466,7 +469,7 @@ namespace Directiva10.KPIs
 				HorizontalTextAlignment = TextAlignment.Center,
 			};
 
-			Grid gridFilters = CreateGridFilter(listFilters, filtrosAplicados);			
+			Grid gridFilters = CrearFiltroCuadrícula(listFilters, filtrosAplicados);			
 
 			StackLayout StackLayoutTarjetaGrafica = new StackLayout
 			{
@@ -480,7 +483,7 @@ namespace Directiva10.KPIs
 						}
 					},
 					gridFilters,
-					labelTitle,
+					LabelTitulo,
 					labelTotal,
 					imageDescription,
 					labelPorcentaje,
@@ -496,7 +499,7 @@ namespace Directiva10.KPIs
 		}
 
         #region Chart Crecimiento
-		private Grid CreateGridFilter(List<TFiltro> listFilters, List<TFiltroAplicado> filtrosAplicados)
+		private Grid CrearFiltroCuadrícula(List<TFiltro> listFilters, List<TFiltroAplicado> filtrosAplicados)
         {
 			var _idGridSpecifics = Guid.NewGuid();
 			Grid gridFilters = new Grid()
