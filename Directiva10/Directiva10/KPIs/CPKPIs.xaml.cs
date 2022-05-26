@@ -751,9 +751,11 @@ namespace Directiva10.KPIs
 			#region Button Refresh
 			Button btnRefresh = new Button()
 			{
-				Text = "Update Data"
+				Text = "Update Data",
+				BackgroundColor = Color.Black,
+				TextColor = Color.White,
 			};
-			gridFilters.Children.Add(years, 0, 4);
+			gridFilters.Children.Add(btnRefresh, 0, 4);
 			#endregion
 			return gridFilters;
 		}
