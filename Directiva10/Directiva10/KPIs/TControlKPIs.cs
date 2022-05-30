@@ -122,7 +122,7 @@ namespace Directiva10.KPIs
             }
 
 
-
+            /*
 
             //Grafica DOUGHNUT ejemplo de llenado Hard-code
             Indicador = new TIndicador();
@@ -276,7 +276,7 @@ namespace Directiva10.KPIs
                 //},
             };
             ListRespuesta.Add(Indicador);
-
+            */
             return ListRespuesta;
         }
 
