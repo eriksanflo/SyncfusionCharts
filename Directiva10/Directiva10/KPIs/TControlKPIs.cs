@@ -44,8 +44,6 @@ namespace Directiva10.KPIs
             return ListRespuesta;
         }
 
-        // Métodos privados
-
         private List<TIndicador> JObjectToGraficas(JObject JObjectIndicadores)
         {
             List<TIndicador> ListRespuesta = new List<TIndicador>();
@@ -59,7 +57,7 @@ namespace Directiva10.KPIs
                 {
                     break;
                 }
-                Indicador.Tipo = indicador.Value.Value<string>("TIPO");
+                Indicador.Tipo = indicador.Value.Value<string>("TIPO").ToUpper();
                 Indicador.Titulo = indicador.Value.Value<string>("NOMBRE_GRAFICA");
                 Indicador.EsFavorita = indicador.Value.Value<string>("FAVORITA") == "1";
                 Indicador.Medicion = indicador.Value.Value<string>("MEDICION");
@@ -68,8 +66,7 @@ namespace Directiva10.KPIs
                 JObject JObjectEtiquetas = indicador.Value.Value<JObject>("ETIQUETAS");
                 if (!string.IsNullOrWhiteSpace(Indicador.Tipo))
                 {
-                    Indicador.Tipo = Indicador.Tipo.ToUpper();
-                    if (Indicador.Tipo.ToUpper() == "DOUGHNUT" || Indicador.Tipo.ToLower() == "circularprogressbar")
+                    if (Indicador.Tipo == "DOUGHNUT" || Indicador.Tipo == "CIRCULARPROGRESSBAR" || Indicador.Tipo == "CRECIMIENTO")
                     {
                         // La grafica DOUGHNUT o VERTICALBAR solo recibe una serie
                         List<Color> ListPaletadeColores = new List<Color>();
@@ -117,6 +114,56 @@ namespace Directiva10.KPIs
                             Indicador.ListDetalles.Add(EtiquetaDetalle);
                         }
                     }
+                    #region Add Filters selected
+                    var filtrosAplicados = indicador.Value.Value<JObject>("FILTROS_APLICADOS");
+                    if (filtrosAplicados != null)
+                    {
+                        Indicador.FiltrosAplicados = new List<TFiltroAplicado>();
+                        TFiltroAplicado _filtroAplicado = null;
+                        foreach (var filtroAplicado in filtrosAplicados)
+                        {
+                            _filtroAplicado = new TFiltroAplicado();
+                            _filtroAplicado.TipoFiltro = filtroAplicado.Value.Value<string>("TIPO_DE_FILTRO");
+                            _filtroAplicado.Valor = filtroAplicado.Value.Value<string>("VALOR");
+                            Indicador.FiltrosAplicados.Add(_filtroAplicado);
+                        }
+                    }
+                    #endregion
+
+                    #region Add Filters
+                    var filtersList = indicador.Value.Value<JObject>("FILTROS");
+                    if (filtersList != null)
+                    {
+                        TFiltro _filtro = null;
+                        Indicador.Filtros = new List<TFiltro>();
+                        foreach (var filtro in filtersList)
+                        {
+                            _filtro = new TFiltro();
+                            _filtro.ValoresFiltro = new List<TFiltroValor>();
+                            _filtro.TipoFiltro = filtro.Value.Value<string>("TIPO");
+                            var _valoresArray = filtro.Value.Value<JObject>("VALORES");
+                            foreach (var _valor in _valoresArray)
+                            {
+                                var valorFiltro = new TFiltroValor();
+                                valorFiltro.FiltroValor = _valor.Value.Value<string>("VALOR");
+                                valorFiltro.Nombre = _valor.Value.Value<string>("NOMBRE");
+                                var _valoresNivel2Array = _valor.Value.Value<JObject>("VALORES");
+                                if (_valoresNivel2Array != null)
+                                {
+                                    valorFiltro.Valores = new List<TFiltroValor>();
+                                    foreach (var _nivel2 in _valoresNivel2Array)
+                                    {
+                                        valorFiltro.Valores.Add(new TFiltroValor
+                                        {
+                                            FiltroValor = _nivel2.Value.Value<string>("VALOR")
+                                        });
+                                    }
+                                }
+                            }
+                            Indicador.Filtros.Add(_filtro);
+                        }
+                    }
+                    #endregion
                     ListRespuesta.Add(Indicador);
                 }
             }

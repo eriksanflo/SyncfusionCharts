@@ -84,11 +84,11 @@ namespace Directiva10.KPIs
 								DibujarGraficaDona(CrearObjetoEncabezadodeGrafica(Indicador.Id, Indicador.Titulo), CrearObjetoPiedeGrafica(Indicador.ListDetalles), Indicador.Medicion, Indicador.MostrarLeyenda, Indicador.LegendPlacementPosicionLeyenda, Indicador.MostrarLeyendaSecundaria, Indicador.FormatoPorcentaje, Indicador.ListSeries);
 								break;
 
-							case "circularProgressBar":
+							case "CIRCULARPROGRESSBAR":
 								DibujarGraficaProgressBar(CrearObjetoEncabezadodeGrafica(Indicador.Id, Indicador.Titulo), Indicador.ListSeries);
 								break;
 
-							case "crecimiento":
+							case "CRECIMIENTO":
 								DibujarGraficaCrecimiento(CrearObjetoEncabezadodeGrafica(Indicador.Id, Indicador.Titulo), Indicador.ListSeries, Indicador.Filtros, Indicador.FiltrosAplicados, "Marzo 2022", 1025600.45);
 								break;
 						}
