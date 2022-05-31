@@ -88,10 +88,10 @@ namespace Directiva10.KPIs
 								DibujarGraficaProgressBar(CrearObjetoEncabezadodeGrafica(Indicador.Id, Indicador.Titulo), Indicador.ListSeries);
 								break;
 
-							case "CRECIMIENTO":
-								DibujarGraficaCrecimiento(CrearObjetoEncabezadodeGrafica(Indicador.Id, Indicador.Titulo), Indicador.ListSeries, Indicador.Filtros, Indicador.FiltrosAplicados, "Marzo 2022", 1025600.45);
-								break;
-						}
+                            case "CRECIMIENTO":
+                                DibujarGraficaCrecimiento(CrearObjetoEncabezadodeGrafica(Indicador.Id, Indicador.Titulo), Indicador.ListSeries, Indicador.Filtros, Indicador.FiltrosAplicados, "Marzo 2022", 1025600.45);
+                                break;
+                        }
 					}
 					if (Navigation.ModalStack.Count > 0)
 						await Navigation.PopModalAsync();
@@ -542,9 +542,9 @@ namespace Directiva10.KPIs
 			};
 			Picker values = new Picker()
 			{
-				ItemsSource = listFilters.FirstOrDefault(x => x.TipoFiltro == "PERIODO").ValoresFiltro.Select(x => x.FiltroValor).ToList(),
+				ItemsSource = listFilters.FirstOrDefault(x => x.TipoFiltro == "PERIODOS").ValoresFiltro.Select(x => x.FiltroValor).ToList(),
 			};
-			var _periodoSleccionado = filtrosAplicados.Where(x => x.TipoFiltro == "PERIODO").ToList();
+			var _periodoSleccionado = filtrosAplicados.Where(x => x.TipoFiltro == "PERIODOS").ToList();
 			if (_periodoSleccionado.Any())
             {
 				values.SelectedItem = _periodoSleccionado.FirstOrDefault().Valor;

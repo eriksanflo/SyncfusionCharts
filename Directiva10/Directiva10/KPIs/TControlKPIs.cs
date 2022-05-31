@@ -53,10 +53,6 @@ namespace Directiva10.KPIs
             {
                 Indicador = new TIndicador();
                 Indicador.Id = indicador.Value.Value<int>("ID_INDICADOR");
-                if (Indicador.Id.Equals(12))
-                {
-                    break;
-                }
                 Indicador.Tipo = indicador.Value.Value<string>("TIPO").ToUpper();
                 Indicador.Titulo = indicador.Value.Value<string>("NOMBRE_GRAFICA");
                 Indicador.EsFavorita = indicador.Value.Value<string>("FAVORITA") == "1";
@@ -151,14 +147,17 @@ namespace Directiva10.KPIs
                                 if (_valoresNivel2Array != null)
                                 {
                                     valorFiltro.Valores = new List<TFiltroValor>();
+                                    var indexNivel2 = 1;
                                     foreach (var _nivel2 in _valoresNivel2Array)
                                     {
                                         valorFiltro.Valores.Add(new TFiltroValor
                                         {
-                                            FiltroValor = _nivel2.Value.Value<string>("VALOR")
+                                            IdFiltroValor = indexNivel2++,
+                                            FiltroValor = _nivel2.Value.Value<string>("VALOR"),
                                         });
                                     }
                                 }
+                                _filtro.ValoresFiltro.Add(valorFiltro);
                             }
                             Indicador.Filtros.Add(_filtro);
                         }
