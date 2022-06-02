@@ -111,55 +111,54 @@ namespace Directiva10.KPIs
                         }
                     }
                     #region Add Filters selected
-                    var filtrosAplicados = indicador.Value.Value<JObject>("FILTROS_APLICADOS");
-                    if (filtrosAplicados != null)
+                    JObject JObjectFiltrosAplicados = indicador.Value.Value<JObject>("FILTROS_APLICADOS");
+                    if (JObjectFiltrosAplicados != null)
                     {
                         Indicador.FiltrosAplicados = new List<TFiltroAplicado>();
-                        TFiltroAplicado _filtroAplicado = null;
-                        foreach (var filtroAplicado in filtrosAplicados)
+                        TFiltroAplicado FiltroAplicado = null;
+                        foreach (var filtroAplicado in JObjectFiltrosAplicados)
                         {
-                            _filtroAplicado = new TFiltroAplicado();
-                            _filtroAplicado.TipoFiltro = filtroAplicado.Value.Value<string>("TIPO_DE_FILTRO");
-                            _filtroAplicado.Valor = filtroAplicado.Value.Value<string>("VALOR");
-                            Indicador.FiltrosAplicados.Add(_filtroAplicado);
+                            FiltroAplicado = new TFiltroAplicado();
+                            FiltroAplicado.TipoFiltro = filtroAplicado.Value.Value<string>("TIPO_DE_FILTRO");
+                            FiltroAplicado.Valor = filtroAplicado.Value.Value<string>("VALOR");
+                            Indicador.FiltrosAplicados.Add(FiltroAplicado);
                         }
                     }
                     #endregion
 
                     #region Add Filters
-                    var filtersList = indicador.Value.Value<JObject>("FILTROS");
-                    if (filtersList != null)
+                    JObject JObjectListaFiltros = indicador.Value.Value<JObject>("FILTROS");
+                    if (JObjectListaFiltros != null)
                     {
-                        TFiltro _filtro = null;
+                        TFiltro Filtro = null;
                         Indicador.Filtros = new List<TFiltro>();
-                        foreach (var filtro in filtersList)
+                        foreach (var filtro in JObjectListaFiltros)
                         {
-                            _filtro = new TFiltro();
-                            _filtro.ValoresFiltro = new List<TFiltroValor>();
-                            _filtro.TipoFiltro = filtro.Value.Value<string>("TIPO");
-                            var _valoresArray = filtro.Value.Value<JObject>("VALORES");
-                            foreach (var _valor in _valoresArray)
+                            Filtro = new TFiltro();
+                            Filtro.ValoresFiltro = new List<TFiltroValor>();
+                            Filtro.TipoFiltro = filtro.Value.Value<string>("TIPO");
+                            foreach (var valor in filtro.Value.Value<JObject>("VALORES"))
                             {
-                                var valorFiltro = new TFiltroValor();
-                                valorFiltro.FiltroValor = _valor.Value.Value<string>("VALOR");
-                                valorFiltro.Nombre = _valor.Value.Value<string>("NOMBRE");
-                                var _valoresNivel2Array = _valor.Value.Value<JObject>("VALORES");
-                                if (_valoresNivel2Array != null)
+                                TFiltroValor FiltroValor = new TFiltroValor();
+                                FiltroValor.FiltroValor = valor.Value.Value<string>("VALOR");
+                                FiltroValor.Nombre = valor.Value.Value<string>("NOMBRE");
+                                JObject JObjectvaloresNivel2Arreglo = valor.Value.Value<JObject>("VALORES");
+                                if (JObjectvaloresNivel2Arreglo != null)
                                 {
-                                    valorFiltro.Valores = new List<TFiltroValor>();
+                                    FiltroValor.Valores = new List<TFiltroValor>();
                                     var indexNivel2 = 1;
-                                    foreach (var _nivel2 in _valoresNivel2Array)
+                                    foreach (var nivel2 in JObjectvaloresNivel2Arreglo)
                                     {
-                                        valorFiltro.Valores.Add(new TFiltroValor
+                                        FiltroValor.Valores.Add(new TFiltroValor
                                         {
                                             IdFiltroValor = indexNivel2++,
-                                            FiltroValor = _nivel2.Value.Value<string>("VALOR"),
+                                            FiltroValor = nivel2.Value.Value<string>("VALOR"),
                                         });
                                     }
                                 }
-                                _filtro.ValoresFiltro.Add(valorFiltro);
+                                Filtro.ValoresFiltro.Add(FiltroValor);
                             }
-                            Indicador.Filtros.Add(_filtro);
+                            Indicador.Filtros.Add(Filtro);
                         }
                     }
                     #endregion
@@ -338,11 +337,11 @@ namespace Directiva10.KPIs
         private List<TFiltroValor> GetMonthsOfYear()
         {
             var response = new List<TFiltroValor>();
-            response.Add(new TFiltroValor { IdFiltroValor = 1, FiltroValor = "Enero" });
+            response.Add(new TFiltroValor { IdFiltroValor = 1, FiltroValor = "Enero1" });
             response.Add(new TFiltroValor { IdFiltroValor = 2, FiltroValor = "Febrero" });
             response.Add(new TFiltroValor { IdFiltroValor = 3, FiltroValor = "Marzo" });
             response.Add(new TFiltroValor { IdFiltroValor = 4, FiltroValor = "Abril" });
-            response.Add(new TFiltroValor { IdFiltroValor = 5, FiltroValor = "Mayo" });
+            response.Add(new TFiltroValor { IdFiltroValor = 5, FiltroValor = "Mayo1" });
             response.Add(new TFiltroValor { IdFiltroValor = 6, FiltroValor = "Junio" });
             response.Add(new TFiltroValor { IdFiltroValor = 7, FiltroValor = "Julio" });
             response.Add(new TFiltroValor { IdFiltroValor = 8, FiltroValor = "Agosto" });
