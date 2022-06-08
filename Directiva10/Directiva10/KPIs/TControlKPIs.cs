@@ -167,7 +167,7 @@ namespace Directiva10.KPIs
             }
 
 
-            /*
+            
 
             //Grafica DOUGHNUT ejemplo de llenado Hard-code
             Indicador = new TIndicador();
@@ -206,7 +206,7 @@ namespace Directiva10.KPIs
             //llenado de las graficas
             Indicador = new TIndicador();
             Indicador.Titulo = "Margen de Beneficio Bruto";
-            Indicador.Tipo = "circularProgressBar";
+            Indicador.Tipo = "CIRCULARPROGRESSBAR";
             Indicador.ListSeries = new List<TSerie>
             {
                 new TSerie
@@ -222,7 +222,7 @@ namespace Directiva10.KPIs
 
             Indicador = new TIndicador();
             Indicador.Titulo = "Margen de Beneficio Bruto";
-            Indicador.Tipo = "circularProgressBar";
+            Indicador.Tipo = "CIRCULARPROGRESSBAR";
             Indicador.ListSeries = new List<TSerie>
             {
                 new TSerie
@@ -321,7 +321,7 @@ namespace Directiva10.KPIs
                 //},
             };
             ListRespuesta.Add(Indicador);
-            */
+            
             return ListRespuesta;
         }
 

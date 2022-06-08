@@ -362,9 +362,9 @@ namespace Directiva10.KPIs
 				Margin = new Thickness(-30, -30, -30, -30),
 				Rotation = porcentaje < 0 ? ClculateRotation(porcentaje) : 90, //Rotacion del color
 			};
-			SfChartGrafica.SetBinding<TViewModelKPIs>(SfChart.HeightRequestProperty, ViewModel => ViewModel.AltodeGraficaPrincipal, mode: BindingMode.TwoWay);
+            SfChartGrafica.SetBinding<TViewModelKPIs>(SfChart.HeightRequestProperty, ViewModel => ViewModel.AltodeGraficaPrincipal, mode: BindingMode.TwoWay);
 
-			Label LabelTitulo = new Label
+            Label LabelTitulo = new Label
 			{
 				Text = $"Mayo 2022",
 				HorizontalTextAlignment = TextAlignment.Center,
@@ -386,16 +386,17 @@ namespace Directiva10.KPIs
 			Image imageButtom = new Image
 			{
 				Source = porcentaje < 0 ? "AD_Icono_KPIS02.png" : "AD_Icono_KPIS01.png",
-				WidthRequest = 80,
-				HeightRequest = 80,
+				WidthRequest = 70,
+				HeightRequest = 70,
 				HorizontalOptions = LayoutOptions.Center,
-				VerticalOptions = LayoutOptions.Center,
-				Margin = new Thickness(0, (int)ViewModelKPIs?.AltodeGraficaPrincipal, 0, 0),
+				VerticalOptions = LayoutOptions.End,
+				//Margin = new Thickness(0, (int)ViewModelKPIs?.AltodeGraficaPrincipal, 0, 0),
 			};
 
 			Grid gridGrafica = new Grid();
 			gridGrafica.BackgroundColor = Color.White;
-			gridGrafica.RowDefinitions.Add(new RowDefinition());
+			gridGrafica.Padding = new Thickness(0, 0, 0, 0);
+			gridGrafica.RowDefinitions.Add(new RowDefinition() { Height = ViewModelKPIs.AltodeGraficaPrincipal });
 			gridGrafica.ColumnDefinitions.Add(new ColumnDefinition());
 			gridGrafica.Children.Add(SfChartGrafica, 0, 0);
 			gridGrafica.Children.Add(PieChart, 0, 0);
